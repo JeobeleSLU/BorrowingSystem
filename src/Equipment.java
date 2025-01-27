@@ -1,3 +1,7 @@
+/**
+ * This is the base class of the equipment
+ */
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Equipment {
