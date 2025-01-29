@@ -121,6 +121,7 @@ public class XMLParser {
         imageInFile.read(imageData);
         imageInFile.close();
         return Base64.getEncoder().encodeToString(imageData);
+
     }
 
     public BufferedImage base64ToImage(String encoded) throws IOException {

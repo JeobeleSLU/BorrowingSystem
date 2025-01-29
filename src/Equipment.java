@@ -4,7 +4,7 @@
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Equipment {
+public class Equipment implements XMLTemplate {
     String name;
     String type;
     AtomicInteger quantity; // Not sure for atomicity
@@ -58,5 +58,16 @@ public class Equipment {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    @Override
+    public String getAllValues() {
+        return new StringBuilder()
+                .append("id:").append(this.id).append(",")
+                .append("name:").append(this.name).append(",")
+                .append("type:").append(this.type).append(",")
+                .append("quantity:").append(this.quantity).append(",")
+                .append("isAvailable:").append(this.isAvailable)
+                .toString();
     }
 }
