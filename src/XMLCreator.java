@@ -27,8 +27,17 @@ public class XMLCreator {
         HashMap<String,String> elements = getAllVariables(equipment.getAllValues());
         return buildXML(elements,type);
     }
+    public boolean createXML(User user){
+        String type = "User";
+        HashMap<String,String> elements = getAllVariables(user.getAllValues());
+        return buildXML(elements,type);
+
+    }
 
     //Todo:Create a Log if theres an exception for easier debugging
+    /*
+    Todo: Handle use case where xml already exists and if the item already exist so that u just append on it
+     */
     private boolean buildXML(HashMap<String, String> elements, String type) {
 
         try {

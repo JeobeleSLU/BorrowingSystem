@@ -114,7 +114,7 @@ public class XMLParser {
         return null;
     }
 
-    public Equipment parseXMLToUser(){
+    public Equipment parseXMLEquipment(){
         return null;
     }
 

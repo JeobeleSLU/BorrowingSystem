@@ -35,7 +35,7 @@ public class FileHandler {
         return file;
     }
 
-    public static synchronized boolean saveXML(Transformer transformer, DOMSource domSource, StreamResult result) {
+    public static boolean saveXML(Transformer transformer, DOMSource domSource, StreamResult result) {
         try {
             transformer.transform(domSource,result);
             return true;
