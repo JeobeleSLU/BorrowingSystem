@@ -2,6 +2,7 @@
  * This is the base class of the equipment
  */
 
+import java.awt.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Equipment implements XMLTemplate {
@@ -10,13 +11,15 @@ public class Equipment implements XMLTemplate {
     AtomicInteger quantity; // Not sure for atomicity
     String id;
     boolean isAvailable;
+    String imagePath;
 
-    public Equipment(String name, String type, AtomicInteger quantity, String id, boolean isAvailable) {
+    public Equipment(String name, String type, AtomicInteger quantity, String id, boolean isAvailable,String imagePath) {
         this.name = name;
         this.type = type;
         this.quantity = quantity;
         this.id = id;
         this.isAvailable = isAvailable;
+        this.imagePath = imagePath;
 
     }
 
@@ -67,6 +70,7 @@ public class Equipment implements XMLTemplate {
                 .append("id:").append(this.id).append(",")
                 .append("name:").append(this.name).append(",")
                 .append("quantity:").append(this.quantity).append(",")
+                .append("Image").append(ImageHandler.encodeImageToBase64(imagePath))
                 .append("isAvailable:").append(this.isAvailable)
                 .toString();
     }

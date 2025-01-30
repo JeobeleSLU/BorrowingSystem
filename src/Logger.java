@@ -1,6 +1,11 @@
 /**
  * This is the Logger where it logs every transaction that happens in the server
  */
-public class Logger {
+public class Logger  {
 
+    private Logger() {
+    }
+    static void createLog(){
+
+    }
 }

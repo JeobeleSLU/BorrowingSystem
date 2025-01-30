@@ -114,25 +114,8 @@ public class XMLParser {
         return null;
     }
 
-    public static String encodeImageToBase64(String imagePath) throws IOException {
-        File file = new File(imagePath);
-        FileInputStream imageInFile = new FileInputStream(file);
-        byte[] imageData = new byte[(int) file.length()];
-        imageInFile.read(imageData);
-        imageInFile.close();
-        return Base64.getEncoder().encodeToString(imageData);
-
-    }
-
-    public BufferedImage base64ToImage(String encoded) throws IOException {
-        String base64Image = encoded;
-        byte[] imageBytes = Base64.getDecoder().decode(base64Image);
-
-        // Convert byte array to BufferedImage
-        ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
-        BufferedImage image = ImageIO.read(bis);
-
-        return image;
+    public Equipment parseXMLToUser(){
+        return null;
     }
 
 }
