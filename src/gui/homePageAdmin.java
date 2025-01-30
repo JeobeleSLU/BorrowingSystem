@@ -17,6 +17,7 @@ public class homePageAdmin extends JFrame {
     private JLabel equipment;
 
 
+
     public homePageAdmin() {
         setContentPane(mainPanel);
         setTitle("Menu");
@@ -37,6 +38,10 @@ public class homePageAdmin extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                new addItem();
+             //   dispose();
+
+
             }
         });
 
