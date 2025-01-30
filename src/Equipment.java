@@ -63,9 +63,9 @@ public class Equipment implements XMLTemplate {
     @Override
     public String getAllValues() {
         return new StringBuilder()
+                .append("type:").append(this.type).append(",")
                 .append("id:").append(this.id).append(",")
                 .append("name:").append(this.name).append(",")
-                .append("type:").append(this.type).append(",")
                 .append("quantity:").append(this.quantity).append(",")
                 .append("isAvailable:").append(this.isAvailable)
                 .toString();
