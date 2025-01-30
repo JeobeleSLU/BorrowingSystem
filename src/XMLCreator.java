@@ -6,8 +6,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -33,14 +36,19 @@ public class XMLCreator {
             if (domSource == null){
                 return false;
             }
+            //Todo:Maybe Refactor to remove the logic of getting the path of the files in the creator
+            String path;
+            if (type.equals("Equipment")){
+                path = "res/Server/Equipment/";
+            }else{
+                path ="";
+            }
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
-
+            StreamResult result = new StreamResult(new File(path.concat(type).concat(".xml")));
+                transformer.transform(domSource,result);
             return true;
-        }catch (TransformerConfigurationException e){
-            e.printStackTrace();
-            return false;
-        } catch (ParserConfigurationException e) {
+        } catch (ParserConfigurationException | TransformerException e) {
            return false;
         }
     }
