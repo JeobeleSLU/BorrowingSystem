@@ -36,18 +36,11 @@ public class XMLCreator {
             if (domSource == null){
                 return false;
             }
-            //Todo:Maybe Refactor to remove the logic of getting the path of the files in the creator
-            String path;
-            if (type.equals("Equipment")){
-                path = "res/Server/Equipment/";
-            }else{
-                path ="";
-            }
+            String path = FileHandler.getFilePath(type.concat(type).concat(".xml"));
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            StreamResult result = new StreamResult(new File(path.concat(type).concat(".xml")));
-                transformer.transform(domSource,result);
-            return true;
+            StreamResult result = new StreamResult(new File(path));
+            return FileHandler.saveXML(transformer,domSource,result);
         } catch (ParserConfigurationException | TransformerException e) {
            return false;
         }
