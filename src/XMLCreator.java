@@ -22,16 +22,9 @@ public class XMLCreator {
     private XMLCreator() {
     }
 
-    public boolean createXML(Equipment equipment){
-        String type = "Equipment";
-        HashMap<String,String> elements = getAllVariables(equipment.getAllValues());
-        return buildXML(elements,type);
-    }
-    public boolean createXML(User user){
-        String type = "User";
-        HashMap<String,String> elements = getAllVariables(user.getAllValues());
-        return buildXML(elements,type);
-
+    public <T extends XMLTemplate> boolean createXML(T object, String type) {
+        HashMap<String, String> elements = getAllVariables(object.getAllValues());
+        return buildXML(elements, type);
     }
 
     //Todo:Create a Log if theres an exception for easier debugging

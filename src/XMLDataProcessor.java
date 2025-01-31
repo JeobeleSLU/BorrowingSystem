@@ -72,6 +72,7 @@ public class XMLDataProcessor {
         this.status = status;
     }
 
+
     public static ArrayList<String> parse() {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
