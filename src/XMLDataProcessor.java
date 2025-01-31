@@ -4,23 +4,18 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Base64;
 
 /**
  * This class will parse xml into its corresponding object
  */
-public class XMLParser {
+public class XMLDataProcessor {
     private static File filePath; // filepath of xml
     private String image; // Image filepath of the item
     private String itemName; // Name of the item
@@ -28,8 +23,8 @@ public class XMLParser {
     private String status;   // Status of the item
 
     // Constructor
-    public XMLParser(File filePath, String image, String itemName, int qty, String status) {
-        XMLParser.filePath = filePath;
+    public XMLDataProcessor(File filePath, String image, String itemName, int qty, String status) {
+        XMLDataProcessor.filePath = filePath;
         this.image = image;
         this.itemName = itemName;
         this.qty = qty;
@@ -41,7 +36,7 @@ public class XMLParser {
     }
 
     public void setFilePath(File filePath) {
-        XMLParser.filePath = filePath;
+        XMLDataProcessor.filePath = filePath;
     }
 
     // Getters and Setters

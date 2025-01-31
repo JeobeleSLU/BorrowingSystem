@@ -7,4 +7,5 @@ public interface XMLTemplate {
      *
      */
     String getAllValues();
+    String[] getDataMembers();
 }

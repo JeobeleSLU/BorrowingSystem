@@ -74,4 +74,16 @@ public class Equipment implements XMLTemplate {
                 .append("isAvailable:").append(this.isAvailable)
                 .toString();
     }
+
+    @Override
+    public String[] getDataMembers() {
+        return new String[]{
+                "type",
+                "id",
+                "name",
+                "quantity"
+                ,"image",
+                "isAvailable"
+        };
+    }
 }

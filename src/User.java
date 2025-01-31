@@ -9,14 +9,24 @@ public class User implements XMLTemplate {
     //If admin or student
     String userType;
     int failedAttempts;
+    String password;
 
-    public User(String name, String lastName, String mail, String idNumber, String userType, int failedAttempts) {
+    public User(String name, String lastName, String mail, String idNumber, String userType, int failedAttempts,String password) {
         this.name = name;
         this.lastName = lastName;
         this.mail = mail;
         this.idNumber = idNumber;
         this.userType = userType;
+        this.password = password;
         this.failedAttempts = failedAttempts;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -74,6 +84,15 @@ public class User implements XMLTemplate {
                 .append("Id:").append(this.idNumber).append(",")
                 .append("Name:").append(this.name).append(",")
                 .append("LastName:").append(this.lastName).append(",")
+                .append("Password:").append(this.password).append(",")
                 .append("Failed Attempts:").append(this.failedAttempts).append(",").toString();
     }
+
+    //Return this to get all the data members
+    @Override
+    public String[] getDataMembers() {
+        return new String[]{"UserType", "Id", "Name", "LastName", "FailedAttempts", "Password"};
+
+    }
+
 }
