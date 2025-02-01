@@ -28,6 +28,7 @@ public class XMLCreator {
     }
 
     //Todo:Create a Log if theres an exception for easier debugging
+    //Todo: Pacheck FileLogger
     /*
     Todo: Handle use case where xml already exists and if the item already exist so that u just append on it
      */
@@ -36,14 +37,19 @@ public class XMLCreator {
         try {
             DOMSource domSource= buildDOMSource(elements,type);
             if (domSource == null){
+                // Log error
+                FileLogger.warning("domSource is null");
                 return false;
             }
             String path = FileHandler.getFilePath(type.concat(type).concat(".xml"));
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             StreamResult result = new StreamResult(new File(path));
+            // LOg successful creation
+            FileLogger.info("Successfully created "+ type+".xml");
             return FileHandler.saveXML(transformer,domSource,result);
         } catch (ParserConfigurationException | TransformerException e) {
+            FileLogger.severe(e.getMessage());
            return false;
         }
     }
