@@ -15,7 +15,7 @@ import java.util.Arrays;
 /**
  * This class will parse xml into its corresponding object
  */
-public class XMLDataProcessor {
+public class XMLParser {
     private static File filePath; // filepath of xml
     private String image; // Image filepath of the item
     private String itemName; // Name of the item
@@ -23,8 +23,8 @@ public class XMLDataProcessor {
     private String status;   // Status of the item
 
     // Constructor
-    public XMLDataProcessor(File filePath, String image, String itemName, int qty, String status) {
-        XMLDataProcessor.filePath = filePath;
+    public XMLParser(File filePath, String image, String itemName, int qty, String status) {
+        XMLParser.filePath = filePath;
         this.image = image;
         this.itemName = itemName;
         this.qty = qty;
@@ -36,7 +36,7 @@ public class XMLDataProcessor {
     }
 
     public void setFilePath(File filePath) {
-        XMLDataProcessor.filePath = filePath;
+        XMLParser.filePath = filePath;
     }
 
     // Getters and Setters

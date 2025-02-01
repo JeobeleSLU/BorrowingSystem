@@ -13,7 +13,13 @@ public class Equipment implements XMLTemplate {
     boolean isAvailable;
     String imagePath;
 
-    public Equipment(String name, String type, AtomicInteger quantity, String id, boolean isAvailable,String imagePath) {
+    //           "type",
+    //                "id",
+    //                "name",
+    //                "quantity"
+    //                ,"image",
+    //                "isAvailable"
+    public Equipment( String type, String id,String name, AtomicInteger quantity,String imagePath, boolean isAvailable) {
         this.name = name;
         this.type = type;
         this.quantity = quantity;

@@ -1,4 +1,4 @@
-public interface XMLTemplate {
+public interface XMLTemplate extends Getter {
     /**
      *
      * @return String
@@ -7,5 +7,4 @@ public interface XMLTemplate {
      *
      */
     String getAllValues();
-    String[] getDataMembers();
 }

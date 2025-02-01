@@ -11,7 +11,8 @@ public class User implements XMLTemplate {
     int failedAttempts;
     String password;
 
-    public User(String name, String lastName, String mail, String idNumber, String userType, int failedAttempts,String password) {
+
+    public User( String userType, String idNumber, String name, String lastName,  String password, String mail, int failedAttempts) {
         this.name = name;
         this.lastName = lastName;
         this.mail = mail;
@@ -91,8 +92,7 @@ public class User implements XMLTemplate {
     //Return this to get all the data members
     @Override
     public String[] getDataMembers() {
-        return new String[]{"UserType", "Id", "Name", "LastName", "FailedAttempts", "Password"};
+        return new String[]{"UserType", "Id", "Name", "LastName","Password","Mail", "FailedAttempts" };
 
     }
-
 }
