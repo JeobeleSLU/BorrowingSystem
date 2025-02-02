@@ -14,6 +14,11 @@ public class SingletonUserFactory<T> implements Factory {
     }
 
     @Override
+    public String getClassName() {
+        return "User";
+    }
+
+    @Override
     public String[] getDataMembers() {
         //"UserType", "Id", "Name", "LastName","Password" "FailedAttempts",mail
         return new String[]{"UserType", "Id", "Name", "LastName","Password","Mail", "FailedAttempts" };

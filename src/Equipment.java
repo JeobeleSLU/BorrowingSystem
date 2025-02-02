@@ -2,7 +2,6 @@
  * This is the base class of the equipment
  */
 
-import java.awt.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Equipment implements XMLTemplate {

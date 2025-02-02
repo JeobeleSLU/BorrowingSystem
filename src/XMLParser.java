@@ -15,12 +15,13 @@ import java.util.Arrays;
 /**
  * This class will parse xml into its corresponding object
  */
-public class XMLParser {
+public class XMLParser{
     private static File filePath; // filepath of xml
     private String image; // Image filepath of the item
     private String itemName; // Name of the item
     private int qty;         // Quantity of the item
     private String status;   // Status of the item
+
 
     // Constructor
     public XMLParser(File filePath, String image, String itemName, int qty, String status) {
@@ -72,8 +73,18 @@ public class XMLParser {
         this.status = status;
     }
 
-
-    public static ArrayList<String> parse() {
+    /**
+     *
+     * @param objectToBeCreated
+     * @param path
+     * @return T
+     * @param <T>
+     *     Pass in a factory  to create an object in runtime
+     */
+    public <T>ArrayList<T> parse(Factory<T> objectToBeCreated,String path) {
+        ArrayList<T> arrayList = new ArrayList<>();
+        String[] dataMembers = objectToBeCreated.getDataMembers();
+        String[]  attributes= new String[objectToBeCreated.getDataMembers().length];
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -81,33 +92,33 @@ public class XMLParser {
 
             document.getDocumentElement().normalize();
 
-            NodeList equipmentList = document.getElementsByTagName("Equipment");
+            NodeList objectList = document.getElementsByTagName(objectToBeCreated.getClassName());
 
-            ArrayList<String> list = new ArrayList<>();
-            for (int i = 0; i < equipmentList.getLength(); i++) {
-                Node equipmentNode = equipmentList.item(i);
+            for (int i = 0; i < objectList.getLength(); i++) {
+
+                Node equipmentNode = objectList.item(i);
 
                 if (equipmentNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element equipmentElement = (Element) equipmentNode;
+                    Element objectElement = (Element) equipmentNode;
                     //TODO: change tagName if needed
 
-                    String id = equipmentElement.getAttribute("Id");
-
-                    String image = equipmentElement.getElementsByTagName("Image").item(0).getTextContent();
-                    String itemName = equipmentElement.getElementsByTagName("itemName").item(0).getTextContent();
-                    String qty = equipmentElement.getElementsByTagName("Qty").item(0).getTextContent();
-                    String status = equipmentElement.getElementsByTagName("Status").item(0).getTextContent();
-
-                    list.addAll(Arrays.asList(id, image, itemName, qty, status));
-
+                    /*
+                    Loop through the array of data members to get the tags
+                    and store all the content of the tag in an array of string attribute
+                    create an object based on the factory
+                     */
+                    for (int j = 0; j < attributes.length; j++){
+                        attributes[j] = objectElement.
+                                getElementsByTagName(dataMembers[j]).item(0).getTextContent();
+                    }
+                 arrayList.add(objectToBeCreated.createObject(attributes));
                 }
-                return list;
             }
+            return arrayList;
         } catch(SAXException | IOException | ParserConfigurationException e){
             throw new RuntimeException(e);
         }
         //TODO: Error handling if null
-        return null;
     }
 
     public Equipment parseXMLEquipment(){

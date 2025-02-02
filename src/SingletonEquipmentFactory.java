@@ -10,6 +10,11 @@ public class SingletonEquipmentFactory implements Getter,Factory {
         return null;
     }
 
+    @Override
+    public String getClassName() {
+        return "Equipment";
+    }
+
 
     @Override
     public String[] getDataMembers() {
@@ -21,7 +26,9 @@ public class SingletonEquipmentFactory implements Getter,Factory {
                 ,"image",
                 "isAvailable"
         };
+
     }
+
 
     private static class SingletonHelper{
         private static final SingletonEquipmentFactory INSTANCE = new SingletonEquipmentFactory();
