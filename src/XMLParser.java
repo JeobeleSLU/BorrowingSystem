@@ -17,19 +17,11 @@ import java.util.Arrays;
  */
 public class XMLParser{
     private static File filePath; // filepath of xml
-    private String image; // Image filepath of the item
-    private String itemName; // Name of the item
-    private int qty;         // Quantity of the item
-    private String status;   // Status of the item
 
 
     // Constructor
-    public XMLParser(File filePath, String image, String itemName, int qty, String status) {
-        XMLParser.filePath = filePath;
-        this.image = image;
-        this.itemName = itemName;
-        this.qty = qty;
-        this.status = status;
+    public XMLParser(File filePath) {
+        this.filePath = filePath;
     }
 
     public File getFilePath() {
@@ -40,48 +32,14 @@ public class XMLParser{
         XMLParser.filePath = filePath;
     }
 
-    // Getters and Setters
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public int getQty() {
-        return qty;
-    }
-
-    public void setQty(int qty) {
-        this.qty = qty;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     /**
      *
      * @param objectToBeCreated
-     * @param path
      * @return T
      * @param <T>
      *     Pass in a factory  to create an object in runtime
      */
-    public <T>ArrayList<T> parse(Factory<T> objectToBeCreated,String path) {
+    public <T>ArrayList<T> parse(Factory<T> objectToBeCreated) {
         ArrayList<T> arrayList = new ArrayList<>();
         String[] dataMembers = objectToBeCreated.getDataMembers();
         String[]  attributes= new String[objectToBeCreated.getDataMembers().length];
