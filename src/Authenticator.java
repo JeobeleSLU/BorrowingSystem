@@ -1,3 +1,5 @@
+import java.util.logging.Logger;
+
 public class Authenticator {
     /**
      * This class will authenticate each session that wil be logged in to the system
@@ -26,13 +28,12 @@ public class Authenticator {
             //Todo: Log me!
 
         }else if (!isCorrectPassword(user)){
+            FileLogger.warning("Incorrect Password, Try again");
             return 0;
-            //Todo: Log me!
         }
         else return 1;
             //Todo: Log me!
     }
-
     private boolean isCorrectPassword(User user) {
         //some long ass method chain to get the user password and match it
         return manager.getUserLogin(user.getIdNumber()).getPassword().equals(user.getPassword());
