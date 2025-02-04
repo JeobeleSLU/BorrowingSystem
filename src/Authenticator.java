@@ -31,7 +31,11 @@ public class Authenticator {
             FileLogger.warning("Incorrect Password, Try again");
             return 0;
         }
-        else return 1;
+        else{
+            FileLogger.info("Successfully Log in");
+            return 1;
+        }
+
             //Todo: Log me!
     }
     private boolean isCorrectPassword(User user) {
