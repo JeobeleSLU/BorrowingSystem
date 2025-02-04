@@ -1,0 +1,350 @@
+Feb 04, 2025 5:46:45 PM FileLogger severe
+SEVERE: File path is null for type: User
+Feb 04, 2025 5:46:46 PM FileLogger severe
+SEVERE: File path is null for type: User
+Feb 04, 2025 5:47:42 PM FileLogger severe
+SEVERE: File path is null for type: User
+Feb 04, 2025 5:48:20 PM FileLogger severe
+SEVERE: File path is null for type: User
+Feb 04, 2025 5:48:43 PM FileLogger severe
+SEVERE: File path is null for type: User
+Feb 04, 2025 5:49:19 PM FileLogger severe
+SEVERE: File path is null for type: User
+Feb 04, 2025 5:50:04 PM FileLogger severe
+SEVERE: File path is null for type: User
+Feb 04, 2025 5:50:59 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 5:50:59 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: C:\Users\Jeobele\IdeaProjects\borrowingsystemintegrativeprogramming\res\Server\User (Access is denied)
+Feb 04, 2025 5:52:13 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 5:52:13 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: C:\Users\Jeobele\IdeaProjects\borrowingsystemintegrativeprogramming\res\Server\User (Access is denied)
+Feb 04, 2025 5:53:46 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 5:53:46 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: C:\Users\Jeobele\IdeaProjects\borrowingsystemintegrativeprogramming\res\Server\User (Access is denied)
+Feb 04, 2025 5:54:25 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:04:25 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:06:26 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:06:47 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:09:05 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:10:13 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:12:14 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:15:53 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:15:53 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: C:\Users\Jeobele\IdeaProjects\borrowingsystemintegrativeprogramming (Access is denied)
+Feb 04, 2025 6:19:41 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:19:41 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: C:\Users\Jeobele\IdeaProjects\borrowingsystemintegrativeprogramming (Access is denied)
+Feb 04, 2025 6:20:27 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:20:27 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: C:\Users\Jeobele\IdeaProjects\borrowingsystemintegrativeprogramming (Access is denied)
+Feb 04, 2025 6:20:27 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:20:27 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: C:\Users\Jeobele\IdeaProjects\borrowingsystemintegrativeprogramming (Access is denied)
+Feb 04, 2025 6:23:09 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:23:09 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\User\User.xml (The system cannot find the path specified)
+Feb 04, 2025 6:23:09 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:23:09 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\Equipment\Equipment.xml (The system cannot find the path specified)
+Feb 04, 2025 6:24:36 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:24:36 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\User\User.xml (The system cannot find the path specified)
+Feb 04, 2025 6:24:36 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:24:36 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\Equipment\Equipment.xml (The system cannot find the path specified)
+Feb 04, 2025 6:24:48 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:24:48 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\User\User.xml (The system cannot find the path specified)
+Feb 04, 2025 6:24:48 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:24:48 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\Equipment\Equipment.xml (The system cannot find the path specified)
+Feb 04, 2025 6:27:18 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\User\User.xml (The system cannot find the path specified)
+Feb 04, 2025 6:27:18 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\Equipment\Equipment.xml (The system cannot find the path specified)
+Feb 04, 2025 6:28:31 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\User\User.xml (The system cannot find the path specified)
+Feb 04, 2025 6:28:31 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\Equipment\Equipment.xml (The system cannot find the path specified)
+Feb 04, 2025 6:31:54 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\User\User.xml (The system cannot find the path specified)
+Feb 04, 2025 6:32:48 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\Equipment\Equipment.xml (The system cannot find the path specified)
+Feb 04, 2025 6:34:11 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\User\User.xml (The system cannot find the path specified)
+Feb 04, 2025 6:34:11 PM FileLogger severe
+SEVERE: java.io.FileNotFoundException: ..\res\Server\Equipment\Equipment.xml (The system cannot find the path specified)
+Feb 04, 2025 6:35:32 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:35:32 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:36:55 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:36:55 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:50:21 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:50:21 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:50:51 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:50:53 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:55:19 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:55:19 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:55:33 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:55:33 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:56:00 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:56:00 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:56:26 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:56:26 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:58:04 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 6:58:04 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 6:59:57 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:00:00 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:02:27 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:02:27 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:15:13 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:15:13 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:19:55 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:19:55 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:23:43 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:23:43 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:25:23 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:25:24 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:32:58 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:32:58 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:33:26 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:33:26 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:36:12 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:36:12 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:41:38 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:41:38 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:43:05 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:43:05 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:43:05 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:43:05 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:43:05 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:45:40 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:45:40 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:45:40 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:45:40 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:45:40 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:45:47 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:45:47 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:45:47 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:45:47 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:45:47 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:52:29 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:52:29 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:52:29 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:52:29 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:52:29 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:52:31 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:52:31 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:52:31 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:52:31 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:52:31 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:56:35 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:56:35 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:56:35 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:56:35 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:56:35 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:57:28 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:57:28 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:57:28 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:57:28 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:57:28 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:57:39 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:57:39 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:57:39 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:57:39 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:57:39 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:58:51 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:58:51 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:58:51 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:58:51 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:58:51 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 7:58:56 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:58:56 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:58:56 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:58:56 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 7:58:56 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 8:00:02 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:00:02 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:00:02 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:00:02 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:00:02 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 8:01:32 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:01:32 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:01:32 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:01:32 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:01:32 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 8:02:27 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:02:27 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:02:27 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:02:27 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:02:27 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:02:27 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:02:27 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:02:27 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 8:06:43 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:06:43 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:06:43 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:06:43 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:06:43 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:06:43 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:06:43 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:06:43 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 8:09:08 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:09:09 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:09:09 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:09:09 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:09:09 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:09:09 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:09:09 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:09:09 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 8:17:02 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:17:02 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:17:02 PM FileLogger info
+INFO: Successfully created Equipment.xml
+Feb 04, 2025 8:36:24 PM FileLogger info
+INFO: Successfully created User.xml
+Feb 04, 2025 8:39:43 PM FileLogger info
+INFO: Successfully created User.xml

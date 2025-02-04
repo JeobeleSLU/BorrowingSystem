@@ -4,9 +4,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     public static void main(String[] args) {
+        FileLogger logger = new FileLogger(Main.class);
         FileHandler handler = new FileHandler();
         File file = new File(handler.getFilePath("User")+"User.xml");
         System.out.println("Hello world!");
+<<<<<<< HEAD
         User user1 = new User("alice.smith@example.com", 1, "1001", "Smith", "Admin", "Alice", "password123");
         User user2 = new User("bob.johnson@example.com", 0, "1002", "Johnson", "User", "Bob", "securePass");
         User user3 = new User("charlie.brown@example.com", 2, "1003", "Brown", "Moderator", "Charlie", "modPass!");
@@ -25,6 +27,12 @@ public class Main {
 //  xmlCreator.createXML(user1, "User");
 //         xmlCreator.createXML(user2, "User");
 //         xmlCreator.createXML(user3, "User");
+=======
+        User user = new User("john.doe@example.com", 0, "12345", "Doe", "Admin", "John", "securePass");
+
+        XMLCreator xmlCreator = new XMLCreator();
+        boolean success = xmlCreator.createXML(user, "User");
+>>>>>>> d533df921b72309048bed1f20b28eb280ab9b7a3
 
         if (success) {
             System.out.println("XML file successfully created.");

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Base64;
 
 public class ImageHandler {
+    FileLogger logger = new FileLogger(ImageHandler.class);
     private ImageHandler(){
     }
     public static String encodeImageToBase64(String imagePath)  {

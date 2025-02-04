@@ -1,6 +1,7 @@
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SingletonEquipmentFactory implements Getter,Factory {
+    FileLogger logger = new FileLogger(SingletonEquipmentFactory.class);
     private SingletonEquipmentFactory(){}
 
     @Override

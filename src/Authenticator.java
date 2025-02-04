@@ -1,6 +1,7 @@
 import java.util.logging.Logger;
 
-public class Authenticator {
+public class Authenticator{
+    FileLogger logger = new FileLogger(Authenticator.class);
     /**
      * This class will authenticate each session that wil be logged in to the system
      * It will parse xml file and will return true or false it passed the authentication
@@ -25,8 +26,8 @@ public class Authenticator {
     public int authenticate(User user){
 
         if (!manager.userExists(user.getIdNumber())){
+            FileLogger.warning("Create an account first");
             return -1;
-            //Todo: Log me!
 
         }else if (!isCorrectPassword(user)){
             FileLogger.warning("Incorrect Password, Try again");
