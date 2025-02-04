@@ -20,7 +20,7 @@ public class homePageAdmin extends JFrame {
 
     public homePageAdmin() {
         setContentPane(mainPanel);
-        setTitle("Menu");
+        setTitle("Admin homepage");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 700);
         setLocationRelativeTo(null);
