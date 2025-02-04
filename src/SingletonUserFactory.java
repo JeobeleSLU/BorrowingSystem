@@ -1,4 +1,5 @@
 public class SingletonUserFactory<T> implements Factory {
+    FileLogger Filelogger = new FileLogger(SingletonUserFactory.class);
 
     private SingletonUserFactory(){
     }

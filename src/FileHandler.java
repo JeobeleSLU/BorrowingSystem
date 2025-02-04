@@ -9,6 +9,8 @@ import java.io.File;
  * Use this for centralized file IO operations
  */
 public class FileHandler {
+    FileLogger Filelogger = new FileLogger(FileHandler.class);
+
     public FileHandler(){
     }
     public String getFilePath(String type) {

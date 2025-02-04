@@ -16,6 +16,8 @@ import java.util.Arrays;
  * This class will parse xml into its corresponding object
  */
 public class XMLParser{
+    FileLogger Filelogger = new FileLogger(XMLParser.class);
+
 //    private File filePath; // filepath of xml
 
 

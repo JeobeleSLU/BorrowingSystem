@@ -1,57 +1,48 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-/**
- * This is the Logger where it logs every transaction that happens in the server
- */
 public class FileLogger {
+    private final String className;
+    private static String logFile;
+    private static final String logDir = "logs";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final String timestamp = LocalDateTime.now().format(FORMATTER);
 
-    private static Logger logger;
+    public FileLogger(Class<?> name) {
+        this.className = name.getSimpleName();
+        File directory = new File(logDir);
+        // Create a directory if it does not exist
+        if (!directory.exists()){
+            directory.mkdir();
+        }
+        // name the log file as the classname
+        this.logFile = logDir + File.separator + className + ".log";
+    }
 
-    // Initialize the logger
-    static {
-        try {
-            // Create a logger instance
-            logger = Logger.getLogger(FileLogger.class.getName());
-
-            // Create a FileHandler to write logs to a file
-            FileHandler fileHandler = new FileHandler("application.log", true); // true for appending
-            fileHandler.setFormatter(new SimpleFormatter()); // Use simple text format
-
-            // Add the FileHandler to the logger
-            logger.addHandler(fileHandler);
-
-            // Set the logging level
-            logger.setLevel(Level.INFO);
-
-            // Disable logging to the console
-            logger.setUseParentHandlers(false);
-
+    public static void info(String message) {
+        try (FileWriter writer = new FileWriter(logFile, true)) {
+            writer.write(String.format("[%s] [INFO] %s\n", timestamp, message));
         } catch (IOException e) {
-            System.err.println("Failed to initialize logger: " + e.getMessage());
+            System.err.println("Failed to write to log file: " + e.getMessage());
         }
     }
 
-    // Log an INFO message
-    public static void info(String message) {
-        logger.info(message);
-    }
-
-    // Log a WARNING message
     public static void warning(String message) {
-        logger.warning(message);
+        try (FileWriter writer = new FileWriter(logFile, true)) {
+            writer.write(String.format("[%s] [WARNING] %s\n", timestamp, message));
+        } catch (IOException e) {
+            System.err.println("Failed to write to log file: " + e.getMessage());
+        }
     }
 
-    // Log a SEVERE message
     public static void severe(String message) {
-        logger.severe(message);
-    }
-
-    // Log an exception
-    public static void logException(Throwable throwable) {
-        logger.log(Level.SEVERE, "Exception occurred: ", throwable);
+        try (FileWriter writer = new FileWriter(logFile, true)) {
+            writer.write(String.format("[%s] [SEVERE] %s\n", timestamp, message));
+        } catch (IOException e) {
+            System.err.println("Failed to write to log file: " + e.getMessage());
+        }
     }
 }

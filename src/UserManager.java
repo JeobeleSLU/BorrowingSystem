@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserManager {
+    FileLogger Filelogger = new FileLogger(UserManager.class);
+
     XMLParser parser;
     private ConcurrentHashMap<String, User> users;
 
