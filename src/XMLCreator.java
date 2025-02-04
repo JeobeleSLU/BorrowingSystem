@@ -41,13 +41,13 @@ public class XMLCreator {
 
         try {
             if (type == null) {
-                FileLogger.severe("Type is null!");
+                logger.severe("Type is null!");
                 return false;
             }
 
             DOMSource domSource = buildDOMSource(elements, type);
             if (domSource == null) {
-                FileLogger.warning("domSource is null");
+                logger.warning("domSource is null");
                 return false;
             }
 
@@ -65,11 +65,11 @@ public class XMLCreator {
             // LOg successful creation
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(domSource,result);
-            FileLogger.info("Successfully created "+ type+".xml");
+            logger.info("Successfully created "+ type+".xml");
 //            fileHandler.saveXML(transformer,domSource,result);
             return true;
         } catch (ParserConfigurationException | TransformerException e) {
-            FileLogger.severe(e.getMessage());
+            logger.severe(e.getMessage());
            return false;
         } catch (IOException e) {
             throw new RuntimeException(e);

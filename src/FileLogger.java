@@ -22,7 +22,7 @@ public class FileLogger {
         this.logFile = logDir + File.separator + className + ".log";
     }
 
-    public static void info(String message) {
+    public void info(String message) {
         try (FileWriter writer = new FileWriter(logFile, true)) {
             writer.write(String.format("[%s] [INFO] %s\n", timestamp, message));
         } catch (IOException e) {
@@ -30,7 +30,7 @@ public class FileLogger {
         }
     }
 
-    public static void warning(String message) {
+    public void warning(String message) {
         try (FileWriter writer = new FileWriter(logFile, true)) {
             writer.write(String.format("[%s] [WARNING] %s\n", timestamp, message));
         } catch (IOException e) {
@@ -38,7 +38,7 @@ public class FileLogger {
         }
     }
 
-    public static void severe(String message) {
+    public void severe(String message) {
         try (FileWriter writer = new FileWriter(logFile, true)) {
             writer.write(String.format("[%s] [SEVERE] %s\n", timestamp, message));
         } catch (IOException e) {

@@ -17,7 +17,7 @@ public class SingletonUserFactory<T> implements Factory {
              */
             return new User(members[0],Integer.parseInt(members[1]),members[2],members[3],members[4],members[5],(members[6])) ;
         }catch (NumberFormatException e){
-            FileLogger.severe("Failed to manufacture user"+e.getMessage());
+            logger.severe("Failed to manufacture user"+e.getMessage());
             return null;
         }
     }
