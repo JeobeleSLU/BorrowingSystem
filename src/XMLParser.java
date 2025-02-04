@@ -44,7 +44,7 @@ public class XMLParser{
 
             NodeList objectList = document.getElementsByTagName(objectToBeCreated.getClassName());
 
-            for (int i = 1; i < objectList.getLength(); i++) {
+            for (int i = 0; i < objectList.getLength(); i++) {
 
                 Node objectNode = objectList.item(i);
 
@@ -59,8 +59,10 @@ public class XMLParser{
                     create an object based on the factory
                      */
                     for (int j = 0; j < attributes.length; j++){
-                        attributes[j] = objectElement.
-                                getElementsByTagName(dataMembers[j]).item(0).getTextContent();
+                        attributes[j] =
+                                objectElement
+                                        .getElementsByTagName(dataMembers[j]).item(0)
+                                        .getTextContent();
                     }
                  arrayList.add(objectToBeCreated.createObject(attributes));
                 }

@@ -12,15 +12,24 @@ public class User implements XMLTemplate {
     String password;
 
 
-    public User( String userType, String idNumber, String name, String lastName,  String password, String mail, int failedAttempts) {
-        this.name = name;
-        this.lastName = lastName;
+    public User(String mail, int failedAttempts, String id, String lastName, String userType, String name, String password) {
         this.mail = mail;
-        this.idNumber = idNumber;
-        this.userType = userType;
-        this.password = password;
         this.failedAttempts = failedAttempts;
+        this.idNumber = id;
+        this.lastName = lastName;
+        this.userType = userType;
+        this.name = name;
+        this.password = password;
     }
+//    public User( String userType, String idNumber, String name, String lastName,  String password, String mail, int failedAttempts) {
+//        this.name = name;
+//        this.lastName = lastName;
+//        this.mail = mail;
+//        this.idNumber = idNumber;
+//        this.userType = userType;
+//        this.password = password;
+//        this.failedAttempts = failedAttempts;
+//    }
 
     public String getPassword() {
         return password;
@@ -87,7 +96,8 @@ public class User implements XMLTemplate {
                 .append("Id:").append(this.idNumber).append(",")
                 .append("LastName:").append(this.lastName).append(",")
                 .append("Password:").append(this.password).append(",")
-                .append("FailedAttempts:").append(this.failedAttempts)
+                .append("FailedAttempts:").append(this.failedAttempts).append(",")
+                .append("Mail:").append(this.mail)
                 .toString();
     }
 

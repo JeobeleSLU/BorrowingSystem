@@ -6,7 +6,15 @@ public class SingletonUserFactory<T> implements Factory {
     @Override
     public User createObject(String[] members) {
         try {
-            return new User(members[0],members[1],members[2],members[3],members[4],members[5],Integer.parseInt(members[6])) ;
+            /*
+               <FailedAttempts id="0"/>
+    <Id>12345</Id>
+    <LastName>Doe</LastName>
+    <UserType>Admin</UserType>
+    <Name>John</Name>
+    <Password>securePass</Password>
+             */
+            return new User(members[0],Integer.parseInt(members[1]),members[2],members[3],members[4],members[5],(members[6])) ;
         }catch (NumberFormatException e){
             FileLogger.severe("Failed to manufacture user"+e.getMessage());
             return null;
@@ -21,8 +29,7 @@ public class SingletonUserFactory<T> implements Factory {
     @Override
     public String[] getDataMembers() {
         //"UserType", "Id", "Name", "LastName","Password" "FailedAttempts",mail
-        return new String[]{"UserType", "Id", "Name", "LastName","Password","Mail", "FailedAttempts" };
-
+        return new String[]{"Mail", "FailedAttempts", "Id", "LastName", "UserType", "Name", "Password"};
     }
 
     private static class SingletonHelper{

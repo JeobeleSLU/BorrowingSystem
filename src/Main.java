@@ -7,7 +7,8 @@ public class Main {
         FileHandler handler = new FileHandler();
         File file = new File(handler.getFilePath("User")+"User.xml");
         System.out.println("Hello world!");
-        User user = new User("Admin", "12345", "John", "Doe", "securePass", "john.doe@example.com", 0);
+        User user = new User("john.doe@example.com", 0, "12345", "Doe", "Admin", "John", "securePass");
+
         XMLCreator xmlCreator = new XMLCreator();
         boolean success = xmlCreator.createXML(user, "User");
 
