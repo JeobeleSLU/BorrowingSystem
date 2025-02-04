@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     public static void main(String[] args) {
-        FileLogger fileLogger = new FileLogger(Main.class);
+        FileLogger logger = new FileLogger(Main.class);
         FileHandler handler = new FileHandler();
         File file = new File(handler.getFilePath("User")+"User.xml");
         System.out.println("Hello world!");

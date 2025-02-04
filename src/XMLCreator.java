@@ -19,7 +19,7 @@ import java.util.Map;
  * This will facilitate and handle the creation of the xml files
  */
 public class XMLCreator {
-    FileLogger Filelogger = new FileLogger(XMLCreator.class);
+    FileLogger logger = new FileLogger(XMLCreator.class);
 
     FileHandler fileHandler;
     public XMLCreator() {

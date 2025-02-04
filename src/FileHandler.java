@@ -9,7 +9,7 @@ import java.io.File;
  * Use this for centralized file IO operations
  */
 public class FileHandler {
-    FileLogger Filelogger = new FileLogger(FileHandler.class);
+    FileLogger logger = new FileLogger(FileHandler.class);
 
     public FileHandler(){
     }

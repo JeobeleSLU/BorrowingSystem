@@ -5,7 +5,7 @@
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Equipment implements XMLTemplate {
-    FileLogger Filelogger = new FileLogger(XMLTemplate.class);
+    FileLogger logger = new FileLogger(XMLTemplate.class);
     String name;
     String type;
     AtomicInteger quantity; // Not sure for atomicity

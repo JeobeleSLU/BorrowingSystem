@@ -2,7 +2,7 @@
  * This is the base class for the user
  */
 public class User implements XMLTemplate {
-    FileLogger Filelogger = new FileLogger(User.class);
+    FileLogger logger = new FileLogger(User.class);
     String name;
     String lastName;
     String mail; //not sure

@@ -1,7 +1,7 @@
 import java.util.logging.Logger;
 
 public class Authenticator{
-    FileLogger Filelogger = new FileLogger(Authenticator.class);
+    FileLogger logger = new FileLogger(Authenticator.class);
     /**
      * This class will authenticate each session that wil be logged in to the system
      * It will parse xml file and will return true or false it passed the authentication
@@ -29,11 +29,11 @@ public class Authenticator{
             //Todo: Log me!
 
         }else if (!isCorrectPassword(user)){
-            FileLogger.warning("Incorrect Password, Try again");
+            logger.warning("Incorrect Password, Try again");
             return 0;
         }
         else{
-            FileLogger.info("Successfully Log in");
+            logger.info("Successfully Log in");
             return 1;
         }
 
