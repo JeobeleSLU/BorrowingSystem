@@ -21,16 +21,6 @@ public class User implements XMLTemplate {
         this.name = name;
         this.password = password;
     }
-//    public User( String userType, String idNumber, String name, String lastName,  String password, String mail, int failedAttempts) {
-//        this.name = name;
-//        this.lastName = lastName;
-//        this.mail = mail;
-//        this.idNumber = idNumber;
-//        this.userType = userType;
-//        this.password = password;
-//        this.failedAttempts = failedAttempts;
-//    }
-
     public String getPassword() {
         return password;
     }

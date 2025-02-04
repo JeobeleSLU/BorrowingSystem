@@ -8,6 +8,7 @@ public class Authenticator {
      * creating new user accopunt will be here
      */
     UserManager manager;
+    XMLParser parse;
     public Authenticator() {
         manager = new UserManager();
         //when registering and reseting password (admin) refetch database
@@ -37,6 +38,22 @@ public class Authenticator {
         }
 
             //Todo: Log me!
+    }
+    /*
+    1 for correct
+    0 for already existing
+     */
+    public synchronized int createUseAccount(User user){
+
+        if (manager.userExists(user.getIdNumber())){
+            return -1;
+            //Todo: Log me pls
+        }else {
+            if (manager.writeUserToXml(user)){
+                return 1;
+            }
+        }return 0; // For some odd reason that even God doesn't knows
+        //todo: How would you even log this ?
     }
     private boolean isCorrectPassword(User user) {
         //some long ass method chain to get the user password and match it

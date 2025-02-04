@@ -5,12 +5,17 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UserManager {
     XMLParser parser;
     private ConcurrentHashMap<String, User> users;
+    XMLCreator writer;
 
-    private final File filePath = new File("../res/Server/User/User.xml");
+
+    private final File filePath;
     public UserManager(){
+        FileHandler handler = new FileHandler();
+        filePath = new File(handler.getFilePath("User")+"User.xml");
         //user path
         users = new ConcurrentHashMap<>();
         parser = new XMLParser();
+        writer = new XMLCreator();
         fetchUserData();
     }
     public synchronized void  fetchUserData() {
@@ -18,6 +23,10 @@ public class UserManager {
         ArrayList<User> temp = parser.parse(SingletonUserFactory.getInstance(),filePath);
         temp.forEach(e -> users.put(e.getIdNumber(),e));
         temp.clear();
+    }
+
+    boolean writeUserToXml(User user){
+        return writer.createXML(user, "User");
     }
 
     boolean userExists(String idNumber){
