@@ -107,9 +107,7 @@ public class XMLCreator {
         }
 
         // The first entry becomes the main element
-        Map.Entry<String, String> firstEntry = iterator.next();
-        Element types = doc.createElement(firstEntry.getKey());
-        root.appendChild(types);
+
 
         while (iterator.hasNext()) {
             Map.Entry<String, String> entry = iterator.next();
