@@ -44,7 +44,7 @@ public class FileHandler {
             transformer.transform(domSource,result);
             return true;
         } catch (TransformerException e) {
-            FileLogger.severe(e.getMessage());
+            logger.severe(e.getMessage());
             //log this
             return false;
         }
