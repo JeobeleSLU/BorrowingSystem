@@ -38,7 +38,7 @@ public class FileHandler {
 
     public boolean saveXML(Transformer transformer, DOMSource domSource, StreamResult result) {
         try {
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.INDENT, "no");
             transformer.transform(domSource,result);
             return true;
         } catch (TransformerException e) {

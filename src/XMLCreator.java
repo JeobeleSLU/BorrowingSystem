@@ -1,5 +1,6 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -77,29 +78,29 @@ public class XMLCreator {
 
     private DOMSource buildDOMSource(HashMap<String, String> elements, String type) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setIgnoringElementContentWhitespace(true);
         DocumentBuilder docBuilder = factory.newDocumentBuilder();
         Document doc;
         Element root;
-        if (!fileHandler.exists(fileHandler.getFilePath(type))) {
-            doc = docBuilder.newDocument();
-            root = doc.createElement(type);
-        } else {
-            File file = new File(fileHandler.getFilePath(type));
-            if (file.length() == 0) { // if file is empty
-                doc = docBuilder.newDocument();
-                root = doc.createElement(type);
-            } else {
-                doc = docBuilder.parse(file); //  only if not empty
-                root = doc.getDocumentElement();
-            }
-        }
+        String filePath = fileHandler.getFilePath(type) + type + ".xml";
+        File file = new File(filePath);
 
-        doc.appendChild(root);
+        if (!file.exists() || file.length() == 0) { //file doesn't exist or is empty, create new
+            doc = docBuilder.newDocument();
+            root = doc.createElement(type+"s");
+            doc.appendChild(root);
+        } else {
+            doc = docBuilder.parse(file);
+            doc.getDocumentElement().normalize();
+            removeWhitespaceNodes(doc.getDocumentElement());
+            root = doc.getDocumentElement(); // use existing root
+        }
+        Element tempRoot = doc.createElement("User");
+        root.appendChild(tempRoot);
 
         if (elements.isEmpty()) {
             return null;
         }
-
         //Hashmap first
         Iterator<Map.Entry<String, String>> iterator = elements.entrySet().iterator();
         if (!iterator.hasNext()) {
@@ -108,12 +109,11 @@ public class XMLCreator {
 
         // The first entry becomes the main element
 
-
         while (iterator.hasNext()) {
             Map.Entry<String, String> entry = iterator.next();
             Element temp = doc.createElement(entry.getKey());
             temp.appendChild(doc.createTextNode(entry.getValue()));
-            root.appendChild(temp);
+            tempRoot.appendChild(temp);
         }
 
         return new DOMSource(doc);
@@ -131,5 +131,15 @@ public class XMLCreator {
         }
 
         return variables;
+    }
+    private static void removeWhitespaceNodes(Node node) {
+        for (int i = node.getChildNodes().getLength() - 1; i >= 0; i--) {
+            Node child = node.getChildNodes().item(i);
+            if (child.getNodeType() == Node.TEXT_NODE && child.getNodeValue().trim().isEmpty()) {
+                node.removeChild(child);
+            } else if (child.hasChildNodes()) {
+                removeWhitespaceNodes(child);
+            }
+        }
     }
 }
