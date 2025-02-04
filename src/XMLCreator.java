@@ -111,8 +111,6 @@ public class XMLCreator {
         Element types = doc.createElement(firstEntry.getKey());
         root.appendChild(types);
 
-        types.setAttribute("id", firstEntry.getValue());
-
         while (iterator.hasNext()) {
             Map.Entry<String, String> entry = iterator.next();
             Element temp = doc.createElement(entry.getKey());
