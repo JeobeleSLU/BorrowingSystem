@@ -6,16 +6,16 @@ public class UserManager {
     XMLParser parser;
     private ConcurrentHashMap<String, User> users;
 
-    private final File filePath = new File("res/Server/User");
+    private final File filePath = new File("../res/Server/User/User.xml");
     public UserManager(){
         //user path
         users = new ConcurrentHashMap<>();
-        parser = new XMLParser(filePath);
+        parser = new XMLParser();
         fetchUserData();
     }
     public synchronized void  fetchUserData() {
         users.clear();
-        ArrayList<User> temp = parser.parse(SingletonUserFactory.getInstance());
+        ArrayList<User> temp = parser.parse(SingletonUserFactory.getInstance(),filePath);
         temp.forEach(e -> users.put(e.getIdNumber(),e));
         temp.clear();
     }

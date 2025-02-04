@@ -16,20 +16,12 @@ import java.util.Arrays;
  * This class will parse xml into its corresponding object
  */
 public class XMLParser{
-    private static File filePath; // filepath of xml
+//    private File filePath; // filepath of xml
 
 
     // Constructor
-    public XMLParser(File filePath) {
-        this.filePath = filePath;
-    }
-
-    public File getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(File filePath) {
-        XMLParser.filePath = filePath;
+    public XMLParser() {
+//        this.filePath = filePath;
     }
 
     /**
@@ -39,25 +31,26 @@ public class XMLParser{
      * @param <T>
      *     Pass in a factory  to create an object in runtime
      */
-    public <T>ArrayList<T> parse(Factory<T> objectToBeCreated) {
+    public <T>ArrayList<T> parse(Factory<T> objectToBeCreated,File file) {
         ArrayList<T> arrayList = new ArrayList<>();
         String[] dataMembers = objectToBeCreated.getDataMembers();
         String[]  attributes= new String[objectToBeCreated.getDataMembers().length];
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(filePath);
+            Document document = builder.parse(file);
 
             document.getDocumentElement().normalize();
 
             NodeList objectList = document.getElementsByTagName(objectToBeCreated.getClassName());
 
-            for (int i = 0; i < objectList.getLength(); i++) {
+            for (int i = 1; i < objectList.getLength(); i++) {
 
-                Node equipmentNode = objectList.item(i);
+                Node objectNode = objectList.item(i);
 
-                if (equipmentNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element objectElement = (Element) equipmentNode;
+                if (objectNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element objectElement = (Element) objectNode;
+                    System.out.println(objectElement);
                     //TODO: change tagName if needed
 
                     /*

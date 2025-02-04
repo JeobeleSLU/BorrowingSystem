@@ -1,3 +1,4 @@
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
@@ -10,12 +11,12 @@ import java.io.File;
 public class FileHandler {
     public FileHandler(){
     }
-    public static String getFilePath(String type) {
+    public String getFilePath(String type) {
         switch (type) {
             case "Equipment":
-                return "res/Server/Equipment/";
+                return "./res/Server/Equipment/";
             case "User":
-                return "/res/Server/User";
+                return "./res/Server/User/";
             default:
                 return null;
         }
@@ -35,8 +36,9 @@ public class FileHandler {
         return file;
     }
 
-    public static boolean saveXML(Transformer transformer, DOMSource domSource, StreamResult result) {
+    public boolean saveXML(Transformer transformer, DOMSource domSource, StreamResult result) {
         try {
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(domSource,result);
             return true;
         } catch (TransformerException e) {
@@ -44,5 +46,9 @@ public class FileHandler {
             //log this
             return false;
         }
+    }
+    public boolean exists(String filePath){
+        File file = new File(filePath);
+        return file.exists();
     }
 }

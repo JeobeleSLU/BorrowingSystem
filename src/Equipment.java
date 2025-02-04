@@ -75,7 +75,7 @@ public class Equipment implements XMLTemplate {
                 .append("id:").append(this.id).append(",")
                 .append("name:").append(this.name).append(",")
                 .append("quantity:").append(this.quantity).append(",")
-                .append("Image").append(ImageHandler.encodeImageToBase64(imagePath))
+                .append("Image").append(ImageHandler.encodeImageToBase64(imagePath)).append(",")
                 .append("isAvailable:").append(this.isAvailable)
                 .toString();
     }

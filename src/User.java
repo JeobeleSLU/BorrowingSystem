@@ -81,12 +81,14 @@ public class User implements XMLTemplate {
     @Override
     public String getAllValues() {
         StringBuilder builder = new StringBuilder();
-        return builder.append("UserType:").append(this.userType).append(",")
+        return
+                builder.append("Name:").append(this.name).append(",")
+                .append("UserType:").append(this.userType).append(",")
                 .append("Id:").append(this.idNumber).append(",")
-                .append("Name:").append(this.name).append(",")
                 .append("LastName:").append(this.lastName).append(",")
                 .append("Password:").append(this.password).append(",")
-                .append("Failed Attempts:").append(this.failedAttempts).append(",").toString();
+                .append("FailedAttempts:").append(this.failedAttempts)
+                .toString();
     }
 
     //Return this to get all the data members
