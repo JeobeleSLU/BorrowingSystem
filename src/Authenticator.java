@@ -25,15 +25,15 @@ public class Authenticator{
     public int authenticate(User user){
 
         if (!manager.userExists(user.getIdNumber())){
+            FileLogger.warning("Create an account first");
             return -1;
-            //Todo: Log me!
 
         }else if (!isCorrectPassword(user)){
-            logger.warning("Incorrect Password, Try again");
+            FileLogger.warning("Incorrect Password, Try again");
             return 0;
         }
         else{
-            logger.info("Successfully Log in");
+            FileLogger.info("Successfully Log in");
             return 1;
         }
 
