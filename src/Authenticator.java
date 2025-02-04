@@ -12,6 +12,7 @@ public class Authenticator{
     XMLParser parse;
     public Authenticator() {
         manager = new UserManager();
+        logger = new FileLogger(this.getClass());
         //when registering and reseting password (admin) refetch database
     }
 
@@ -26,15 +27,15 @@ public class Authenticator{
     public int authenticate(User user){
 
         if (!manager.userExists(user.getIdNumber())){
-            FileLogger.warning("Create an account first");
+            logger.warning("Create an account first");
             return -1;
 
         }else if (!isCorrectPassword(user)){
-            FileLogger.warning("Incorrect Password, Try again");
+            logger.warning("Incorrect Password, Try again");
             return 0;
         }
         else{
-            FileLogger.info("Successfully Log in");
+            logger.info("Successfully Log in");
             return 1;
         }
 
@@ -45,11 +46,11 @@ public class Authenticator{
     0 for already existing
      */
     public synchronized int createUseAccount(User user){
-
         if (manager.userExists(user.getIdNumber())){
             return -1;
             //Todo: Log me pls
         }else {
+            //if (checkIfValid(User user)) todo: Validation vodoo
             if (manager.writeUserToXml(user)){
                 return 1;
             }
@@ -59,5 +60,8 @@ public class Authenticator{
     private boolean isCorrectPassword(User user) {
         //some long ass method chain to get the user password and match it
         return manager.getUserLogin(user.getIdNumber()).getPassword().equals(user.getPassword());
+    }
+    public User getCredentials(String id){
+        return manager.getUserLogin(id);
     }
 }
