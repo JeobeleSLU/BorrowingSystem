@@ -5,8 +5,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UserManager {
     FileLogger logger = new FileLogger(UserManager.class);
 
-    XMLParser parser;
     private ConcurrentHashMap<String, User> users;
+    XMLParser parser;
     XMLCreator writer;
 
 
