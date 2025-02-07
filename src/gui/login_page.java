@@ -44,8 +44,11 @@ public class login_page extends JFrame {
         loginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                homePage homePage = new homePage();
-                homePage.setVisible(true);
+              //  clientHomePage homePage = new clientHomePage();
+               // homePage.setVisible(true);
+
+                homePageAdmin homePageAdmin = new homePageAdmin();
+                homePageAdmin.setVisible(true);
                 setVisible(false);
             }
         });
