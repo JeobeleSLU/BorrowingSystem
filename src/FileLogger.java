@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class FileLogger {
+    FileLogger logger = new FileLogger(FileLogger.class);
     private final String className;
     private static String logFile;
     private static final String logDir = "logs";
@@ -26,7 +27,7 @@ public class FileLogger {
         try (FileWriter writer = new FileWriter(logFile, true)) {
             writer.write(String.format("[%s] [INFO] %s\n", timestamp, message));
         } catch (IOException e) {
-            System.err.println("Failed to write to log file: " + e.getMessage());
+           logger.warning("Failed to write to log file: " + e.getMessage());
         }
     }
 
@@ -34,7 +35,7 @@ public class FileLogger {
         try (FileWriter writer = new FileWriter(logFile, true)) {
             writer.write(String.format("[%s] [WARNING] %s\n", timestamp, message));
         } catch (IOException e) {
-            System.err.println("Failed to write to log file: " + e.getMessage());
+            logger.warning("Failed to write to log file: " + e.getMessage());
         }
     }
 
@@ -42,7 +43,7 @@ public class FileLogger {
         try (FileWriter writer = new FileWriter(logFile, true)) {
             writer.write(String.format("[%s] [SEVERE] %s\n", timestamp, message));
         } catch (IOException e) {
-            System.err.println("Failed to write to log file: " + e.getMessage());
+            logger.warning("Failed to write to log file: " + e.getMessage());
         }
     }
 }

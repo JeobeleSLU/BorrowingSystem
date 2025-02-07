@@ -23,15 +23,15 @@ public class FileHandler {
                 return null;
         }
     }
-    public static File getOrCreateFile(String path) {
+    public File getOrCreateFile(String path) {
         File file = new File(path);
         File parentDir = file.getParentFile();
 
         if (parentDir != null && !parentDir.exists()) {
             if (parentDir.mkdirs()) {
-                //Log this
+              logger.info("Creating Directory");
             } else {
-                //log this
+                logger.info("There's an existing Directory");
             }
         }
 
@@ -45,7 +45,6 @@ public class FileHandler {
             return true;
         } catch (TransformerException e) {
             logger.severe(e.getMessage());
-            //log this
             return false;
         }
     }

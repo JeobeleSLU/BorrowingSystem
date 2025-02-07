@@ -50,10 +50,12 @@ public class Authenticator{
             return -1;
             //Todo: Log me pls
         }else {
-            //if (checkIfValid(User user)) todo: Validation vodoo
+            // if (checkIfValid(User user)) todo: Validation vodoo
             if (manager.writeUserToXml(user)){
+                logger.info("Account Successfully Created");
                 return 1;
             }
+            logger.warning("This account already existed");
         }return 0; // For some odd reason that even God doesn't knows
         //todo: How would you even log this ?
     }
