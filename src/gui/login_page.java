@@ -44,9 +44,10 @@ public class login_page extends JFrame {
         loginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                homePage homePage = new homePage();
-                homePage.setVisible(true);
-                setVisible(false);
+              //  clientHomePage homePage = new clientHomePage();
+               // homePage.setVisible(true);
+                login();
+
             }
         });
 
@@ -60,6 +61,16 @@ public class login_page extends JFrame {
                 setVisible(false);
             }
         });
+    }
+
+    public void login() {
+        if (unField.getText().equals("admin") && passField.getText().equals("admin")) {
+            homePageAdmin homePageAdmin = new homePageAdmin();
+            homePageAdmin.setVisible(true);
+            setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid Username or Password", "Warning", 2);
+        }
     }
     public static void main(String[] args) {
         new login_page();
