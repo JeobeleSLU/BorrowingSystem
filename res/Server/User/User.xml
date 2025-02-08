@@ -162,4 +162,22 @@
         <Name>Grace</Name>
         <Password>editPass</Password>
     </User>
+    <User>
+        <Mail>jackson.clark@example.com</Mail>
+        <FailedAttempts>1</FailedAttempts>
+        <Id>1010</Id>
+        <LastName>Clark</LastName>
+        <UserType>Guest</UserType>
+        <Name>Jackson</Name>
+        <Password>guestPass2024</Password>
+    </User>
+    <User>
+        <Mail>isabel.martin@example.com</Mail>
+        <FailedAttempts>0</FailedAttempts>
+        <Id>1009</Id>
+        <LastName>Martin</LastName>
+        <UserType>Admin</UserType>
+        <Name>Isabel</Name>
+        <Password>isabelSecure</Password>
+    </User>
 </Users>
