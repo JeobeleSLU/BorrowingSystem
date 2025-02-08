@@ -39,7 +39,29 @@ public class EquipmentManager {
                         .equals(filter)).toList());
     }
 
+
+
     public ArrayList<Equipment> getEquipmentArrayList() {
         return equipmentArrayList;
+    }
+
+    /**
+     *
+     * @param equipment
+     * @return
+     *   -1  for no equipment left
+     *   0 for the successful
+     *
+     */
+    public synchronized int transact(Equipment equipment){
+        /*
+        Todo: Code this
+        pseudocode :
+        check if the equipment that the user will borrow has a quantity > 1
+        if the user borrow the equipment bind the transaction to the id
+        log it to check the transaction
+         */
+        return  -1;
+
     }
 }
