@@ -16,19 +16,15 @@ public class ClientHomePage extends JFrame {
     private JLabel equipment;
     private JPanel centerPanel;
     private JTable equipTable;
-    private JPanel receiptPanel;
-    private JTextArea borrowListTF;
+    private JComboBox types;
     homePageAdmin homePageAdmin;
-
-    private DefaultListModel<String> receiptModel;
-    private JList<String> receiptList;
 
 
     public ClientHomePage() {
         setContentPane(mainPanel);
         setTitle("Client Homepage");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 700);
+        setSize(1000, 600);
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -37,8 +33,18 @@ public class ClientHomePage extends JFrame {
         homePageAdmin.setupHoverEffect(equipment);
         populateTable();
 
+        types.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String type = types.getSelectedItem().toString();
+
+
+            }
+        });
+        setVisible(true);
     }
-//=============================================================================================
+
+    //=============================================================================================
     public void populateTable() {
         // Set BorderLayout for centerPanel
         centerPanel.setLayout(new BorderLayout());
@@ -95,7 +101,7 @@ public class ClientHomePage extends JFrame {
         setVisible(true);
     }
 
- //============================================================================================================
+    //============================================================================================================
 
     // Custom Button Renderer (Displays buttons in the table)
     class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -105,11 +111,12 @@ public class ClientHomePage extends JFrame {
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            setText((value == null) ? "Borrow" : value.toString());
+            setText((value == null) ? "Borrowed" : value.toString());
             return this;
         }
     }
-//================================================================================================================
+
+    //================================================================================================================
     // Custom Button Editor (Handles button clicks)
     class ButtonEditor extends DefaultCellEditor {
         private JButton button;
@@ -144,11 +151,21 @@ public class ClientHomePage extends JFrame {
 
         @Override
         public Object getCellEditorValue() {
+            JTextArea receiptArea = null;
             if (clicked) {
                 //TODO: when the button add is clicked it will get the fields and print it in the receipt panel
+                receiptArea = new JTextArea();
+                receiptArea.setEditable(false);
+                receiptArea.setLineWrap(true);
+                receiptArea.setWrapStyleWord(true);
+                receiptArea.setLocation(500, 500);
+                //   receiptArea.setText(receiptModel.get(row));
+                receiptArea.setCaretPosition(0);
+
             }
             clicked = false;
-            return "Add";
+            //    return "Add";
+            return receiptArea;
         }
 
 
@@ -159,4 +176,70 @@ public class ClientHomePage extends JFrame {
 //        }
     }
 
-}
+    //=============================================================================================
+ //   private void creatDropDown() {
+        // Initialize the JComboBox with equipment types
+//        String[] typesArray = {"Camera", "Drones", "Stabilizer", "Switches", "Routers"};
+
+
+//        types = new JComboBox<>(typesArray);
+//
+//        // Add action listener to the JComboBox
+//        types.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                // When a new type is selected, dynamically create a dropdown
+//                String selectedType = (String) types.getSelectedItem();
+//                createDropdownForSelectedType(selectedType);
+//            }
+//        });
+//
+//        // Add the types JComboBox to the mainPanel (top of the layout)
+//        // mainPanel is using GridLayout, so it will be added in the first cell (0,0).
+//        mainPanel.add(types); // No need to specify BorderLayout, just add it to the mainPanel.
+//
+//        // Update the layout and repaint
+//        mainPanel.revalidate();
+//        mainPanel.repaint();
+//    }
+
+//    public void createDropdownForSelectedType(String selectedType) {
+//        // Remove the existing dropdown (if any) before creating a new one
+//        if (centerPanel.getComponentCount() > 0) {
+//            centerPanel.removeAll(); // Clear the center panel
+//        }
+//
+//        // Create a new JComboBox based on the selected type
+//        String[] options;
+//        switch (selectedType) {
+//            case "Camera":
+//                options = new String[]{"Canon", "Nikon", "Sony"};
+//                break;
+//            case "Drones":
+//                options = new String[]{"DJI", "Parrot", "Yuneec"};
+//                break;
+//            case "Stabilizer":
+//                options = new String[]{"GoPro", "DJI", "Zhiyun"};
+//                break;
+//            case "Switches":
+//                options = new String[]{"TP-Link", "Cisco", "Netgear"};
+//                break;
+//            case "Routers":
+//                options = new String[]{"TP-Link", "Netgear", "Asus"};
+//                break;
+//            default:
+//                options = new String[]{};
+//        }
+//
+//        JComboBox<String> newDropdown = new JComboBox<>(options);
+//
+//        // Add newDropdown to centerPanel (center position of BorderLayout)
+//        centerPanel.setLayout(new BorderLayout());  // Ensure BorderLayout is in use
+//        centerPanel.add(newDropdown, BorderLayout.CENTER);
+//
+//        // Revalidate and repaint the panel to make the dropdown visible
+//        centerPanel.revalidate();
+//        centerPanel.repaint();
+//    }
+    }
+
