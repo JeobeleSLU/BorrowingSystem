@@ -64,8 +64,7 @@ public class login_page extends JFrame {
 
     public void login() {
         if (unField.getText().equals("ad") && passField.getText().equals("ad")) {
-          //  homePageAdmin homePageAdmin = new homePageAdmin();
-         // homePageAdmin.setVisible(true);
+
             clientHomePage = new ClientHomePage();
             clientHomePage.setVisible(true);
             setVisible(false);
