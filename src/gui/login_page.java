@@ -11,7 +11,7 @@ public class login_page extends JFrame {
     private JPanel labelPanel;
     private JLabel signUpLbl;
     private signUpPage signUpPage;
-    private ClientHomePage clientHomePage;
+    private HomepageClient clientHomePage;
 
 
 
@@ -69,7 +69,7 @@ public class login_page extends JFrame {
             homePageAdmin.setVisible(true);
             setVisible(false);
         } else if (unField.getText().equals("un") && passField.getText().equals("un")) {
-            clientHomePage = new ClientHomePage();
+            clientHomePage = new HomepageClient();
             clientHomePage.setVisible(true);
             setVisible(false);
 

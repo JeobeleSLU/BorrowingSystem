@@ -1,13 +1,14 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ClientHomePage extends JFrame {
+public class HomepageClient extends JFrame {
     private JPanel mainPanel;
     private JPanel dashboardPanel;
     private JPanel dashboard;
@@ -22,7 +23,8 @@ public class ClientHomePage extends JFrame {
     homePageAdmin homePageAdmin;
 
 
-    public ClientHomePage() {
+
+    public HomepageClient() {
         setContentPane(mainPanel);
         setTitle("Client Homepage");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,9 +75,11 @@ public class ClientHomePage extends JFrame {
         // Define table columns
         String[] columnNames = {"Image", "Equipment Name", "Quantity", "Avail"};
 
+
+        ImageIcon droneIcon = new ImageIcon("./src/gui/drone.jpg");
         // Sample Data to populate the table
         Object[][] data = {
-                {1, "Drone", "4", "add"},
+                {droneIcon, "Drone", "4", "add"},
                 {2, "Camera", "5", "add"},
                 {3, "Stabilizer", "3", "add"},
                 {4, "Switch", "4", "add"}
@@ -98,7 +102,7 @@ public class ClientHomePage extends JFrame {
 
 
         // Set column widths
-        equipTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+       // equipTable.getColumnModel().getColumn(0).setPreferredWidth(50);
         equipTable.getColumnModel().getColumn(1).setPreferredWidth(150);
         equipTable.getColumnModel().getColumn(2).setPreferredWidth(80);
         equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
@@ -119,9 +123,18 @@ public class ClientHomePage extends JFrame {
         // Set custom renderer and editor for button column
         equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
         equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
+        equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
         setVisible(true);
     }
-
+//===================================================================================================================
+    class ImageRender extends DefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            String photoName = value.toString();
+            ImageIcon droneIcon = new ImageIcon(new ImageIcon("./src/gui/drone.jpg" + photoName).getImage().getScaledInstance(40,40, Image.SCALE_DEFAULT));
+          return new JLabel(droneIcon);
+        }
+    }
     //============================================================================================================
 
     // Custom Button Renderer (Displays buttons in the table)
