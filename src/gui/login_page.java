@@ -11,7 +11,9 @@ public class login_page extends JFrame {
     private JPanel labelPanel;
     private JLabel signUpLbl;
     private signUpPage signUpPage;
-    
+    private HomepageClient clientHomePage;
+
+
 
     public login_page() {
         setContentPane(loginPanel);
@@ -21,7 +23,7 @@ public class login_page extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
-        
+
 
 
         //Username Field
@@ -44,8 +46,6 @@ public class login_page extends JFrame {
         loginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              //  clientHomePage homePage = new clientHomePage();
-               // homePage.setVisible(true);
                 login();
 
             }
@@ -64,10 +64,15 @@ public class login_page extends JFrame {
     }
 
     public void login() {
-        if (unField.getText().equals("admin") && passField.getText().equals("admin")) {
+        if (unField.getText().equals("ad") && passField.getText().equals("ad")) {
             homePageAdmin homePageAdmin = new homePageAdmin();
             homePageAdmin.setVisible(true);
             setVisible(false);
+        } else if (unField.getText().equals("un") && passField.getText().equals("un")) {
+            clientHomePage = new HomepageClient();
+            clientHomePage.setVisible(true);
+            setVisible(false);
+
         } else {
             JOptionPane.showMessageDialog(null, "Invalid Username or Password", "Warning", 2);
         }

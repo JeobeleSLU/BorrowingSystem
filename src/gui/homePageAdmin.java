@@ -17,7 +17,6 @@ public class homePageAdmin extends JFrame {
     private JLabel equipment;
 
 
-
     public homePageAdmin() {
         setContentPane(mainPanel);
         setTitle("Admin homepage");
@@ -39,7 +38,7 @@ public class homePageAdmin extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 new addItem();
-             //   dispose();
+                //   dispose();
 
 
             }
@@ -70,10 +69,10 @@ public class homePageAdmin extends JFrame {
         });
     }
 
-    private void setupHoverEffect(JLabel label) {
+    public void setupHoverEffect(JLabel label) {
         // Save the default background and foreground colors
         Color defaultBackground = new Color(14, 40, 90);
-       // Color hoverBackground = new Color(0, 161, 173); //  lighter shade for hover
+        // Color hoverBackground = new Color(0, 161, 173); //  lighter shade for hover
         Color defaultForeground = label.getForeground();
         Color hoverForeground = Color.black;
 
@@ -84,7 +83,7 @@ public class homePageAdmin extends JFrame {
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-           //     label.setBackground(hoverBackground);
+                //     label.setBackground(hoverBackground);
                 label.setForeground(hoverForeground);
             }
 
@@ -94,8 +93,5 @@ public class homePageAdmin extends JFrame {
                 label.setForeground(defaultForeground);
             }
         });
-    }
-    public static void main(String[] args) {
-        new homePageAdmin();
     }
 }
