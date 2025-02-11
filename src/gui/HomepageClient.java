@@ -91,6 +91,13 @@ public class HomepageClient extends JFrame {
             public boolean isCellEditable(int row, int column) {
                 return column == 3;
             }
+
+            public Class<?> getColumnClass(int column) {
+                if (column == 0) {
+                    return ImageIcon.class; // Ensure the first column uses ImageIcon
+                }
+                return Object.class;
+            }
         };
         equipTable = new JTable(model);
         equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -128,11 +135,17 @@ public class HomepageClient extends JFrame {
     }
 //===================================================================================================================
     class ImageRender extends DefaultTableCellRenderer {
-        @Override
+//        @Override
+//        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+//            String photoName = value.toString();
+//            ImageIcon droneIcon = new ImageIcon(new ImageIcon("./src/gui/drone.jpg" + photoName).getImage().getScaledInstance(40,40, Image.SCALE_DEFAULT));
+//          return new JLabel(droneIcon);
+//        }
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            String photoName = value.toString();
-            ImageIcon droneIcon = new ImageIcon(new ImageIcon("./src/gui/drone.jpg" + photoName).getImage().getScaledInstance(40,40, Image.SCALE_DEFAULT));
-          return new JLabel(droneIcon);
+            if (value instanceof ImageIcon) {
+                return new JLabel((ImageIcon) value);
+            }
+            return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         }
     }
     //============================================================================================================
