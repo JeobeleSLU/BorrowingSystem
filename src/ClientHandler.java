@@ -1,3 +1,5 @@
+import java.net.Socket;
+
 /**
  * This is what will handle the client and will have a shared resources which would be the
  * equipment manager
@@ -12,6 +14,20 @@
  *
  * }
  */
-public class ClientHandler {
+public class ClientHandler implements Runnable {
 
+    Socket socket;
+    EquipmentManager equipmentManager;
+    Authenticator auth;
+
+    public ClientHandler(Socket client, EquipmentManager equipmentManager, Authenticator authenticator) {
+        this.socket = client;
+        this.equipmentManager = equipmentManager;
+        this.auth = authenticator;
+    }
+
+    @Override
+    public void run() {
+
+    }
 }
