@@ -65,13 +65,14 @@ public class login_page extends JFrame {
 
     public void login() {
         if (unField.getText().equals("ad") && passField.getText().equals("ad")) {
-//            homePageAdmin homePageAdmin = new homePageAdmin();
-//            homePageAdmin.setVisible(true);
-
+            homePageAdmin homePageAdmin = new homePageAdmin();
+            homePageAdmin.setVisible(true);
+            setVisible(false);
+        } else if (unField.getText().equals("un") && passField.getText().equals("un")) {
             clientHomePage = new ClientHomePage();
             clientHomePage.setVisible(true);
-
             setVisible(false);
+
         } else {
             JOptionPane.showMessageDialog(null, "Invalid Username or Password", "Warning", 2);
         }
