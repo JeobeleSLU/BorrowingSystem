@@ -30,9 +30,12 @@ public class ClientHomePage extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-//        homePageAdmin = new homePageAdmin();
-//        homePageAdmin.setupHoverEffect(borrowedItemlbl);
-//        homePageAdmin.setupHoverEffect(equipment);
+        homePageAdmin = new homePageAdmin();
+        homePageAdmin.setupHoverEffect(borrowedItemlbl);
+        homePageAdmin.setupHoverEffect(equipment);
+        homePageAdmin.setVisible(false);
+
+
 
         populateTable();
 

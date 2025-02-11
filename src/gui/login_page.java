@@ -14,6 +14,7 @@ public class login_page extends JFrame {
     private ClientHomePage clientHomePage;
 
 
+
     public login_page() {
         setContentPane(loginPanel);
         setTitle("Menu");
@@ -69,6 +70,7 @@ public class login_page extends JFrame {
 
             clientHomePage = new ClientHomePage();
             clientHomePage.setVisible(true);
+
             setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Invalid Username or Password", "Warning", 2);
