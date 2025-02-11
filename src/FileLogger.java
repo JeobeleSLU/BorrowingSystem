@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class FileLogger {
-    FileLogger logger = new FileLogger(FileLogger.class);
+    FileLogger logger;
     private final String className;
     private static String logFile;
     private static final String logDir = "logs";
