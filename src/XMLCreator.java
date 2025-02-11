@@ -32,8 +32,7 @@ public class XMLCreator {
         return buildXML(elements, type);
     }
 
-    //Todo:Create a Log if theres an exception for easier debugging
-    //Todo: Pacheck FileLogger
+
     /*
     Todo: Handle use case where xml already exists and if the item already exist so that u just append on it
      */

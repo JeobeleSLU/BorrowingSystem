@@ -73,11 +73,5 @@ public class XMLParser{
         } catch(SAXException | IOException | ParserConfigurationException e){
             throw new RuntimeException(e);
         }
-        //TODO: Error handling if null
     }
-
-    public Equipment parseXMLEquipment(){
-        return null;
-    }
-
 }
