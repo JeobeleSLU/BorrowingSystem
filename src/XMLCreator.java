@@ -97,7 +97,7 @@ public class XMLCreator {
             removeWhitespaceNodes(doc.getDocumentElement());
             root = doc.getDocumentElement(); // use existing root
         }
-        Element tempRoot = doc.createElement("User");
+        Element tempRoot = doc.createElement(type);
         root.appendChild(tempRoot);
 
         if (elements.isEmpty()) {

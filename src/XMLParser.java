@@ -75,9 +75,4 @@ public class XMLParser{
         }
         //TODO: Error handling if null
     }
-
-    public Equipment parseXMLEquipment(){
-        return null;
-    }
-
 }

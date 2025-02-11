@@ -19,6 +19,8 @@ public class FileHandler {
                 return "./res/Server/Equipment/";
             case "User":
                 return "./res/Server/User/";
+            case "Transaction":
+                return "./res/Server/Transaction/";
             default:
                 return null;
         }
