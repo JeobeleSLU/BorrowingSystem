@@ -28,7 +28,6 @@ public class XMLCreator {
 
     public <T extends XMLTemplate> boolean createXML(T object, String type) {
         HashMap<String, String> elements = getAllVariables(object.getAllValues());
-        System.out.println(elements);
         return buildXML(elements, type);
     }
 

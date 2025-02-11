@@ -88,7 +88,7 @@ public class User implements XMLTemplate {
                 .append("LastName:").append(this.lastName).append(",")
                 .append("Password:").append(this.password).append(",")
                 .append("FailedAttempts:").append(this.failedAttempts).append(",")
-                .append("Mail:").append(this.mail)
+                .append("Mail:").append(this.mail).append(",")
                 .toString();
     }
 

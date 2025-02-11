@@ -21,11 +21,11 @@ public class SingletonTransactionFactory implements Factory {
     @Override
     public String[] getDataMembers() {
         return new String[] {
-                "userId",
-                "equipmentId",
-                "equipmentName",
                 "qty",
-                "time"
+                "equipmentName",
+                "time",
+                "userId",
+                "equipmentId"
         };
     }
     private SingletonTransactionFactory(){}

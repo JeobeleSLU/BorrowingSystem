@@ -10,16 +10,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * This class will parse xml into its corresponding object
  */
 public class XMLParser{
     FileLogger Filelogger = new FileLogger(XMLParser.class);
-
-//    private File filePath; // filepath of xml
-
 
     // Constructor
     public XMLParser() {
@@ -37,6 +33,8 @@ public class XMLParser{
         ArrayList<T> arrayList = new ArrayList<>();
         String[] dataMembers = objectToBeCreated.getDataMembers();
         String[]  attributes= new String[objectToBeCreated.getDataMembers().length];
+
+
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -45,9 +43,7 @@ public class XMLParser{
             document.getDocumentElement().normalize();
 
             NodeList objectList = document.getElementsByTagName(objectToBeCreated.getClassName());
-
             for (int i = 0; i < objectList.getLength(); i++) {
-
                 Node objectNode = objectList.item(i);
 
                 if (objectNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -61,10 +57,12 @@ public class XMLParser{
                     create an object based on the factory
                      */
                     for (int j = 0; j < attributes.length; j++){
+
+                        System.out.println(dataMembers[j]);
                         attributes[j] =
                                 objectElement
-                                        .getElementsByTagName(dataMembers[j]).item(0)
-                                        .getTextContent();
+                                        .getElementsByTagName(dataMembers[j])
+                                        .item(0).getTextContent();
                     }
                  arrayList.add(objectToBeCreated.createObject(attributes));
                 }

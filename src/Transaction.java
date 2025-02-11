@@ -21,7 +21,6 @@ public class Transaction implements XMLTemplate {
         this.equipmentName = equipmentName;
         this.qty = qty;
         this.time = time;
-        this.type = type;
     }
 
     public String getUserId() {
@@ -86,14 +85,11 @@ public class Transaction implements XMLTemplate {
     }
 
     /*
-        return new StringBuilder()
-                .append("type:").append(this.type).append(",")
-                .append("id:").append(this.id).append(",")
-                .append("name:").append(this.name).append(",")
-                .append("quantity:").append(this.quantity).append(",")
-                .append("Image").append(ImageHandler.encodeImageToBase64(imagePath)).append(",")
-                .append("isAvailable:").append(this.isAvailable)
-                .toString();
+        "userId",
+                "equipmentId",
+                "equipmentName",
+                "qty",
+                "time"
      */
     /*
     String userId, String equipmentId, String equipmentName, int qty, String time
@@ -104,7 +100,8 @@ public class Transaction implements XMLTemplate {
                 .append("userId:").append(this.userId).append(",")
                 .append("equipmentId:").append(this.equipmentId).append(",")
                 .append("equipmentName:").append(this.equipmentName).append(",")
-                .append("qty:").append(this.qty).append(",")
-                .append("time:").append(this.time).toString();
+                .append("time:").append(this.time).append(",")
+                .append("qty:").append(this.qty)
+                .toString();
     }
 }
