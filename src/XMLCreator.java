@@ -28,7 +28,6 @@ public class XMLCreator {
 
     public <T extends XMLTemplate> boolean createXML(T object, String type) {
         HashMap<String, String> elements = getAllVariables(object.getAllValues());
-        System.out.println(elements);
         return buildXML(elements, type);
     }
 
@@ -96,7 +95,7 @@ public class XMLCreator {
             removeWhitespaceNodes(doc.getDocumentElement());
             root = doc.getDocumentElement(); // use existing root
         }
-        Element tempRoot = doc.createElement("User");
+        Element tempRoot = doc.createElement(type);
         root.appendChild(tempRoot);
 
         if (elements.isEmpty()) {

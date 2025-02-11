@@ -1,5 +1,3 @@
-import java.util.logging.Logger;
-
 public class Authenticator{
     FileLogger logger = new FileLogger(Authenticator.class);
     /**
@@ -24,13 +22,16 @@ public class Authenticator{
      * -1 No account
      */
     //For temporary it will get a user but maybe use a byteStream?
-    public int authenticate(User user){
+    public int authenticate(String[] user){
+        String id = user[0];
+        String password = user[1];
 
-        if (!manager.userExists(user.getIdNumber())){
+
+        if (!manager.userExists(id)){
             logger.warning("Create an account first");
             return -1;
 
-        }else if (!isCorrectPassword(user)){
+        }else if (!isCorrectPassword(id,password)){
             logger.warning("Incorrect Password, Try again");
             return 0;
         }
@@ -59,9 +60,9 @@ public class Authenticator{
         }return 0; // For some odd reason that even God doesn't knows
         //todo: How would you even log this ?
     }
-    private boolean isCorrectPassword(User user) {
+    private boolean isCorrectPassword(String id, String password) {
         //some long ass method chain to get the user password and match it
-        return manager.getUserLogin(user.getIdNumber()).getPassword().equals(user.getPassword());
+        return manager.getUserLogin(id).getPassword().equals(password);
     }
     public User getCredentials(String id){
         return manager.getUserLogin(id);

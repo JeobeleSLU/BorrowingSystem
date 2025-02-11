@@ -20,7 +20,7 @@ public class UserManager {
         writer = new XMLCreator();
         fetchUserData();
     }
-    public synchronized void  fetchUserData() {
+    public synchronized void fetchUserData() {
         users.clear();
         ArrayList<User> temp = parser.parse(SingletonUserFactory.getInstance(),filePath);
         temp.forEach(e -> users.put(e.getIdNumber(),e));
