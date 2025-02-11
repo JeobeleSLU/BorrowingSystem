@@ -17,6 +17,8 @@ public class ClientHomePage extends JFrame {
     private JPanel centerPanel;
     private JTable equipTable;
     private JComboBox types;
+    private JTextField searchField;
+    private JButton searchButton;
     homePageAdmin homePageAdmin;
 
 
@@ -42,6 +44,21 @@ public class ClientHomePage extends JFrame {
             }
         });
         setVisible(true);
+
+        //SEARCH FIELD FOR SEARCHING
+        searchField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        //Search Button
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     //=============================================================================================
