@@ -1,6 +1,11 @@
 package Client.Model;
 
-import Server.Model.*;
+import Common.Factories.SingletonTransactionFactory;
+import Common.Model.Transaction;
+import Common.Utilities.FileHandler;
+import Common.Utilities.FileLogger;
+import Common.Utilities.XMLCreator;
+import Common.Utilities.XMLParser;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,4 +1,7 @@
-package Server.Model;
+package Common.Model;
+
+import Common.Utilities.FileLogger;
+import Common.Utilities.XMLTemplate;
 
 /**
  * This is the base class for the user

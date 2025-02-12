@@ -1,4 +1,6 @@
-package Server.Model;
+package Common.Factories;
+
+import Common.Model.Transaction;
 
 public class SingletonTransactionFactory implements Factory {
 

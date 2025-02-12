@@ -1,4 +1,4 @@
-package Server.Model;
+package Common.Utilities;
 
 import java.io.File;
 import java.io.FileWriter;

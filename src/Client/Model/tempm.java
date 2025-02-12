@@ -1,7 +1,7 @@
 package Client.Model;
 
 import Server.Model.Authenticator;
-import Server.Model.User;
+import Common.Model.User;
 
 public class tempm {
     public static void main(String[] args) {

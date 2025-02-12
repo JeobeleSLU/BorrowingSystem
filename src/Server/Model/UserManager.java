@@ -1,5 +1,12 @@
 package Server.Model;
 
+import Common.Factories.SingletonUserFactory;
+import Common.Model.User;
+import Common.Utilities.FileHandler;
+import Common.Utilities.FileLogger;
+import Common.Utilities.XMLCreator;
+import Common.Utilities.XMLParser;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;

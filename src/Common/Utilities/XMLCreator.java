@@ -1,4 +1,4 @@
-package Server.Model;
+package Common.Utilities;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -71,9 +71,7 @@ public class XMLCreator {
         } catch (ParserConfigurationException | TransformerException e) {
             logger.severe(e.getMessage());
            return false;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (SAXException e) {
+        } catch (IOException | SAXException e) {
             throw new RuntimeException(e);
         }
     }

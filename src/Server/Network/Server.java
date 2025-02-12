@@ -1,5 +1,7 @@
+package Server.Network;
+
 import Server.Model.Authenticator;
-import ClientHandler;
+
 import Client.Model.EquipmentManager;
 
 import java.io.IOException;

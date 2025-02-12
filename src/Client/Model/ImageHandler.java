@@ -1,6 +1,6 @@
 package Client.Model;
 
-import Server.Model.FileLogger;
+import Common.Utilities.FileLogger;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

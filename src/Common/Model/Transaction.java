@@ -1,4 +1,6 @@
-package Server.Model;
+package Common.Model;
+
+import Common.Utilities.XMLTemplate;
 
 public class Transaction implements XMLTemplate {
     String userId;

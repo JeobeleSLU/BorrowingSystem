@@ -1,5 +1,9 @@
 package Server.Model;
 
+import Common.Model.User;
+import Common.Utilities.FileLogger;
+import Common.Utilities.XMLParser;
+
 public class Authenticator{
     FileLogger logger = new FileLogger(Authenticator.class);
     /**

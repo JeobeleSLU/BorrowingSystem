@@ -3,6 +3,8 @@ package Server.Model; /**
  */
 
 import Client.Model.ImageHandler;
+import Common.Utilities.FileLogger;
+import Common.Utilities.XMLTemplate;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

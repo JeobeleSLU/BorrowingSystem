@@ -1,5 +1,9 @@
 package Client.Model;
 
+import Common.Factories.SingletonEquipmentFactory;
+import Common.Utilities.FileHandler;
+import Common.Utilities.XMLCreator;
+import Common.Utilities.XMLParser;
 import Server.Model.*;
 
 import java.io.File;

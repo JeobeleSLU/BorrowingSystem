@@ -1,4 +1,8 @@
-package Server.Model;
+package Common.Factories;
+
+import Server.Model.Equipment;
+import Common.Utilities.FileLogger;
+import Common.Utilities.Getter;
 
 public class SingletonEquipmentFactory implements Getter, Factory {
     FileLogger logger = new FileLogger(SingletonEquipmentFactory.class);

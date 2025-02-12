@@ -1,4 +1,4 @@
-package Server.Model;
+package Common.Utilities;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;

@@ -1,4 +1,7 @@
-package Server.Model;
+package Common.Factories;
+
+import Common.Utilities.FileLogger;
+import Common.Model.User;
 
 public class SingletonUserFactory<T> implements Factory {
     FileLogger logger = new FileLogger(SingletonUserFactory.class);

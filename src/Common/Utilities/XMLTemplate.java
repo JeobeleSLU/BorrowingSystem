@@ -1,4 +1,4 @@
-package Server.Model;
+package Common.Utilities;
 
 public interface XMLTemplate extends Getter {
     /**
