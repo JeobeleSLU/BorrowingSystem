@@ -76,7 +76,7 @@ public class HomepageClient extends JFrame {
         String[] columnNames = {"Image", "Equipment Name", "Quantity", "Avail"};
 
 
-        ImageIcon droneIcon = new ImageIcon("./src/gui/drone.jpg");
+        ImageIcon droneIcon = new ImageIcon("./res/Images/drone.jpg");
         // Sample Data to populate the table
         Object[][] data = {
                 {droneIcon, "Drone", "4", "add"},
