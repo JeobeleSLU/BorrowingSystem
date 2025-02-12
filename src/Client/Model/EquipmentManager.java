@@ -10,7 +10,7 @@ import java.util.HashSet;
  * This class will facilitate the transactions
  */
 public class EquipmentManager {
-
+    FileLogger logger;
     XMLParser parser;
     XMLCreator writer;
     ArrayList<Equipment> equipmentArrayList;
@@ -64,7 +64,23 @@ public class EquipmentManager {
         if the user borrow the equipment bind the transaction to the id
         log it to check the transaction
          */
-        return  -1;
+        for (int i = 0; i < equipmentArrayList.size(); i++) {
+            Equipment e = equipmentArrayList.get(i);
+            if (e.getId().equals(equipment.getId())) {
+                if (e.getQuantity().get() > 1) {
+                    int remainingQuantity = e.getQuantity().decrementAndGet();
+                    logger.info("Transaction Success");
 
+                    if (remainingQuantity == 0) {
+                        e.setAvailable(false);
+                        logger.info("Equipment in unavailable due to quantity");
+                    }
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+        }
+        return 1;
     }
 }
