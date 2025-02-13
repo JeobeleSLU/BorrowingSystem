@@ -22,11 +22,16 @@ public class EquipmentManager {
     File equipmentXML;
 
     public EquipmentManager() {
+        initComponents();
+
+        equipmentXML = handler.getXMLFile("Equipment");
+        equipmentArrayList = retrieveData();
+    }
+
+    private void initComponents() {
         writer = new XMLCreator();
         parser = new XMLParser();
         handler = new FileHandler();
-        equipmentXML = handler.getXMLFile("Equipment");
-        equipmentArrayList = retrieveData();
     }
 
     private ArrayList<Equipment> retrieveData() {

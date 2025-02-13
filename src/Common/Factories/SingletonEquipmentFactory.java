@@ -31,8 +31,7 @@ public class SingletonEquipmentFactory implements Getter, Factory {
                 "type",
                 "id",
                 "name",
-                "quantity"
-                ,"image",
+                "quantity",
                 "isAvailable"
         };
 

@@ -4,6 +4,8 @@ import Common.Model.User;
 import Common.Utilities.FileLogger;
 import Common.Utilities.XMLParser;
 
+import java.util.ArrayList;
+
 public class Authenticator{
     FileLogger logger = new FileLogger(Authenticator.class);
     /**
@@ -19,6 +21,16 @@ public class Authenticator{
         logger = new FileLogger(this.getClass());
         //when registering and reseting password (admin) refetch database
     }
+    public String[] getLoginAttributes(){
+        return new String []{
+                "id","password"
+        };
+    }
+    public String[] getResponseAttributes(){
+        return new String[]{
+          "Result"
+        };
+    }
 
     /**
      *
@@ -28,10 +40,9 @@ public class Authenticator{
      * -1 No account
      */
     //For temporary it will get a user but maybe use a byteStream?
-    public int authenticate(String[] user){
-        String id = user[0];
-        String password = user[1];
-
+    public int authenticate(ArrayList<String> user){
+        String id = user.get(0);
+        String password = user.get(1);
 
         if (!manager.userExists(id)){
             logger.warning("Create an account first");

@@ -29,6 +29,8 @@ public class FileHandler {
             case "Transaction":
                 basePath += "Transaction/";
                 break;
+            case "Cache":
+                return basePath+="Cache/";
             default:
                 return null;
         }
@@ -72,6 +74,8 @@ public class FileHandler {
         return file.exists();
     }
    public File getXMLFile(String type){
-        return new File(getFilePath(type)+".xml");
+        return new File(getFilePath(type)+type+".xml");
     }
+
+
 }
