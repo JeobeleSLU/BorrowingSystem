@@ -50,16 +50,16 @@ public class XMLCreator {
             }
 
             // Get file path
-            String path = fileHandler.getFilePath(type)+type+".xml";
+            String path = fileHandler.getFilePathForXML(type);
 
             // Debugging output
             System.out.println("Generated File Path: " + path);
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             StreamResult result = new StreamResult(new File
-                    (fileHandler.getFilePath(type)+type)+".xml");
+                    (fileHandler.getFilePathForXML(type)));
 
-            System.out.println((fileHandler.getFilePath(type)+type)+".xml");
+            System.out.println((fileHandler.getFilePathForXML(type)));
             // LOg successful creation
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(domSource,result);
@@ -82,7 +82,7 @@ public class XMLCreator {
         DocumentBuilder docBuilder = factory.newDocumentBuilder();
         Document doc;
         Element root;
-        String filePath = fileHandler.getFilePath(type) + type + ".xml";
+        String filePath = fileHandler.getFilePathForXML(type);
         File file = new File(filePath);
 
         if (!file.exists() || file.length() == 0) { //file doesn't exist or is empty, create new

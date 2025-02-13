@@ -16,10 +16,10 @@ public class Main {
 //        User user6 = new User("frank.miller@example.com", 1, "1006", "Miller", "User", "Frank", "userPass123");
 //        User user8 = new User("henry.taylor@example.com", 2, "1008", "Taylor", "User", "Henry", "henryPass");
 //        User user9 = new User("isabel.martin@example.com", 0, "1009", "Martin", "Admin", "Isabel", "isabelSecure");
-//        User user10 = new User("jackson.clark@example.com", 1, "1010", "Clark", "Guest", "Jackson", "guestPass2024");
+        User user10 = new User("jackson.clark@example.com", 1, "1010", "Clark", "Guest", "Jackson", "guestPass2024");
 
         XMLCreator xmlCreator = new XMLCreator();
-//        boolean success = xmlCreator.createXML(user10, "User");
+        boolean success = xmlCreator.createXML(user10, "User");
 //       xmlCreator.createXML(user9, "User");
 //         xmlCreator.createXML(user2, "User");
 //         xmlCreator.createXML(user8, "User");
@@ -34,32 +34,25 @@ public class Main {
 //        } else {
 //            System.out.println("Failed to create XML file.");
 //        }
-//        Equipment equipment = new Equipment(
-//                "Laptop",                // type
-//                "EQ-001",                // id
-//                "Dell Inspiron",         // name
-//                new AtomicInteger(5),    // quantity
-//                "",     // imagePath
-//                true                     // isAvailable
-//        );
+
+
 
 //        boolean trial = xmlCreator.createXML(equipment, "Equipment");
 //        System.out.println(trial);
-        File file = new File(handler.getFilePath("User")+"User.xml");
+        File file = new File(handler.getFilePathForXML("User"));
 
         XMLParser parser = new XMLParser();
 //        ArrayList<User> users = parser.parse(SingletonUserFactory.getInstance(), file);
 //        users.forEach(e-> System.out.println(e.getAllValues()));
 
-        Transaction transaction = new Transaction(3,"Cisco Switch", "13 40","2241","2242");
-        File transactionFile = new File("Transaction");
-        boolean hello = xmlCreator.createXML(transaction, "Transaction");
+//        Transaction transaction = new Transaction(3,"Cisco Switch", "13 40","2241","2242");
+//        File transactionFile = new File("Transaction");
+//        boolean hello = xmlCreator.createXML(transaction, "Transaction");
 
-        File trans = new File(handler.getFilePath("Transaction")+"Transaction.xml");
+        File trans = new File(handler.getFilePathForXML("Transaction"));
         ArrayList<Transaction> transactions =
                 parser.parse(SingletonTransactionFactory.getInstance(),trans);
 
-        System.out.println(hello);
 
         transactions.forEach(e-> System.out.println( e.getAllValues()));
     }

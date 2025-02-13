@@ -4,11 +4,31 @@ public class SingletonEquipmentFactory implements Getter,Factory {
     FileLogger logger = new FileLogger(SingletonEquipmentFactory.class);
     private SingletonEquipmentFactory(){}
 
+    /*
+     <isAvailable>true</isAvailable>
+        <quantity>5</quantity>
+        <name>Dell Inspiron</name>
+        <id>EQ-001</id>
+        <type>Laptop</type>
+     */
     @Override
     public Equipment createObject(String[] members) {
         //todo: continue this
-//        return new Equipment(members[0],members[1],members[2], ),members[4]);
-        return null;
+        int quantity = Integer.parseInt(members[3]);
+        boolean flag = quantity < 1;
+
+        return new Equipment(flag,new AtomicInteger(quantity),members[2],members[1],members[0]);
+    }
+    @Override
+    public String[] getDataMembers() {
+        return new String[]{
+                "type",
+                "id",
+                "name",
+                "quantity",
+                "isAvailable"
+        };
+
     }
 
     @Override
@@ -17,18 +37,7 @@ public class SingletonEquipmentFactory implements Getter,Factory {
     }
 
 
-    @Override
-    public String[] getDataMembers() {
-        return new String[]{
-                "type",
-                "id",
-                "name",
-                "quantity"
-                ,"image",
-                "isAvailable"
-        };
 
-    }
 
 
     private static class SingletonHelper{

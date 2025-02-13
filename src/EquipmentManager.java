@@ -1,4 +1,4 @@
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.stream.Collectors;
@@ -17,9 +17,9 @@ public class EquipmentManager {
     public EquipmentManager() {
         writer = new XMLCreator();
         parser = new XMLParser();
-        equipmentArrayList = retrieveData();
         handler = new FileHandler();
-        equipmentXML = new File(handler.getFilePath("Equipment"));
+        equipmentXML = new File("./res/Server/Equipment/Equipment.xml");
+        equipmentArrayList = retrieveData();
     }
 
     private ArrayList<Equipment> retrieveData() {

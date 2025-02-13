@@ -13,16 +13,16 @@ public class FileHandler {
 
     public FileHandler(){
     }
-    public String getFilePath(String type) {
+    public String getFilePathForXML(String type) {
         switch (type) {
             case "Equipment":
-                return "./res/Server/Equipment/";
+                return "./res/Server/Equipment/Equipment.xml";
             case "User":
-                return "./res/Server/User/";
+                return "./res/Server/User/User.xml";
             case "Transaction":
-                return "./res/Server/Transaction/";
+                return "./res/Server/Transaction/Transaction.xml";
             default:
-                return null;
+              return "./res/Server/Equipment/Equipment.xml";
         }
     }
     public File getOrCreateFile(String path) {

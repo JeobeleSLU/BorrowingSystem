@@ -13,7 +13,7 @@ public class UserManager {
     private final File filePath;
     public UserManager(){
         FileHandler handler = new FileHandler();
-        filePath = new File(handler.getFilePath("User")+"User.xml");
+        filePath = new File(handler.getFilePathForXML("User"));
         //user path
         users = new ConcurrentHashMap<>();
         parser = new XMLParser();
