@@ -4,19 +4,28 @@
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Equipment {
+public class Equipment implements XMLTemplate {
+    FileLogger logger = new FileLogger(XMLTemplate.class);
     String name;
     String type;
     AtomicInteger quantity; // Not sure for atomicity
     String id;
     boolean isAvailable;
+    String imagePath;
 
-    public Equipment(String name, String type, AtomicInteger quantity, String id, boolean isAvailable) {
+    //           "type",
+    //                "id",
+    //                "name",
+    //                "quantity"
+    //                ,"image",
+    //                "isAvailable"
+    public Equipment( String type, String id,String name, AtomicInteger quantity,String imagePath, boolean isAvailable) {
         this.name = name;
         this.type = type;
         this.quantity = quantity;
         this.id = id;
         this.isAvailable = isAvailable;
+        this.imagePath = imagePath;
 
     }
 
@@ -58,5 +67,29 @@ public class Equipment {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    @Override
+    public String getAllValues() {
+        return new StringBuilder()
+                .append("type:").append(this.type).append(",")
+                .append("id:").append(this.id).append(",")
+                .append("name:").append(this.name).append(",")
+                .append("quantity:").append(this.quantity).append(",")
+                .append("Image").append(ImageHandler.encodeImageToBase64(imagePath)).append(",")
+                .append("isAvailable:").append(this.isAvailable)
+                .toString();
+    }
+
+    @Override
+    public String[] getDataMembers() {
+        return new String[]{
+                "type",
+                "id",
+                "name",
+                "quantity"
+                ,"image",
+                "isAvailable"
+        };
     }
 }

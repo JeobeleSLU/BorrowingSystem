@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 
 public class homePageAdmin extends JFrame {
 
-    public Label receiptArea;
     private JPanel mainPanel;
     private JPanel dashboardPanel;
     private JPanel dashboard;
