@@ -69,7 +69,6 @@
                   <background color="-15849393"/>
                   <font size="20"/>
                   <foreground color="-591873"/>
-                  <icon value="gui/251-2519428_0-add-icon-white-png.png"/>
                   <text value="   Add Item"/>
                 </properties>
               </component>
@@ -95,7 +94,6 @@
                       <background color="-15849393"/>
                       <font size="20"/>
                       <foreground color="-591873"/>
-                      <icon value="gui/2491ae1361751875120fd542a42973dc-removebg-preview__1_.png"/>
                       <text value=" Logs"/>
                     </properties>
                   </component>
@@ -124,7 +122,6 @@
                           <background color="-15849393"/>
                           <font size="20"/>
                           <foreground color="-591873"/>
-                          <icon value="gui/4875945-middle-removebg-preview.png"/>
                           <text value="History"/>
                         </properties>
                       </component>
@@ -150,7 +147,6 @@
                               <background color="-15849393"/>
                               <font size="20"/>
                               <foreground color="-591873"/>
-                              <icon value="gui/hd-gears-settings-white-icon-transparent-png-701751695035129vhfukm8kpz-removebg-preview.png"/>
                               <text value="Equipment"/>
                             </properties>
                           </component>
