@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Users>
+    <User>
+        <Mail>jackson.clark@example.com</Mail>
+        <FailedAttempts>1</FailedAttempts>
+        <Id>1010</Id>
+        <LastName>Clark</LastName>
+        <UserType>Guest</UserType>
+        <Name>Jackson</Name>
+        <Password>guestPass2024</Password>
+    </User>
+</Users>
