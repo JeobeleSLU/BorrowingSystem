@@ -21,7 +21,8 @@ public class HomepageClient extends JFrame {
     private JTextField searchField;
     private JButton searchButton;
     homePageAdmin homePageAdmin;
-
+    private JTextArea receiptArea;
+    private JTextArea receiptAreaa;
 
     public HomepageClient() {
         setContentPane(mainPanel);
@@ -98,6 +99,7 @@ public class HomepageClient extends JFrame {
                 return Object.class;
             }
         };
+
         equipTable = new JTable(model);
         equipTable.setRowHeight(50);
         equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -113,6 +115,13 @@ public class HomepageClient extends JFrame {
         equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
 
         centerPanel.add(scrollPane, BorderLayout.WEST);
+        //============================
+        receiptArea = new JTextArea();
+        receiptArea.setEditable(false);
+        JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
+        receiptScrollPane.setPreferredSize(new Dimension(300, 500));
+        centerPanel.add(receiptScrollPane, BorderLayout.EAST);
+        //===========================
 
         // Ensure UI updates properly
         SwingUtilities.invokeLater(() -> {
@@ -128,6 +137,7 @@ public class HomepageClient extends JFrame {
         equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
         equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
         equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
+        equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
         setVisible(true);
     }
 //===================================================================================================================
@@ -155,6 +165,7 @@ public class HomepageClient extends JFrame {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             setText((value == null) ? "Borrowed" : value.toString());
+            System.out.println("asdadasdad");
             return this;
         }
     }
@@ -174,37 +185,56 @@ public class HomepageClient extends JFrame {
             button.setOpaque(true);
             button.setPreferredSize(new Dimension(50, 10));
             button.setLayout(new GridBagLayout());
+            receiptArea.setText("===== Receipt =====\n");
 
             // Handle button click event
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    clicked = true;
                     fireEditingStopped();
+                    getCellEditorValue();
+                    System.out.println("Clicked");
                 }
             });
         }
 
-        @Override
         public Object getCellEditorValue() {
-            if (clicked) {
+//            if (clicked) {
+                System.out.println("HELLO");
+
                 int selectedRow = equipTable.getSelectedRow();
                 if (selectedRow != -1) {
                     String equipmentName = equipTable.getValueAt(selectedRow, 1).toString();
                     String quantity = equipTable.getValueAt(selectedRow, 2).toString();
 
-                    // Format the receipt content
-                    String receiptText = "===== Receipt =====\n";
+                    // Update the receiptArea with the equipment and quantity
+
+                    String receiptText = "";
                     receiptText += "Equipment: " + equipmentName + "\n";
                     receiptText += "Quantity: " + quantity + "\n";
                     receiptText += "==================\n";
 
-                    // Update the receiptArea in centerPanel
-                    homePageAdmin.receiptArea.setText(receiptText);
-                    //  receiptArea.repaint();
+
+                    receiptArea.append(receiptText);
+
+
+
+                    System.out.println("Receipt updated: " + receiptText); // Debug statement
                 }
-            }
             clicked = false;
-            return "Add";
+            return label;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            clicked = false;
+            return super.stopCellEditing();
+        }
+
+        @Override
+        protected void fireEditingStopped() {
+            super.fireEditingStopped();
         }
     }
 }
