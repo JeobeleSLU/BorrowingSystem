@@ -18,7 +18,7 @@ public class EquipmentManager {
         writer = new XMLCreator();
         parser = new XMLParser();
         handler = new FileHandler();
-        equipmentXML = new File("./res/Server/Equipment/Equipment.xml");
+        equipmentXML = handler.retrieveXML("Equipment");
         equipmentArrayList = retrieveData();
     }
 

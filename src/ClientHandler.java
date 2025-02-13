@@ -31,7 +31,7 @@ public class ClientHandler implements Runnable {
             this.outputStream = new ObjectOutputStream(socket.getOutputStream());
             this.inputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -41,15 +41,12 @@ public class ClientHandler implements Runnable {
         while ((request = getRequest()) != null && !request.equalsIgnoreCase("Exit")) {
             respondToRequest(request);
         }
-        closeResources();
     }
 
     private void respondToRequest(String request) {
-        ObjectOutputStream outputStream;
         if (request.equals("LOGIN")) {
             String[] creds = getUserCredentials();
              reply(auth.authenticate(creds));
-
         }
 
     }
@@ -67,7 +64,6 @@ public class ClientHandler implements Runnable {
         try {
 
             return  (String[]) inputStream.readObject();
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -93,5 +89,4 @@ public class ClientHandler implements Runnable {
             System.err.println("Error closing resources: " + e.getMessage());
         }
     }
-
 }
