@@ -24,9 +24,9 @@ public class EquipmentManager {
     public EquipmentManager() {
         writer = new XMLCreator();
         parser = new XMLParser();
-        equipmentArrayList = retrieveData();
         handler = new FileHandler();
-        equipmentXML = new File(handler.getFilePath("Equipment"));
+        equipmentXML = handler.getXMLFile("Equipment");
+        equipmentArrayList = retrieveData();
     }
 
     private ArrayList<Equipment> retrieveData() {

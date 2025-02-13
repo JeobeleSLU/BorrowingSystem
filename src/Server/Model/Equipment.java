@@ -23,7 +23,7 @@ public class Equipment implements XMLTemplate {
     //                "quantity"
     //                ,"image",
     //                "isAvailable"
-    public Equipment( String type, String id,String name, AtomicInteger quantity,String imagePath, boolean isAvailable) {
+    public Equipment( boolean isAvailable, AtomicInteger quantity, String name, String id, String type) {
         this.name = name;
         this.type = type;
         this.quantity = quantity;
@@ -32,6 +32,7 @@ public class Equipment implements XMLTemplate {
         this.imagePath = imagePath;
 
     }
+
 
     public String getName() {
         return name;

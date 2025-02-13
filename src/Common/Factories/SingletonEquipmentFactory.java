@@ -4,6 +4,8 @@ import Server.Model.Equipment;
 import Common.Utilities.FileLogger;
 import Common.Utilities.Getter;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class SingletonEquipmentFactory implements Getter, Factory {
     FileLogger logger = new FileLogger(SingletonEquipmentFactory.class);
     private SingletonEquipmentFactory(){}
@@ -11,8 +13,10 @@ public class SingletonEquipmentFactory implements Getter, Factory {
     @Override
     public Equipment createObject(String[] members) {
         //todo: continue this
-//        return new Equipment(members[0],members[1],members[2], ),members[4]);
-        return null;
+        int quantity = Integer.parseInt(members[3]);
+        boolean flag = quantity < 1;
+
+        return new Equipment(flag,new AtomicInteger(quantity),members[2],members[1],members[0]);
     }
 
     @Override

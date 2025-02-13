@@ -71,4 +71,7 @@ public class FileHandler {
         File file = new File(filePath);
         return file.exists();
     }
+   public File getXMLFile(String type){
+        return new File(getFilePath(type)+".xml");
+    }
 }
