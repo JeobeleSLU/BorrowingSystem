@@ -21,6 +21,7 @@ public class HomepageClient extends JFrame {
     private JTextField searchField;
     private JButton searchButton;
     homePageAdmin homePageAdmin;
+    private boolean isClicked = false;
 
 
 
@@ -55,6 +56,7 @@ public class HomepageClient extends JFrame {
         searchField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                searchAndUpdateTable();
 
             }
         });
@@ -62,6 +64,7 @@ public class HomepageClient extends JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                searchAndUpdateTable();
 
             }
         });
@@ -127,6 +130,37 @@ public class HomepageClient extends JFrame {
         setVisible(true);
     }
 //===================================================================================================================
+    private void searchAndUpdateTable() {
+        String searchTerm = searchField.getText().trim().toLowerCase();
+        DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
+        model.setRowCount(0);
+
+        Object[][] data;
+        if (isClicked) {
+            data = new Object[][]{
+                    {new ImageIcon("./src/gui/drone.jpg"), "Drone", "4", "add"},
+                    {new ImageIcon("./src/gui/camera.png"), "Camera", "5", "add"},
+                    {3, "Stabilizer", "3", "add"},
+                    {4, "Switch", "4", "add"}
+            };
+        } else {
+            data = new Object[][]{
+                    {"Drone", "12-01-2025", "Returned"},
+                    {"Switch", "02-27-2026", "In Progress"}
+            };
+        }
+
+
+        for (Object[] row : data) {
+            for (Object cell : row) {
+                if (cell != null && cell.toString().toLowerCase().contains(searchTerm)) {
+                    model.addRow(row);
+                    break;
+                }
+            }
+        }
+    }
+    //============================================================================================================
     class ImageRender extends DefaultTableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
