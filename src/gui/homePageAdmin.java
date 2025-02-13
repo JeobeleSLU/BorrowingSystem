@@ -22,6 +22,7 @@ public class homePageAdmin extends JFrame {
     private JLabel equipment;
     private JTable equipTable;
     private JPanel centerPanel;
+    private boolean showingHistory = false;
 
 
     public homePageAdmin() {
@@ -57,6 +58,7 @@ public class homePageAdmin extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                showingHistory = false;  // Set to false to show logs
                 populateTable();
             }
         });
@@ -66,6 +68,8 @@ public class homePageAdmin extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                showingHistory = true;  // Set to true to show history
+                populateTable();
             }
         });
 
@@ -107,20 +111,31 @@ public class homePageAdmin extends JFrame {
     void populateTable() {
         centerPanel.setLayout(new BorderLayout());
 
-        // Define table columns
-        String[] columnNames = {"StudentId", "Equipment Name", "Date", "Time", "Status"};
+        String[] columnNames;
+        Object[][] data;
 
-        // Sample Data to populate the table
-        Object[][] data = {
-                //{getStudId, getEquipName, getDate, getTime, getStatus}
-                {"2242815", "Drone", "02-14-25", "1:00-2:00" ,"In progress"}, //will edit status
-                {"2240696", "Camera", "02-14-25", "1:00-2:00" ,"Returned"}, //will edit status
-                {"2241615", "Switch", "02-14-25", "1:00-2:00" ,"Not claim"}, //will edit status
-                {"2241122", "Router", "02-14-25", "1:00-2:00" ,"In progress"}, //will edit status
-        };
+        if (showingHistory) {
+            columnNames = new String[]{"StudentId", "Equipment Name", "Date Borrowed", "Status"};
+            data = new Object[][]{
+                    {"2242815", "Drone", "02-14-25", "Returned"},
+                    {"2240696", "Camera", "02-14-25", "Returned"},
+                    {"2241615", "Switch", "02-14-25", "Returned"},
+                    {"2241122", "Router", "02-14-25", "Returned"}
+            };
+        } else {
+            columnNames = new String[]{"StudentId", "Equipment Name", "Date", "Time", "Status"};
+            data = new Object[][]{
+                    {"2242815", "Drone", "02-14-25", "1:00-2:00", "In progress"},
+                    {"2240696", "Camera", "02-14-25", "1:00-2:00", "Returned"},
+                    {"2241615", "Switch", "02-14-25", "1:00-2:00", "Not claimed"},
+                    {"2241122", "Router", "02-14-25", "1:00-2:00", "In progress"}
+            };
+        }
 
+        // Create the table model with the updated data
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
 
+        // Create the table and configure its properties
         equipTable = new JTable(model);
         equipTable.setRowHeight(50);
         equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -132,9 +147,8 @@ public class homePageAdmin extends JFrame {
         // Set column widths
         equipTable.getColumnModel().getColumn(0).setPreferredWidth(70);
         equipTable.getColumnModel().getColumn(1).setPreferredWidth(100);
-        equipTable.getColumnModel().getColumn(2).setPreferredWidth(80);
+        equipTable.getColumnModel().getColumn(2).setPreferredWidth(120);
         equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
-        equipTable.getColumnModel().getColumn(4).setPreferredWidth(100);
 
         centerPanel.add(scrollPane, BorderLayout.WEST);
 
@@ -145,79 +159,7 @@ public class homePageAdmin extends JFrame {
             centerPanel.revalidate();
             centerPanel.repaint();
         });
-       // equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
-      //  equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
-        //equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
 
         setVisible(true);
-    }
-//===================================================================================================================
-    class ButtonRenderer extends JButton implements TableCellRenderer {
-        public ButtonRenderer() {
-            setOpaque(true);
-            setPreferredSize(new Dimension(50, 10));
-        }
-
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            if (value == null) {
-                setText("Add");
-            } else {
-                setText(value.toString());
-            }
-            return this;
-        }
-    }
-
-    class ButtonEditor extends DefaultCellEditor {
-        private JButton button;
-        private String label;
-        private boolean clicked;
-        private JTable table;
-        private int row;
-
-        public ButtonEditor(JCheckBox checkBox) {
-            super(checkBox);
-            button = new JButton();
-            button.setOpaque(true);
-            button.setPreferredSize(new Dimension(50, 10));
-
-            // Handle button click event
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    clicked = true;
-                    fireEditingStopped();
-                    getCellEditorValue();
-                }
-            });
-        }
-
-        @Override
-        public Object getCellEditorValue() {
-            if (clicked) {
-                // You can perform any action here like updating or adding new equipment
-                // For example, show a message when the button is clicked
-                JOptionPane.showMessageDialog(button, "Add button clicked for row: " + row);
-            }
-            clicked = false;
-            return label;
-        }
-
-        @Override
-        public boolean stopCellEditing() {
-            clicked = false;
-            return super.stopCellEditing();
-        }
-
-        @Override
-        protected void fireEditingStopped() {
-            super.fireEditingStopped();
-        }
-
-        // Set the row index where the button was clicked
-        public void setRow(int row) {
-            this.row = row;
-        }
     }
 }
