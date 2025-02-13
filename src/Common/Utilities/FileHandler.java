@@ -6,6 +6,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.nio.file.Path;
 
 /**
  * Use this for centralized file IO operations
@@ -16,17 +17,31 @@ public class FileHandler {
     public FileHandler(){
     }
     public String getFilePath(String type) {
+        String basePath = "./res/Server/";
+
         switch (type) {
             case "Equipment":
-                return "./res/Server/Equipment/";
+                basePath += "Equipment/";
+                break;
             case "User":
-                return "./res/Server/User/";
+                basePath += "User/";
+                break;
             case "Transaction":
-                return "./res/Server/Transaction/";
+                basePath += "Transaction/";
+                break;
             default:
                 return null;
         }
+
+        // check directory
+        File directory = new File(basePath);
+        if (!directory.exists()) {
+            directory.mkdirs(); // create directory if it doesnt exist
+        }
+
+        return basePath;
     }
+
     public File getOrCreateFile(String path) {
         File file = new File(path);
         File parentDir = file.getParentFile();
