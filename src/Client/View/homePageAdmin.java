@@ -27,6 +27,8 @@ public class homePageAdmin extends JFrame {
     private JTable equipTable;
     private JPanel centerPanel;
     private boolean showingHistory = false;
+    private boolean showingLogs = false;
+    private boolean showingEquipment = false;
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss");
     private final String stamp = LocalDateTime.now().format(dateTimeFormatter);
@@ -68,7 +70,7 @@ public class homePageAdmin extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                showingHistory = false;  // Set to false to show logs
+                showingLogs = true;
                 populateTable();
             }
         });
@@ -88,6 +90,8 @@ public class homePageAdmin extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                showingEquipment = true;
+                populateTable();
             }
         });
     }
@@ -116,6 +120,10 @@ public class homePageAdmin extends JFrame {
                 label.setForeground(defaultForeground);
             }
         });
+        System.out.println("Showing logs: " + showingLogs);
+        System.out.println("Showing history: " + showingHistory);
+        System.out.println("Showing equipment: " + showingEquipment);
+
     }
 
     void populateTable() {
@@ -125,6 +133,8 @@ public class homePageAdmin extends JFrame {
         Object[][] data;
 
         if (showingHistory) {
+            showingLogs = false;
+            showingEquipment = false;
             columnNames = new String[]{"StudentId", "Equipment Name", "Date Borrowed", "Status"};
             data = new Object[][]{
                     {"2242815", "Drone", "02-14-25", "Returned"},
@@ -132,7 +142,9 @@ public class homePageAdmin extends JFrame {
                     {"2241615", "Switch", "02-14-25", "Returned"},
                     {"2241122", "Router", "02-14-25", "Returned"}
             };
-        } else {
+        } else if (showingLogs) {
+            showingHistory = false;
+            showingEquipment = false;
             columnNames = new String[]{"StudentId", "Equipment Name", "Date", "Time", "Status"};
             data = new Object[][]{
                     {"2242815", "Drone", "02-14-25", "1:00-2:00", "In progress"},
@@ -140,43 +152,56 @@ public class homePageAdmin extends JFrame {
                     {"2241615", "Switch", "02-14-25", "1:00-2:00", "Not claimed"},
                     {"2241122", "Router", "02-14-25", "1:00-2:00", "In progress"}
             };
+        } else if (showingEquipment) {
+            showingHistory = false;
+            showingLogs = false;
+            columnNames = new String[]{"Equipment ID", "Equipment Name", "Flag"};
+            data = new Object[][]{
+                    {"012345", "Drone", "( removed button)"},
+                    {"012346", "Camera", "( removed button)"},
+                    {"012347", "Switch", "( removed button)"},
+            };
+        } else {
+            columnNames = new String[]{};
+            data = new Object[][]{};
         }
 
-        // Create the table model with the updated data
-        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+        // Check if columnNames or data is empty before creating the table
+        if (columnNames.length == 0 || data.length == 0) {
+            System.out.println("No data to display.");
+            return; // Skip populating the table
+        }
 
+        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return column == 5;
             }
         };
 
-        if (equipTable == null) {
-            // Create the table and configure its properties
-            equipTable = new JTable(model);
-            equipTable.setRowHeight(50);
-            equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        centerPanel.removeAll();
 
-            // Wrap JTable in JScrollPane
-            JScrollPane scrollPane = new JScrollPane(equipTable);
-            scrollPane.setPreferredSize(new Dimension(500, 500));
+        equipTable = new JTable(model);
+        equipTable.setRowHeight(50);
+        equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-            // Set column widths
-            equipTable.getColumnModel().getColumn(0).setPreferredWidth(70);
-            equipTable.getColumnModel().getColumn(1).setPreferredWidth(100);
-            equipTable.getColumnModel().getColumn(2).setPreferredWidth(120);
-            equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+        JScrollPane scrollPane = new JScrollPane(equipTable);
+        scrollPane.setPreferredSize(new Dimension(500, 500));
 
-            centerPanel.add(scrollPane, BorderLayout.WEST);
-        } else
-            equipTable.setModel(model);
+        equipTable.getColumnModel().getColumn(0).setPreferredWidth(70);
+        equipTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+        equipTable.getColumnModel().getColumn(2).setPreferredWidth(120);
+        equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
 
-        // Ensure UI updates properly
+        centerPanel.add(scrollPane, BorderLayout.CENTER);
+
         SwingUtilities.invokeLater(() -> {
             equipTable.revalidate();
             equipTable.repaint();
             centerPanel.revalidate();
             centerPanel.repaint();
+            mainPanel.revalidate();
+            mainPanel.repaint();
         });
 
         setVisible(true);
