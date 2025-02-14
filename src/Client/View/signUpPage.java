@@ -13,12 +13,14 @@ public class signUpPage extends JFrame {
     private JTextField passField;
     private JButton signUpBtn;
     private JTextField emailField;
+    private JLabel fNameLbl;
+    private JLabel lNameLbl;
 
     public signUpPage() {
         setContentPane(loginPanel);
         setTitle("Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(380, 300);
+        setSize(380, 400);
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
