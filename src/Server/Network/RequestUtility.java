@@ -20,7 +20,7 @@ public class RequestUtility {
     public static String getRequest(File file){
         String[] node = {"Request"};
                 ArrayList<String> req= getContent(file,node);
-               return req.getFirst();
+               return req.get(0);
     }
 
     public static ArrayList<String> getContent(File file, String[] nodesToGet) {

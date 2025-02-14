@@ -2,6 +2,7 @@ package Client.View;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.lang.*;
 
 public class login_page extends JFrame {
     private JPanel loginPanel;

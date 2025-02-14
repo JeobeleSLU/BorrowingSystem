@@ -1,12 +1,21 @@
 package Client.View;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 public class homePageAdmin extends JFrame {
 
+    public Label receiptArea;
     private JPanel mainPanel;
     private JPanel dashboardPanel;
     private JPanel dashboard;
@@ -15,6 +24,12 @@ public class homePageAdmin extends JFrame {
     private JLabel logs;
     private JLabel history;
     private JLabel equipment;
+    private JTable equipTable;
+    private JPanel centerPanel;
+    private boolean showingHistory = false;
+
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss");
+    private final String stamp = LocalDateTime.now().format(dateTimeFormatter);
 
 
     public homePageAdmin() {
@@ -26,11 +41,15 @@ public class homePageAdmin extends JFrame {
         setVisible(true);
         setResizable(false);
 
+        populateTable();
 
         setupHoverEffect(addItem);
         setupHoverEffect(logs);
         setupHoverEffect(history);
         setupHoverEffect(equipment);
+
+        System.out.println(stamp);
+
 
         //ADD ITEM
         addItem.addMouseListener(new MouseAdapter() {
@@ -49,6 +68,8 @@ public class homePageAdmin extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                showingHistory = false;  // Set to false to show logs
+                populateTable();
             }
         });
 
@@ -57,6 +78,8 @@ public class homePageAdmin extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                showingHistory = true;  // Set to true to show history
+                populateTable();
             }
         });
 
@@ -93,5 +116,60 @@ public class homePageAdmin extends JFrame {
                 label.setForeground(defaultForeground);
             }
         });
+    }
+
+    void populateTable() {
+        centerPanel.setLayout(new BorderLayout());
+
+        String[] columnNames;
+        Object[][] data;
+
+        if (showingHistory) {
+            columnNames = new String[]{"StudentId", "Equipment Name", "Date Borrowed", "Status"};
+            data = new Object[][]{
+                    {"2242815", "Drone", "02-14-25", "Returned"},
+                    {"2240696", "Camera", "02-14-25", "Returned"},
+                    {"2241615", "Switch", "02-14-25", "Returned"},
+                    {"2241122", "Router", "02-14-25", "Returned"}
+            };
+        } else {
+            columnNames = new String[]{"StudentId", "Equipment Name", "Date", "Time", "Status"};
+            data = new Object[][]{
+                    {"2242815", "Drone", "02-14-25", "1:00-2:00", "In progress"},
+                    {"2240696", "Camera", "02-14-25", "1:00-2:00", "Returned"},
+                    {"2241615", "Switch", "02-14-25", "1:00-2:00", "Not claimed"},
+                    {"2241122", "Router", "02-14-25", "1:00-2:00", "In progress"}
+            };
+        }
+
+        // Create the table model with the updated data
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+
+        // Create the table and configure its properties
+        equipTable = new JTable(model);
+        equipTable.setRowHeight(50);
+        equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        // Wrap JTable in JScrollPane
+        JScrollPane scrollPane = new JScrollPane(equipTable);
+        scrollPane.setPreferredSize(new Dimension(500, 500));
+
+        // Set column widths
+        equipTable.getColumnModel().getColumn(0).setPreferredWidth(70);
+        equipTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+        equipTable.getColumnModel().getColumn(2).setPreferredWidth(120);
+        equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+
+        centerPanel.add(scrollPane, BorderLayout.WEST);
+
+        // Ensure UI updates properly
+        SwingUtilities.invokeLater(() -> {
+            equipTable.revalidate();
+            equipTable.repaint();
+            centerPanel.revalidate();
+            centerPanel.repaint();
+        });
+
+        setVisible(true);
     }
 }
