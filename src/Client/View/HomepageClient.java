@@ -4,8 +4,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class HomepageClient extends JFrame {
     private JPanel mainPanel;
@@ -19,6 +18,7 @@ public class HomepageClient extends JFrame {
     private JComboBox types;
     private JTextField searchField;
     private JButton searchButton;
+    private JLabel equipLabel;
     homePageAdmin homePageAdmin;
     private JTextArea receiptArea;
     private JTextArea receiptAreaa;
@@ -32,8 +32,10 @@ public class HomepageClient extends JFrame {
         setResizable(false);
 
         homePageAdmin = new homePageAdmin();
+        homePageAdmin.setupHoverEffect(equipLabel);
         homePageAdmin.setupHoverEffect(borrowedItemlbl);
         homePageAdmin.setupHoverEffect(equipment);
+
         homePageAdmin.setVisible(false);
 
 
@@ -60,6 +62,13 @@ public class HomepageClient extends JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        equipLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
 
             }
         });
