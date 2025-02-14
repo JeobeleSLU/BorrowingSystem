@@ -142,6 +142,7 @@ public class homePageAdmin extends JFrame {
                     {"2241615", "Switch", "02-14-25", "Returned"},
                     {"2241122", "Router", "02-14-25", "Returned"}
             };
+            showingHistory = false;
         } else if (showingLogs) {
             showingHistory = false;
             showingEquipment = false;
@@ -152,6 +153,7 @@ public class homePageAdmin extends JFrame {
                     {"2241615", "Switch", "02-14-25", "1:00-2:00", "Not claimed"},
                     {"2241122", "Router", "02-14-25", "1:00-2:00", "In progress"}
             };
+            showingLogs = false;
         } else if (showingEquipment) {
             showingHistory = false;
             showingLogs = false;
@@ -161,6 +163,7 @@ public class homePageAdmin extends JFrame {
                     {"012346", "Camera", "( removed button)"},
                     {"012347", "Switch", "( removed button)"},
             };
+            showingEquipment = false;
         } else {
             columnNames = new String[]{};
             data = new Object[][]{};
@@ -191,7 +194,7 @@ public class homePageAdmin extends JFrame {
         equipTable.getColumnModel().getColumn(0).setPreferredWidth(70);
         equipTable.getColumnModel().getColumn(1).setPreferredWidth(100);
         equipTable.getColumnModel().getColumn(2).setPreferredWidth(120);
-        equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+//        equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
 
         centerPanel.add(scrollPane, BorderLayout.CENTER);
 
