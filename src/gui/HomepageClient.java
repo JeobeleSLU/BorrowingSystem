@@ -201,27 +201,27 @@ public class HomepageClient extends JFrame {
 
         public Object getCellEditorValue() {
 //            if (clicked) {
-                System.out.println("HELLO");
+            System.out.println("HELLO");
 
-                int selectedRow = equipTable.getSelectedRow();
-                if (selectedRow != -1) {
-                    String equipmentName = equipTable.getValueAt(selectedRow, 1).toString();
-                    String quantity = equipTable.getValueAt(selectedRow, 2).toString();
+            int selectedRow = equipTable.getSelectedRow();
+            if (selectedRow != -1) {
+                String equipmentName = equipTable.getValueAt(selectedRow, 1).toString();
+                String quantity = equipTable.getValueAt(selectedRow, 2).toString();
 
-                    // Update the receiptArea with the equipment and quantity
+                // Update the receiptArea with the equipment and quantity
 
-                    String receiptText = "";
-                    receiptText += "Equipment: " + equipmentName + "\n";
-                    receiptText += "Quantity: " + quantity + "\n";
-                    receiptText += "==================\n";
-
-
-                    receiptArea.append(receiptText);
+                String receiptText = "";
+                receiptText += "Equipment: " + equipmentName + "\n";
+                receiptText += "Quantity: " + quantity + "\n";
+                receiptText += "==================\n";
 
 
+                receiptArea.append(receiptText);
 
-                    System.out.println("Receipt updated: " + receiptText); // Debug statement
-                }
+
+
+                System.out.println("Receipt updated: " + receiptText); // Debug statement
+            }
             clicked = false;
             return label;
         }
@@ -238,9 +238,9 @@ public class HomepageClient extends JFrame {
         }
     }
 }
-    //=============================================================================================
- //   private void creatDropDown() {
-        // Initialize the JComboBox with equipment types
+//=============================================================================================
+//   private void creatDropDown() {
+// Initialize the JComboBox with equipment types
 //        String[] typesArray = {"Camera", "Drones", "Stabilizer", "Switches", "Routers"};
 
 
