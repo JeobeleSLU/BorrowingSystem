@@ -13,6 +13,8 @@ public class signUpPage extends JFrame {
     private JTextField passField;
     private JButton signUpBtn;
     private JTextField emailField;
+    private JLabel fNameLbl;
+    private JLabel lNameLbl;
 
     public signUpPage() {
         setContentPane(loginPanel);
