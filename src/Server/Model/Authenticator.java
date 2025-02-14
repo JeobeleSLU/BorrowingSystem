@@ -1,5 +1,6 @@
 package Server.Model;
 
+import Common.Factories.SingletonUserFactory;
 import Common.Model.User;
 import Common.Utilities.FileLogger;
 import Common.Utilities.XMLParser;
@@ -64,6 +65,7 @@ public class Authenticator{
     0 for already existing
      */
     public synchronized int createUseAccount(User user){
+
         if (manager.userExists(user.getIdNumber())){
             return -1;
             //Todo: Log me pls
@@ -83,5 +85,23 @@ public class Authenticator{
     }
     public User getCredentials(String id){
         return manager.getUserLogin(id);
+    }
+
+    public String[] getSingUpAttributes() {
+
+        return new String[]{
+                "mail","id","lastName","firsName","password"
+        };
+    }
+    public int createUser(String [] credentials){
+        String userType = "Student";
+        /*
+        return -1 for invalid transactions
+         */
+        if (credentials.length !=5){
+            return -1;
+        }
+       User user = new User(credentials[0],0,credentials[1],userType,credentials[2],credentials[3],credentials[4]);
+       return createUseAccount(user);
     }
 }
