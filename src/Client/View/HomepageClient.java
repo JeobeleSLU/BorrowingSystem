@@ -22,6 +22,7 @@ public class HomepageClient extends JFrame {
     homePageAdmin homePageAdmin;
     private JTextArea receiptArea;
     private JTextArea receiptAreaa;
+    private boolean isClicked = false;
 
     public HomepageClient() {
         setContentPane(mainPanel);
@@ -69,31 +70,55 @@ public class HomepageClient extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                isClicked = true;
+                populateTable();
+            }
+        });
 
+        borrowedItemlbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                isClicked = false;
+                populateTable();
             }
         });
     }
 
     //=============================================================================================
     public void populateTable() {
+        centerPanel.removeAll();
         // Set BorderLayout for centerPanel
         centerPanel.setLayout(new BorderLayout());
 
 
+
         // Define table columns
-        String[] columnNames = {"Image", "Equipment Name", "Quantity", "Avail"};
+        String[] columnNames;
 
         //TODO: Connect it to admin homepage
         ImageIcon droneIcon = new ImageIcon("./src/gui/drone.jpg");
         ImageIcon cameraIcon = new ImageIcon("./src/gui/camera.png");
 
         // Sample Data to populate the table
-        Object[][] data = {
-                {droneIcon, "Drone", "4", "add"},
-                {cameraIcon, "Camera", "5", "add"},
-                {3, "Stabilizer", "3", "add"},
-                {4, "Switch", "4", "add"}
-        };
+        Object[][] data;
+
+        if (isClicked) {
+            columnNames = new String[]{"Image", "Equipment Name", "Quantity", "Avail"};
+            data = new Object[][] {
+                    {droneIcon, "Drone", "4", "add"},
+                    {cameraIcon, "Camera", "5", "add"},
+                    {3, "Stabilizer", "3", "add"},
+                    {4, "Switch", "4", "add"}
+            };
+        } else {
+            columnNames = new String[] {"Equipment Name", "Borrowed Date", "Status"};
+            data = new Object[][] {
+                    {"Drone", "12-01-2025", "Returned"},
+                    {"Switch", "02-27-2026", "In Progress"}
+            };
+        }
+
 
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
@@ -101,29 +126,40 @@ public class HomepageClient extends JFrame {
                 return column == 3;
             }
 
-            public Class<?> getColumnClass(int column) {
-                if (column == 0) {
-                    return ImageIcon.class; // Ensure the first column uses ImageIcon
-                }
-                return Object.class;
-            }
+//            public Class<?> getColumnClass(int column) {
+//                if (column == 0) {
+//                    return ImageIcon.class; // Ensure the first column uses ImageIcon
+//                }
+//                return Object.class;
+//            }
         };
 
-        equipTable = new JTable(model);
-        equipTable.setRowHeight(50);
-        equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        // Wrap JTable in JScrollPane
-        JScrollPane scrollPane = new JScrollPane(equipTable);
-        scrollPane.setPreferredSize(new Dimension(500, 500));
+            equipTable = new JTable(model);
+            equipTable.setRowHeight(50);
+            equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        // Set column widths
-        equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
-        equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
-        equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
-        equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+            if (isClicked){
+                equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
+                equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
+                equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
+                equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
+            }
+
+            // Wrap JTable in JScrollPane
+            JScrollPane scrollPane = new JScrollPane(equipTable);
+            scrollPane.setPreferredSize(new Dimension(500, 500));
+
+//            // Set column widths
+//            equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
+//            equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
+//            equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
+//            equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+
+
 
         centerPanel.add(scrollPane, BorderLayout.WEST);
+
         //============================
         receiptArea = new JTextArea();
         receiptArea.setEditable(false);
@@ -143,10 +179,7 @@ public class HomepageClient extends JFrame {
         setVisible(true);
 
         // Set custom renderer and editor for button column
-        equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
-        equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
-        equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
-        equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
+
 
         setVisible(true);
     }
