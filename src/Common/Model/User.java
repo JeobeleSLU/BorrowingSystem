@@ -22,9 +22,7 @@ public class User implements XMLTemplate {
         this.mail = mail;
         this.failedAttempts = failedAttempts;
         this.idNumber = id;
-        this.lastName = lastName;
         this.userType = userType;
-        this.name = name;
         this.password = password;
     }
     public String getPassword() {

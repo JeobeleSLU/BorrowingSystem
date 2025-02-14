@@ -63,22 +63,38 @@ public class ClientHandler implements Runnable {
 
     private void respondToRequest() {
         String request = RequestUtility.getRequest(saveFile);
+//FIXME!
         if (request.equals("AUTH")){
             //Get the nodes of the login attributes
-            String response =
-                    String.valueOf(auth.
-                            authenticate(RequestUtility.
-                                    getContent(saveFile, auth.getLoginAttributes())));
+            authenticateUser();
+            /*
+            The response arraylist is responsible for the text content
+            the array of attributes is responsible for the node names
+             */
             ArrayList<String> res = new ArrayList<>();
             res.add(response);
             sendToStream(res,auth.getResponseAttributes());
         }else if (request.equals("SIGNUP")){
-
+            createUser();
         }
     }
 
+    private void createUser() {
+        ArrayList<String> attributes = RequestUtility.getContent(saveFile,auth.getSingUpAttributes());
+       int response =  auth.createUser(attributes.toArray(new String[0]));
 
-     void sendToStream(ArrayList<String> res, String[] responseAttributes) {
+    }
+
+    private void authenticateUser() {
+        /*
+        get the content of the xml files
+         */
+        String response = String.valueOf(auth.authenticate(RequestUtility
+                .getContent(saveFile, auth.getLoginAttributes())));
+    }
+
+
+    void sendToStream(ArrayList<String> res, String[] responseAttributes) {
         RequestUtility.sendResponse(res,responseAttributes,response);
         File file = new File(response);
         long size = file.length();
@@ -106,8 +122,6 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    private void sendResponse() {
-    }
 
     private void recieveRequest() {
         try {
