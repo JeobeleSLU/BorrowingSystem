@@ -145,22 +145,25 @@ public class homePageAdmin extends JFrame {
         // Create the table model with the updated data
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
 
-        // Create the table and configure its properties
-        equipTable = new JTable(model);
-        equipTable.setRowHeight(50);
-        equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        if (equipTable == null) {
+            // Create the table and configure its properties
+            equipTable = new JTable(model);
+            equipTable.setRowHeight(50);
+            equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        // Wrap JTable in JScrollPane
-        JScrollPane scrollPane = new JScrollPane(equipTable);
-        scrollPane.setPreferredSize(new Dimension(500, 500));
+            // Wrap JTable in JScrollPane
+            JScrollPane scrollPane = new JScrollPane(equipTable);
+            scrollPane.setPreferredSize(new Dimension(500, 500));
 
-        // Set column widths
-        equipTable.getColumnModel().getColumn(0).setPreferredWidth(70);
-        equipTable.getColumnModel().getColumn(1).setPreferredWidth(100);
-        equipTable.getColumnModel().getColumn(2).setPreferredWidth(120);
-        equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+            // Set column widths
+            equipTable.getColumnModel().getColumn(0).setPreferredWidth(70);
+            equipTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+            equipTable.getColumnModel().getColumn(2).setPreferredWidth(120);
+            equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
 
-        centerPanel.add(scrollPane, BorderLayout.WEST);
+            centerPanel.add(scrollPane, BorderLayout.WEST);
+        } else
+            equipTable.setModel(model);
 
         // Ensure UI updates properly
         SwingUtilities.invokeLater(() -> {
