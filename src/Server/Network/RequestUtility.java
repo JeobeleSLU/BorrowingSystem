@@ -50,15 +50,23 @@ public class RequestUtility {
             throw new RuntimeException(e);
         }
     }
-    static public void sendResponse(ArrayList<String> response,String[] nodes,String responsepath ){
+
+    /**
+     *
+     * @param response
+     * @param nodes
+     * @param responsepath
+     */
+    static public File createXMLResponse(ArrayList<String> response, String[] nodes, String responsepath ) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setIgnoringElementContentWhitespace(true);
+        File file = new File(responsepath);
         try {
             DocumentBuilder docBuilder = factory.newDocumentBuilder();
             Document doc = docBuilder.newDocument();
             Element root = doc.createElement("Response");
             doc.appendChild(root);
-            for (int i = 0; i < nodes.length; i++){
+            for (int i = 0; i < nodes.length; i++) {
                 Element element = doc.createElement(nodes[i]);
                 element.appendChild(doc.createTextNode(response.get(i)));
                 root.appendChild(element);
@@ -67,8 +75,10 @@ public class RequestUtility {
             Transformer transformer = transformerFactory.newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(System.out);
+            StreamResult result = new StreamResult(file);
             transformer.transform(source, result);
+            return file;
+
 
         } catch (ParserConfigurationException e) {
             throw new RuntimeException(e);

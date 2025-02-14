@@ -39,25 +39,32 @@ public class Authenticator{
      * 0 = incorrect password
      * 1 = correct password
      * -1 No account
+     * returns an arraylist that would contain the id number and the userType
      */
     //For temporary it will get a user but maybe use a byteStream?
-    public int authenticate(ArrayList<String> user){
+    public ArrayList<String> authenticate(ArrayList<String> user){
+        ArrayList<String> arrayList = new ArrayList<>();
         String id = user.get(0);
         String password = user.get(1);
+        String response = "";
 
         if (!manager.userExists(id)){
             logger.warning("Create an account first");
-            return -1;
+            response  ="-1";
 
         }else if (!isCorrectPassword(id,password)){
             logger.warning("Incorrect Password, Try again");
-            return 0;
+            response = "0";
         }
         else{
             logger.info("Successfully Log in");
-            return 1;
+            User userInfo = getCredentials(id);
+            arrayList.add(userInfo.getUserType());
+            response = "1";
         }
 
+        arrayList.add(response);
+        return arrayList;
             //Todo: Log me!
     }
     /*
@@ -79,6 +86,7 @@ public class Authenticator{
         }return 0; // For some odd reason that even God doesn't knows
         //todo: How would you even log this ?
     }
+
     private boolean isCorrectPassword(String id, String password) {
         //some long ass method chain to get the user password and match it
         return manager.getUserLogin(id).getPassword().equals(password);
