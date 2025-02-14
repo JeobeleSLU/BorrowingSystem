@@ -143,7 +143,13 @@ public class homePageAdmin extends JFrame {
         }
 
         // Create the table model with the updated data
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 5;
+            }
+        };
 
         if (equipTable == null) {
             // Create the table and configure its properties

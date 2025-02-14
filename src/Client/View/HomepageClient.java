@@ -70,6 +70,7 @@ public class HomepageClient extends JFrame {
         // Set BorderLayout for centerPanel
         centerPanel.setLayout(new BorderLayout());
 
+
         // Define table columns
         String[] columnNames = {"Image", "Equipment Name", "Quantity", "Avail"};
 
@@ -137,6 +138,7 @@ public class HomepageClient extends JFrame {
         equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
         equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
         equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
+
         setVisible(true);
     }
 //===================================================================================================================
