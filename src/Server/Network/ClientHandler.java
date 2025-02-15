@@ -54,7 +54,7 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
 
-        while (true){
+        while (!socket.isClosed()){
             receiveRequest();
             respondToRequest();
         }
@@ -64,17 +64,28 @@ public class ClientHandler implements Runnable {
               The response arraylist is responsible for the text content
               the array of attributes is responsible for the node names
                */
+
     private void respondToRequest() {
         String request = RequestUtility.getRequest(saveFile);
-//FIXME!
         if (request.equals("AUTH")){
-            //Get the nodes of the login attributes
             ArrayList<String> res = authenticateUser();
-
             sendToStream(res,auth.getResponseAttributes());
         }else if (request.equals("SIGNUP")){
             createUser();
+        }else if (request.equals("EQUIPMENT")){
+            sendResponseXML(handler.getXMLFile("Equipment"));
+        }else if (request.equals("TRANSACT")){
+            transact();
+        } else if (request.equals("DISCONNECT")) {
+            closeResources();
         }
+    }
+
+    /**
+     * TODO:
+     * Transaction logic on how the equipment will be borrowed
+     */
+    private void transact() {
     }
 
     private void createUser() {
