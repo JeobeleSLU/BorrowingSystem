@@ -27,7 +27,7 @@ public class homePageAdmin extends JFrame {
     private JTable equipTable;
     private JPanel centerPanel;
     private boolean showingHistory = false;
-    private boolean showingLogs = false;
+    private boolean showingLogs = true;
     private boolean showingEquipment = false;
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss");
