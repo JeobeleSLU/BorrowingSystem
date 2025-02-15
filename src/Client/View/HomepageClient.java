@@ -5,6 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomepageClient extends JFrame {
     private JPanel mainPanel;
@@ -26,6 +28,8 @@ public class HomepageClient extends JFrame {
     private boolean showingSettings = false;
     private boolean isClicked = false;
     private boolean show;
+    private List<Object[]> allEquipments = new ArrayList<>();
+
 
 
 
@@ -56,7 +60,7 @@ public class HomepageClient extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String type = types.getSelectedItem().toString();
-
+                filterTableByType(type);
 
             }
         });
@@ -106,6 +110,24 @@ public class HomepageClient extends JFrame {
         });
     }
     //=============================================================================================
+    private void filterTableByType(String type) {
+        String selectedType = types.getSelectedItem().toString().toLowerCase();
+        DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
+        model.setRowCount(0);
+
+        Object[][] data = new Object[][] {
+                {new ImageIcon("./src/gui/drone.jpg"), "Drones", "4", "add"},
+                {new ImageIcon("./src/gui/camera.png"), "Camera", "5", "add"},
+                {3, "Stabelizer", "3", "add"},
+                {4, "Swtiches", "4", "add"}
+        };
+
+        for (Object[] row : data) {
+            if (row[1].toString().equalsIgnoreCase(selectedType)) {
+                model.addRow(row);
+            }
+        }
+    }
     public void populateTable() {
         //centerPanel.removeAll();
         // Set BorderLayout for centerPanel
