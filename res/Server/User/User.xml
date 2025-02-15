@@ -3,11 +3,11 @@
     <User>
         <Mail>jackson.clark@example.com</Mail>
         <FailedAttempts>1</FailedAttempts>
-        <Id>1010</Id>
+        <Id>10</Id>
         <LastName>Clark</LastName>
         <UserType>Guest</UserType>
         <Name>Jackson</Name>
-        <Password>guestPass2024</Password>
+        <Password>jeobele</Password>
     </User>
     <User>
         <Mail>isabel.martin@example.com</Mail>

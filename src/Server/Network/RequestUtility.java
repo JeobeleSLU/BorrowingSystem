@@ -55,16 +55,16 @@ public class RequestUtility {
      *
      * @param response
      * @param nodes
-     * @param responsepath
+     * @param file
      */
-    static public File createXMLResponse(ArrayList<String> response, String[] nodes, String responsepath ) {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setIgnoringElementContentWhitespace(true);
-        File file = new File(responsepath);
-        try {
-            DocumentBuilder docBuilder = factory.newDocumentBuilder();
-            Document doc = docBuilder.newDocument();
-            Element root = doc.createElement("Response");
+    static public File createXMLResponse(ArrayList<String> response, String[] nodes,File file ) {
+                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                factory.setIgnoringElementContentWhitespace(true);
+
+                try {
+                    DocumentBuilder docBuilder = factory.newDocumentBuilder();
+                    Document doc = docBuilder.newDocument();
+                    Element root = doc.createElement("Response");
             doc.appendChild(root);
             for (int i = 0; i < nodes.length; i++) {
                 Element element = doc.createElement(nodes[i]);

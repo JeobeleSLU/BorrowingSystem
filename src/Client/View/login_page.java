@@ -15,6 +15,21 @@ public class login_page extends JFrame {
     private HomepageClient clientHomePage;
 
 
+    public JPanel getLoginPanel() {
+        return loginPanel;
+    }
+
+    public JTextField getUnField() {
+        return unField;
+    }
+
+    public JTextField getPassField() {
+        return passField;
+    }
+
+    public JButton getLoginBtn() {
+        return loginBtn;
+    }
 
     public login_page() {
         setContentPane(loginPanel);
@@ -27,21 +42,6 @@ public class login_page extends JFrame {
 
 
 
-        //Username Field
-        unField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        //Password Field
-        passField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
 
         //Login Button listener
         loginBtn.addActionListener(new ActionListener() {
@@ -78,8 +78,6 @@ public class login_page extends JFrame {
             JOptionPane.showMessageDialog(null, "Invalid Username or Password", "Warning", 2);
         }
     }
-    public static void main(String[] args) {
-        new login_page();
-    }
+
 }
 

@@ -34,7 +34,7 @@ public class ClientHandler implements Runnable {
     String idNumber;
     FileHandler handler;
     File saveFile;
-    String responseFilePath;
+    File responseFilePath;
 
     public ClientHandler(Socket client, EquipmentManager equipmentManager, Authenticator authenticator)  {
         this.socket = client;
@@ -60,16 +60,15 @@ public class ClientHandler implements Runnable {
         }
 
     }
-    /*
-              The response arraylist is responsible for the text content
-              the array of attributes is responsible for the node names
-               */
+
+    /**
+     * This would response to the resquest that the client will do
+     */
 
     private void respondToRequest() {
         String request = RequestUtility.getRequest(saveFile);
         if (request.equals("AUTH")){
-            ArrayList<String> res = authenticateUser();
-            sendToStream(res,auth.getResponseAttributes());
+           authenticateUser();
         }else if (request.equals("SIGNUP")){
             createUser();
         }else if (request.equals("EQUIPMENT")){
@@ -102,10 +101,11 @@ public class ClientHandler implements Runnable {
      * the user using the authenticator which then put the response inside the
      * arraylist based on the login and then returns the user type
      */
-    private ArrayList<String> authenticateUser() {
+    private void authenticateUser() {
 
-        return auth.authenticate(RequestUtility
-                .getContent(saveFile, auth.getLoginAttributes()));
+
+       ArrayList<String> result= auth.authenticate(RequestUtility.getContent(saveFile, auth.getLoginAttributes()));
+       sendToStream(result, auth.getResponseAttributes());
     }
 
 
@@ -113,13 +113,19 @@ public class ClientHandler implements Runnable {
      *
      * @param res
      * @param responseAttributes
-     * First create an xml and the
+     * build an xml response based on the response attributes and will be saved inside the
+     * response file Path
      */
     private void sendToStream(ArrayList<String> res, String[] responseAttributes) {
         File file  = RequestUtility.createXMLResponse(res, responseAttributes, responseFilePath);
         sendResponseXML(file);
     }
 
+    /**
+     *
+     * @param file
+     * Sends the xml to the file input stream byte by byte
+     */
     private void sendResponseXML(File file) {
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
             byte[] buffer = new byte[4096];
@@ -134,10 +140,14 @@ public class ClientHandler implements Runnable {
     }
 
 
+    /**
+     * Will reeceive request from the client by saving the xml file
+     * the xml would be saved inside the cache folder and and the file name would be the random userID
+     */
     private void receiveRequest() {
         try {
             saveFile = new File(handler.getXMLFile("Cache") + sessionID);
-            responseFilePath = new File(handler.getXMLFile("Cache") + sessionID + "Response").getName();
+            responseFilePath = new File(handler.getFilePath("Cache") + sessionID + "Response.xml");
 
             try (FileOutputStream fileOutputStream = new FileOutputStream(saveFile)) {
                 byte[] buffer = new byte[4096];

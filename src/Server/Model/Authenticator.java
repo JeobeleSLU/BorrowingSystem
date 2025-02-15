@@ -29,7 +29,7 @@ public class Authenticator{
     }
     public String[] getResponseAttributes(){
         return new String[]{
-          "Result"
+          "Result","Role"
         };
     }
 
