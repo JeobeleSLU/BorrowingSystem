@@ -3,6 +3,7 @@ package Client.View;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class addItem extends javax.swing.JFrame {
 
@@ -15,6 +16,8 @@ public class addItem extends javax.swing.JFrame {
     private JTextField qtyFld;
     private JTextField qty;
     private JLabel type;
+    public String[] row;
+
 
     public addItem() {
         setContentPane(mainPanel);
@@ -48,12 +51,21 @@ public class addItem extends javax.swing.JFrame {
             }
         });
 
+
+
         //ADD BUTTON
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                row = newRow();
+                System.out.println("ROW: " + Arrays.toString(row));
 
             }
         });
+    }
+
+
+    String[] newRow() {
+        return new String[]{equipCodeFld.getText(), equipNameFld.getText(), null};
     }
 }

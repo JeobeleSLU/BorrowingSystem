@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -32,7 +33,9 @@ public class homePageAdmin extends JFrame {
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss");
     private final String stamp = LocalDateTime.now().format(dateTimeFormatter);
-
+    public boolean add;
+    public boolean anotherBool;
+    Client.View.addItem addItemBtn;
 
     public homePageAdmin() {
         setContentPane(mainPanel);
@@ -58,8 +61,10 @@ public class homePageAdmin extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                new addItem();
+                addItemBtn = new addItem();
                 //   dispose();
+                add = true;
+
 
 
             }
@@ -143,6 +148,7 @@ public class homePageAdmin extends JFrame {
                     {"2241122", "Router", "02-14-25", "Returned"}
             };
             showingHistory = false;
+            anotherBool = false;
         } else if (showingLogs) {
             showingHistory = false;
             showingEquipment = false;
@@ -154,6 +160,7 @@ public class homePageAdmin extends JFrame {
                     {"2241122", "Router", "02-14-25", "1:00-2:00", "In progress"}
             };
             showingLogs = false;
+            anotherBool = false;
         } else if (showingEquipment) {
             showingHistory = false;
             showingLogs = false;
@@ -164,10 +171,14 @@ public class homePageAdmin extends JFrame {
                     {"012347", "Switch", "( removed button)"},
             };
             showingEquipment = false;
+            anotherBool = true;
         } else {
             columnNames = new String[]{};
             data = new Object[][]{};
         }
+
+
+
 
         // Check if columnNames or data is empty before creating the table
         if (columnNames.length == 0 || data.length == 0) {
@@ -181,6 +192,19 @@ public class homePageAdmin extends JFrame {
                 return column == 5;
             }
         };
+
+        //====================
+        if (add && anotherBool) {
+            System.out.println("ADD");
+//            Client.View.addItem addItem1 = new addItem();
+            String[] row = addItemBtn.row;
+            System.out.println(Arrays.toString(row));
+            model.addRow(row);
+//            equipTable.repaint();
+//            centerPanel.repaint();
+//            mainPanel.repaint();
+        }
+        //======================
 
         centerPanel.removeAll();
 
@@ -206,6 +230,8 @@ public class homePageAdmin extends JFrame {
             mainPanel.revalidate();
             mainPanel.repaint();
         });
+
+
 
         setVisible(true);
     }
