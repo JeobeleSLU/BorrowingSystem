@@ -39,6 +39,7 @@ public class HomepageClient extends JFrame {
         homePageAdmin.setupHoverEffect(equipLabel);
         homePageAdmin.setupHoverEffect(borrowedItemlbl);
         homePageAdmin.setupHoverEffect(equipment);
+        homePageAdmin.setVisible(false);
 
         populateTable();
 
