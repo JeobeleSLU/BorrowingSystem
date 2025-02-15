@@ -25,6 +25,8 @@ public class HomepageClient extends JFrame {
     private boolean showingBorrowed = false;
     private boolean showingSettings = false;
     private boolean isClicked = false;
+    private boolean show;
+
 
 
     public HomepageClient() {
@@ -103,7 +105,6 @@ public class HomepageClient extends JFrame {
             }
         });
     }
-
     //=============================================================================================
     public void populateTable() {
         //centerPanel.removeAll();
@@ -130,6 +131,8 @@ public class HomepageClient extends JFrame {
 
 
             };
+            showingEquipList = false;
+            show = true;
 
             // Shows the user the borrowed item
         } else if (showingBorrowed) {
@@ -142,16 +145,20 @@ public class HomepageClient extends JFrame {
                     {"Switch", "02-27-2026", "In Progress"}
             };
 
-
+            showingBorrowed = false;
+            show = false;
             //Profile Settings
         } else if (showingSettings) {
             showingEquipList = false;
             showingBorrowed = false;
+            showingSettings = false;
+            show = false;
 
         } else {
             columnNames = new String[]{};
             data = new Object[][]{};
         }
+
 
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
@@ -171,7 +178,7 @@ public class HomepageClient extends JFrame {
         scrollPane.setPreferredSize(new Dimension(500, 500));
 
         System.out.println("aabot ata dito");
-        if (showingEquipList){
+        if (show){
             System.out.println(" pero dito hindi umabot");
             equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
             equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
@@ -186,7 +193,11 @@ public class HomepageClient extends JFrame {
         centerPanel.add(scrollPane, BorderLayout.WEST);
 
         //============================
-
+        receiptArea = new JTextArea();
+        receiptArea.setEditable(false);
+        JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
+        receiptScrollPane.setPreferredSize(new Dimension(300, 500));
+        centerPanel.add(receiptScrollPane, BorderLayout.EAST);
         //===========================
 
         // Ensure UI updates properly
