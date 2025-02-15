@@ -35,6 +35,13 @@ public class HomepageClient extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
+
+        receiptArea = new JTextArea();
+        receiptArea.setEditable(false);
+        JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
+        receiptScrollPane.setPreferredSize(new Dimension(330, 500));
+        centerPanel.add(receiptScrollPane, BorderLayout.EAST);
+
         homePageAdmin = new homePageAdmin();
         homePageAdmin.setupHoverEffect(equipLabel);
         homePageAdmin.setupHoverEffect(borrowedItemlbl);
@@ -105,7 +112,7 @@ public class HomepageClient extends JFrame {
         // Define table columns
         String[] columnNames = new String[0];
         Object [][] data = new Object[0][];
-        
+
         //TODO: Connect it to admin homepage
         ImageIcon droneIcon = new ImageIcon("./src/gui/drone.jpg");
         ImageIcon cameraIcon = new ImageIcon("./src/gui/camera.png");
@@ -123,23 +130,24 @@ public class HomepageClient extends JFrame {
 
 
             };
-            showingEquipList = false;
+
             // Shows the user the borrowed item
         } else if (showingBorrowed) {
             showingEquipList = false;
             showingSettings = false;
-            
+
             columnNames = new String[] {"Equipment Name", "Borrowed Date", "Status"};
             data = new Object[][] {
                     {"Drone", "12-01-2025", "Returned"},
                     {"Switch", "02-27-2026", "In Progress"}
             };
-            showingBorrowed = false;
+
+
             //Profile Settings
         } else if (showingSettings) {
             showingEquipList = false;
             showingBorrowed = false;
-            
+
         } else {
             columnNames = new String[]{};
             data = new Object[][]{};
@@ -148,7 +156,7 @@ public class HomepageClient extends JFrame {
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 5;
+                return column == 3;
             }
         };
             centerPanel.removeAll();
@@ -162,13 +170,12 @@ public class HomepageClient extends JFrame {
         JScrollPane scrollPane = new JScrollPane(equipTable);
         scrollPane.setPreferredSize(new Dimension(500, 500));
 
-
+        System.out.println("aabot ata dito");
         if (showingEquipList){
-            System.out.println("umabot");
+            System.out.println(" pero dito hindi umabot");
             equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
             equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
             equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
-            equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
 
             equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
             equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
@@ -179,11 +186,7 @@ public class HomepageClient extends JFrame {
         centerPanel.add(scrollPane, BorderLayout.WEST);
 
         //============================
-        receiptArea = new JTextArea();
-        receiptArea.setEditable(false);
-        JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
-        receiptScrollPane.setPreferredSize(new Dimension(330, 500));
-        centerPanel.add(receiptScrollPane, BorderLayout.EAST);
+
         //===========================
 
         // Ensure UI updates properly
@@ -197,6 +200,8 @@ public class HomepageClient extends JFrame {
         setVisible(true);
     }
 //===================================================================================================================
+
+
 private void searchAndUpdateTable() {
     String searchTerm = searchField.getText().trim().toLowerCase();
     DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
@@ -288,7 +293,6 @@ private void searchAndUpdateTable() {
         }
 
         public Object getCellEditorValue() {
-//            if (clicked) {
             System.out.println("HELLO");
 
             int selectedRow = equipTable.getSelectedRow();
@@ -305,8 +309,6 @@ private void searchAndUpdateTable() {
 
 
                 receiptArea.append(receiptText);
-
-
 
                 System.out.println("Receipt updated: " + receiptText); // Debug statement
             }
@@ -326,69 +328,4 @@ private void searchAndUpdateTable() {
         }
     }
 }
-//=============================================================================================
-//   private void creatDropDown() {
-// Initialize the JComboBox with equipment types
-//        String[] typesArray = {"Camera", "Drones", "Stabilizer", "Switches", "Routers"};
-
-
-//        types = new JComboBox<>(typesArray);
-//
-//        // Add action listener to the JComboBox
-//        types.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                // When a new type is selected, dynamically create a dropdown
-//                String selectedType = (String) types.getSelectedItem();
-//                createDropdownForSelectedType(selectedType);
-//            }
-//        });
-//
-//        // Add the types JComboBox to the mainPanel (top of the layout)
-//        // mainPanel is using GridLayout, so it will be added in the first cell (0,0).
-//        mainPanel.add(types); // No need to specify BorderLayout, just add it to the mainPanel.
-//
-//        // Update the layout and repaint
-//        mainPanel.revalidate();
-//        mainPanel.repaint();
-//    }
-
-//    public void createDropdownForSelectedType(String selectedType) {
-//        // Remove the existing dropdown (if any) before creating a new one
-//        if (centerPanel.getComponentCount() > 0) {
-//            centerPanel.removeAll(); // Clear the center panel
-//        }
-//
-//        // Create a new JComboBox based on the selected type
-//        String[] options;
-//        switch (selectedType) {
-//            case "Camera":
-//                options = new String[]{"Canon", "Nikon", "Sony"};
-//                break;
-//            case "Drones":
-//                options = new String[]{"DJI", "Parrot", "Yuneec"};
-//                break;
-//            case "Stabilizer":
-//                options = new String[]{"GoPro", "DJI", "Zhiyun"};
-//                break;
-//            case "Switches":
-//                options = new String[]{"TP-Link", "Cisco", "Netgear"};
-//                break;
-//            case "Routers":
-//                options = new String[]{"TP-Link", "Netgear", "Asus"};
-//                break;
-//            default:
-//                options = new String[]{};
-//        }
-//
-//        JComboBox<String> newDropdown = new JComboBox<>(options);
-//
-//        // Add newDropdown to centerPanel (center position of BorderLayout)
-//        centerPanel.setLayout(new BorderLayout());  // Ensure BorderLayout is in use
-//        centerPanel.add(newDropdown, BorderLayout.CENTER);
-//
-//        // Revalidate and repaint the panel to make the dropdown visible
-//        centerPanel.revalidate();
-//        centerPanel.repaint();
-//    }
 
