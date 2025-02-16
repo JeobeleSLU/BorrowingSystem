@@ -4,6 +4,8 @@ import Client.Model.LoginModel;
 import Client.Service.SingletonSocketService;
 import Client.View.login_page;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class LoginController {
@@ -18,6 +20,12 @@ public class LoginController {
         server = SingletonSocketService.getInstance();
         view.getLoginBtn().addActionListener(e-> {
             requestLogin();
+        });
+        view.getSignUpLbl().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+             new RegistrationController();
+            }
         });
     }
 

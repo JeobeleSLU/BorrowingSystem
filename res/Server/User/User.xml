@@ -315,4 +315,13 @@
         <Name>Bob</Name>
         <Password>securePass</Password>
     </User>
+    <User>
+        <Mail>asd</Mail>
+        <FailedAttempts>0</FailedAttempts>
+        <Id>2241</Id>
+        <LastName>null</LastName>
+        <UserType>Last Name</UserType>
+        <Name>null</Name>
+        <Password>asd</Password>
+    </User>
 </Users>

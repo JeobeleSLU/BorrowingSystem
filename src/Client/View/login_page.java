@@ -64,6 +64,8 @@ public class login_page extends JFrame {
 
     }
 
-
+    public JLabel getSignUpLbl() {
+        return signUpLbl;
+    }
 }
 

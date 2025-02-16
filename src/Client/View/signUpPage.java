@@ -11,8 +11,8 @@ public class signUpPage extends JFrame {
     private JPanel labelPanel;
     private JTextField unField;
     private JTextField passField;
-    private JButton signUpBtn;
     private JTextField emailField;
+    private JButton signUpBtn;
     private JLabel fNameLbl;
     private JLabel lNameLbl;
 
@@ -82,4 +82,5 @@ public class signUpPage extends JFrame {
     public JTextField getUnField() {
         return unField;
     }
+
 }

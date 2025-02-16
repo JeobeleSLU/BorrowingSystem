@@ -1,3 +1,7 @@
+/**
+ * This Class sole purpose is to parse and create XML to send to the server
+ *
+ */
 package Client.Service;
 
 import org.w3c.dom.Document;
