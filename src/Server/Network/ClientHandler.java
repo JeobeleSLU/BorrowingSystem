@@ -88,7 +88,7 @@ public class ClientHandler implements Runnable {
             sendResponseXML(handler.getXMLFile("Equipment"));
         }else if (request.equals("TRANSACT")) {
             transact();
-        } else if (request.equals("ADDEQUIPMENT")) {
+        } else if (request.equals("ADD_EQUIPMENT")) {
             addEquipment();
          } else if (request.equals("DISCONNECT")) {
             closeResources();

@@ -4,6 +4,9 @@ import Client.Model.HomepageAdminModel;
 import Client.Service.SingletonSocketService;
 import Client.View.homePageAdmin;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 public class HomepageAdminController {
   homePageAdmin view;
   HomepageAdminModel model;
@@ -15,6 +18,13 @@ public class HomepageAdminController {
         model = new HomepageAdminModel();
         server  = SingletonSocketService.getInstance();
         requestEquipment();
+        view.getAddItem().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                new AddItemController();
+            }
+        });
     }
     private void getResponse() {
         equipment = model.storeEqToMemory();

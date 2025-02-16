@@ -26,6 +26,6 @@ public class HomepageController {
     }
 
     private void requestEquipment() {
-        server.sendXMLToServer(model.createRequest("EQUIPMENT"));
+        server.sendXMLToServer(model.requestEquipment("EQUIPMENT"));
     }
 }

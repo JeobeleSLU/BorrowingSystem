@@ -57,18 +57,6 @@ public class homePageAdmin extends JFrame {
 
 
         //ADD ITEM
-        addItem.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                addItemBtn = new addItem();
-                //   dispose();
-                add = true;
-
-
-
-            }
-        });
 
         //LOGS - borrowed equipment list
         logs.addMouseListener(new MouseAdapter() {
@@ -233,5 +221,9 @@ public class homePageAdmin extends JFrame {
 
 
 
+    }
+
+    public JLabel getAddItem() {
+        return addItem;
     }
 }

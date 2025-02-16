@@ -13,7 +13,7 @@ public class HomepageModel {
         return null;
     }
 
-    public File createRequest(String request) {
+    public File requestEquipment(String request) {
         String[] requestNode = new String[] {
             "equipment"
         };
