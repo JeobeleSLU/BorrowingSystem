@@ -165,24 +165,17 @@
             </properties>
             <border type="none"/>
             <children>
-              <scrollpane id="1844f">
+              <grid id="278fd" binding="innerPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints border-constraint="West"/>
                 <properties>
-                  <alignmentX value="0.5"/>
-                  <alignmentY value="1.0"/>
-                  <autoscrolls value="true"/>
+                  <background color="-9722946"/>
+                  <foreground color="-10426955"/>
+                  <preferredSize width="530" height="500"/>
                 </properties>
                 <border type="none"/>
-                <children>
-                  <component id="ee339" class="javax.swing.JTable" binding="equipTable">
-                    <constraints/>
-                    <properties>
-                      <gridColor color="-15952228"/>
-                      <preferredSize width="345" height="40"/>
-                    </properties>
-                  </component>
-                </children>
-              </scrollpane>
+                <children/>
+              </grid>
             </children>
           </grid>
           <component id="8ba45" class="javax.swing.JTextField" binding="searchField">

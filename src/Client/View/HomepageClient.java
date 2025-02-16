@@ -21,6 +21,7 @@ public class HomepageClient extends JFrame {
     private JTextField searchField;
     private JButton searchButton;
     private JLabel equipLabel;
+    private JPanel innerPanel;
     homePageAdmin homePageAdmin;
     private JTextArea receiptArea;
     private boolean showingEquipList = true;
@@ -45,7 +46,7 @@ public class HomepageClient extends JFrame {
         receiptArea = new JTextArea();
         receiptArea.setEditable(false);
         JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
-        receiptScrollPane.setPreferredSize(new Dimension(330, 500));
+        receiptScrollPane.setPreferredSize(new Dimension(350, 500));
         centerPanel.add(receiptScrollPane, BorderLayout.EAST);
 
         homePageAdmin = new homePageAdmin();
@@ -176,6 +177,39 @@ public class HomepageClient extends JFrame {
             showingSettings = false;
             show = false;
 
+            innerPanel.setVisible(true);
+
+            System.out.println("try");
+
+            centerPanel.removeAll();
+            centerPanel.setLayout(new GridLayout(10, 50, 200, 2200));
+
+
+            JLabel firstNameLabel = new JLabel("First Name: ");
+            JLabel firstName = new JLabel("John"); // Example data
+
+            JLabel lastNameLabel = new JLabel("Last Name: ");
+            JLabel lastName = new JLabel("Doe");
+
+            JLabel emailLabel = new JLabel("Email: ");
+            JLabel email = new JLabel("john.doe@example.com");
+
+            // Add labels to the panel
+            centerPanel.add(firstNameLabel);
+            centerPanel.add(firstName);
+            centerPanel.add(lastNameLabel);
+            centerPanel.add(lastName);
+            centerPanel.add(emailLabel);
+            centerPanel.add(email);
+
+            // Refresh UI
+            centerPanel.revalidate();
+            centerPanel.repaint();
+
+            innerPanel.revalidate();
+            innerPanel.repaint();
+            innerPanel.setVisible(true);
+
         } else {
             columnNames = new String[]{};
             data = new Object[][]{};
@@ -197,7 +231,7 @@ public class HomepageClient extends JFrame {
 
         // Wrap JTable in JScrollPane
         JScrollPane scrollPane = new JScrollPane(equipTable);
-        scrollPane.setPreferredSize(new Dimension(500, 500));
+        scrollPane.setPreferredSize(new Dimension(530, 500));
 
         System.out.println("aabot ata dito");
         if (show){
