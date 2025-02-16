@@ -1,4 +1,6 @@
 package Client.View;
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +24,7 @@ public class HomepageClient extends JFrame {
     private JButton searchButton;
     private JLabel equipLabel;
     private JPanel innerPanel;
+    private JButton button1;
     homePageAdmin homePageAdmin;
     private JTextArea receiptArea;
     private boolean showingEquipList = true;
@@ -33,6 +36,8 @@ public class HomepageClient extends JFrame {
 
 
 
+
+    JDateChooser jDateChooser = new JDateChooser();
 
     public HomepageClient() {
         setContentPane(mainPanel);
@@ -110,6 +115,7 @@ public class HomepageClient extends JFrame {
             }
         });
     }
+
     //=============================================================================================
     private void filterTableByType(String type) {
         String selectedType = types.getSelectedItem().toString().toLowerCase();
@@ -130,63 +136,81 @@ public class HomepageClient extends JFrame {
         }
     }
     public void populateTable() {
-        //centerPanel.removeAll();
-        // Set BorderLayout for centerPanel
+        // Clear previous components and set layout
+        centerPanel.removeAll();
         centerPanel.setLayout(new BorderLayout());
-        // Define table columns
-        String[] columnNames = new String[0];
-        Object [][] data = new Object[0][];
+//=================================================================================================================
+        //FOR DATE AND TIME
+        // Create a panel for JDateChooser & JSpinner (Time Chooser)
+        JPanel datePanel = new JPanel();
+        datePanel.add(new JLabel("Select Date: "));
+        datePanel.add(jDateChooser);
 
-        //TODO: Connect it to admin homepage
+        // Initialize JSpinner for time selection
+        SpinnerDateModel timeModel = new SpinnerDateModel();
+        JSpinner timeSpinner = new JSpinner(timeModel);
+        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm:ss");
+        timeSpinner.setEditor(timeEditor);
+
+        datePanel.add(new JLabel("Select Time: "));
+        datePanel.add(timeSpinner);
+
+        JButton borrowButton = new JButton();
+        borrowButton.setText("Borrow");
+        datePanel.add(borrowButton);
+
+        //BORROW BUTTON FOR CONFIRMATION SO THE RESERVATION WILL GO TO ADMIN
+        borrowButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        // Add the date and time panel to the top of the center panel
+        centerPanel.add(datePanel, BorderLayout.NORTH);
+//=====================================================================================================================
+        // Define table columns and data
+        String[] columnNames;
+        Object[][] data;
+
+        // Example equipment images
         ImageIcon droneIcon = new ImageIcon("./src/gui/drone.jpg");
         ImageIcon cameraIcon = new ImageIcon("./src/gui/camera.png");
 
-        //User will use this table for borrowing the equipment
         if (showingEquipList) {
             showingBorrowed = false;
             showingSettings = false;
             columnNames = new String[]{"Image", "Equipment Name", "Quantity", "Avail"};
-            data = new Object[][] {
+            data = new Object[][]{
                     {droneIcon, "Drone", "4", "add"},
                     {cameraIcon, "Camera", "5", "add"},
                     {3, "Stabilizer", "3", "add"},
                     {4, "Switch", "4", "add"}
-
-
             };
             showingEquipList = false;
             show = true;
 
-            // Shows the user the borrowed item
         } else if (showingBorrowed) {
             showingEquipList = false;
             showingSettings = false;
-
-            columnNames = new String[] {"Equipment Name", "Borrowed Date", "Status"};
-            data = new Object[][] {
+            columnNames = new String[]{"Equipment Name", "Borrowed Date", "Status"};
+            data = new Object[][]{
                     {"Drone", "12-01-2025", "Returned"},
                     {"Switch", "02-27-2026", "In Progress"}
             };
-
             showingBorrowed = false;
             show = false;
-            //Profile Settings
+
         } else if (showingSettings) {
             showingEquipList = false;
             showingBorrowed = false;
             showingSettings = false;
             show = false;
 
-            innerPanel.setVisible(true);
-
-            System.out.println("try");
-
-            centerPanel.removeAll();
+            // Display user profile settings
             centerPanel.setLayout(new GridLayout(10, 50, 200, 2200));
 
-
             JLabel firstNameLabel = new JLabel("First Name: ");
-            JLabel firstName = new JLabel("John"); // Example data
+            JLabel firstName = new JLabel("John");
 
             JLabel lastNameLabel = new JLabel("Last Name: ");
             JLabel lastName = new JLabel("Doe");
@@ -194,7 +218,6 @@ public class HomepageClient extends JFrame {
             JLabel emailLabel = new JLabel("Email: ");
             JLabel email = new JLabel("john.doe@example.com");
 
-            // Add labels to the panel
             centerPanel.add(firstNameLabel);
             centerPanel.add(firstName);
             centerPanel.add(lastNameLabel);
@@ -202,40 +225,36 @@ public class HomepageClient extends JFrame {
             centerPanel.add(emailLabel);
             centerPanel.add(email);
 
-            // Refresh UI
             centerPanel.revalidate();
             centerPanel.repaint();
-
-            innerPanel.revalidate();
-            innerPanel.repaint();
-            innerPanel.setVisible(true);
-
+            return; // Exit early to avoid setting up the table
         } else {
             columnNames = new String[]{};
             data = new Object[][]{};
         }
 
-
+        //END OF POPULATING TABLE BY GETTING DATA
+//=====================================================================================================================
+        // Create table model
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 3;
+                return column == 3; // Only "add" button column is editable
             }
         };
-            centerPanel.removeAll();
 
-            equipTable = new JTable(model);
-            equipTable.setRowHeight(50);
-            equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
+        // Create JTable and set properties
+        equipTable = new JTable(model);
+        equipTable.setRowHeight(50);
+        equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         // Wrap JTable in JScrollPane
         JScrollPane scrollPane = new JScrollPane(equipTable);
         scrollPane.setPreferredSize(new Dimension(530, 500));
-
-        System.out.println("aabot ata dito");
-        if (show){
-            System.out.println(" pero dito hindi umabot");
+        centerPanel.add(scrollPane, BorderLayout.WEST);
+//=====================================================================================================================
+        //FORMATTING THE TABLE
+        if (show) {
             equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
             equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
             equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
@@ -244,17 +263,14 @@ public class HomepageClient extends JFrame {
             equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
             equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
             equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
-            }
+        }
 
-        centerPanel.add(scrollPane, BorderLayout.WEST);
-
-        //============================
+        // Panel for receipt
         receiptArea = new JTextArea();
         receiptArea.setEditable(false);
         JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
         receiptScrollPane.setPreferredSize(new Dimension(300, 500));
         centerPanel.add(receiptScrollPane, BorderLayout.EAST);
-        //===========================
 
         // Ensure UI updates properly
         SwingUtilities.invokeLater(() -> {
@@ -266,6 +282,8 @@ public class HomepageClient extends JFrame {
 
         setVisible(true);
     }
+
+
 //===================================================================================================================
 
 
