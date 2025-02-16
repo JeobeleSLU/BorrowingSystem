@@ -4,8 +4,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomepageClient extends JFrame {
     private JPanel mainPanel;
@@ -19,9 +20,18 @@ public class HomepageClient extends JFrame {
     private JComboBox types;
     private JTextField searchField;
     private JButton searchButton;
+    private JLabel equipLabel;
     homePageAdmin homePageAdmin;
     private JTextArea receiptArea;
-    private JTextArea receiptAreaa;
+    private boolean showingEquipList = true;
+    private boolean showingBorrowed = false;
+    private boolean showingSettings = false;
+    private boolean isClicked = false;
+    private boolean show;
+    private List<Object[]> allEquipments = new ArrayList<>();
+
+
+
 
     public HomepageClient() {
         setContentPane(mainPanel);
@@ -31,11 +41,18 @@ public class HomepageClient extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
+
+        receiptArea = new JTextArea();
+        receiptArea.setEditable(false);
+        JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
+        receiptScrollPane.setPreferredSize(new Dimension(330, 500));
+        centerPanel.add(receiptScrollPane, BorderLayout.EAST);
+
         homePageAdmin = new homePageAdmin();
+        homePageAdmin.setupHoverEffect(equipLabel);
         homePageAdmin.setupHoverEffect(borrowedItemlbl);
         homePageAdmin.setupHoverEffect(equipment);
         homePageAdmin.setVisible(false);
-
 
         populateTable();
 
@@ -43,7 +60,7 @@ public class HomepageClient extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String type = types.getSelectedItem().toString();
-
+                filterTableByType(type);
 
             }
         });
@@ -53,6 +70,7 @@ public class HomepageClient extends JFrame {
         searchField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                searchAndUpdateTable();
 
             }
         });
@@ -60,66 +78,147 @@ public class HomepageClient extends JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                searchAndUpdateTable();
 
             }
         });
-    }
+        equipLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                showingEquipList = true;
+                populateTable();
+            }
+        });
 
+        borrowedItemlbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                showingBorrowed = true;
+                populateTable();
+            }
+        });
+
+        equipment.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                showingSettings = true;
+                populateTable();
+            }
+        });
+    }
     //=============================================================================================
+    private void filterTableByType(String type) {
+        String selectedType = types.getSelectedItem().toString().toLowerCase();
+        DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
+        model.setRowCount(0);
+
+        Object[][] data = new Object[][] {
+                {new ImageIcon("./src/gui/drone.jpg"), "Drones", "4", "add"},
+                {new ImageIcon("./src/gui/camera.png"), "Camera", "5", "add"},
+                {3, "Stabelizer", "3", "add"},
+                {4, "Swtiches", "4", "add"}
+        };
+
+        for (Object[] row : data) {
+            if (row[1].toString().equalsIgnoreCase(selectedType)) {
+                model.addRow(row);
+            }
+        }
+    }
     public void populateTable() {
+        //centerPanel.removeAll();
         // Set BorderLayout for centerPanel
         centerPanel.setLayout(new BorderLayout());
-
-
         // Define table columns
-        String[] columnNames = {"Image", "Equipment Name", "Quantity", "Avail"};
+        String[] columnNames = new String[0];
+        Object [][] data = new Object[0][];
 
         //TODO: Connect it to admin homepage
         ImageIcon droneIcon = new ImageIcon("./src/gui/drone.jpg");
         ImageIcon cameraIcon = new ImageIcon("./src/gui/camera.png");
 
-        // Sample Data to populate the table
-        Object[][] data = {
-                {droneIcon, "Drone", "4", "add"},
-                {cameraIcon, "Camera", "5", "add"},
-                {3, "Stabilizer", "3", "add"},
-                {4, "Switch", "4", "add"}
-        };
+        //User will use this table for borrowing the equipment
+        if (showingEquipList) {
+            showingBorrowed = false;
+            showingSettings = false;
+            columnNames = new String[]{"Image", "Equipment Name", "Quantity", "Avail"};
+            data = new Object[][] {
+                    {droneIcon, "Drone", "4", "add"},
+                    {cameraIcon, "Camera", "5", "add"},
+                    {3, "Stabilizer", "3", "add"},
+                    {4, "Switch", "4", "add"}
+
+
+            };
+            showingEquipList = false;
+            show = true;
+
+            // Shows the user the borrowed item
+        } else if (showingBorrowed) {
+            showingEquipList = false;
+            showingSettings = false;
+
+            columnNames = new String[] {"Equipment Name", "Borrowed Date", "Status"};
+            data = new Object[][] {
+                    {"Drone", "12-01-2025", "Returned"},
+                    {"Switch", "02-27-2026", "In Progress"}
+            };
+
+            showingBorrowed = false;
+            show = false;
+            //Profile Settings
+        } else if (showingSettings) {
+            showingEquipList = false;
+            showingBorrowed = false;
+            showingSettings = false;
+            show = false;
+
+        } else {
+            columnNames = new String[]{};
+            data = new Object[][]{};
+        }
+
 
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return column == 3;
             }
-
-            public Class<?> getColumnClass(int column) {
-                if (column == 0) {
-                    return ImageIcon.class; // Ensure the first column uses ImageIcon
-                }
-                return Object.class;
-            }
         };
+            centerPanel.removeAll();
 
-        equipTable = new JTable(model);
-        equipTable.setRowHeight(50);
-        equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            equipTable = new JTable(model);
+            equipTable.setRowHeight(50);
+            equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
 
         // Wrap JTable in JScrollPane
         JScrollPane scrollPane = new JScrollPane(equipTable);
         scrollPane.setPreferredSize(new Dimension(500, 500));
 
-        // Set column widths
-        equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
-        equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
-        equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
-        equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+        System.out.println("aabot ata dito");
+        if (show){
+            System.out.println(" pero dito hindi umabot");
+            equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
+            equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
+            equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
+
+            equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
+            equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
+            equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
+            equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+            }
 
         centerPanel.add(scrollPane, BorderLayout.WEST);
+
         //============================
         receiptArea = new JTextArea();
         receiptArea.setEditable(false);
         JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
-        receiptScrollPane.setPreferredSize(new Dimension(330, 500));
+        receiptScrollPane.setPreferredSize(new Dimension(300, 500));
         centerPanel.add(receiptScrollPane, BorderLayout.EAST);
         //===========================
 
@@ -132,17 +231,43 @@ public class HomepageClient extends JFrame {
         });
 
         setVisible(true);
-
-        // Set custom renderer and editor for button column
-        equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
-        equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
-        equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
-        equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
-
-        setVisible(true);
     }
 //===================================================================================================================
 
+
+private void searchAndUpdateTable() {
+    String searchTerm = searchField.getText().trim().toLowerCase();
+    DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
+    model.setRowCount(0);
+
+    Object[][] data;
+    if (isClicked) {
+        data = new Object[][]{
+                {new ImageIcon("./src/gui/drone.jpg"), "Drone", "4", "add"},
+                {new ImageIcon("./src/gui/camera.png"), "Camera", "5", "add"},
+                {3, "Stabilizer", "3", "add"},
+                {4, "Switch", "4", "add"}
+        };
+    } else {
+        data = new Object[][]{
+                {"Drone", "12-01-2025", "Returned"},
+                {"Switch", "02-27-2026", "In Progress"}
+        };
+    }
+
+
+    for (Object[] row : data) {
+        for (Object cell : row) {
+            if (cell != null && cell.toString().toLowerCase().contains(searchTerm)) {
+                model.addRow(row);
+                break;
+            }
+        }
+    }
+}
+
+
+//=============================================================================================
     class ImageRender extends DefaultTableCellRenderer {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             if (value instanceof ImageIcon) {
@@ -156,7 +281,7 @@ public class HomepageClient extends JFrame {
     //============================================================================================================
 
     // Custom Button Renderer (Displays buttons in the table)
-    class ButtonRenderer extends JButton implements TableCellRenderer {
+    static class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer() {
             setOpaque(true);
             setPreferredSize(new Dimension(50, 10));
@@ -201,7 +326,6 @@ public class HomepageClient extends JFrame {
         }
 
         public Object getCellEditorValue() {
-//            if (clicked) {
             System.out.println("HELLO");
 
             int selectedRow = equipTable.getSelectedRow();
@@ -218,8 +342,6 @@ public class HomepageClient extends JFrame {
 
 
                 receiptArea.append(receiptText);
-
-
 
                 System.out.println("Receipt updated: " + receiptText); // Debug statement
             }
@@ -239,69 +361,4 @@ public class HomepageClient extends JFrame {
         }
     }
 }
-//=============================================================================================
-//   private void creatDropDown() {
-// Initialize the JComboBox with equipment types
-//        String[] typesArray = {"Camera", "Drones", "Stabilizer", "Switches", "Routers"};
-
-
-//        types = new JComboBox<>(typesArray);
-//
-//        // Add action listener to the JComboBox
-//        types.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                // When a new type is selected, dynamically create a dropdown
-//                String selectedType = (String) types.getSelectedItem();
-//                createDropdownForSelectedType(selectedType);
-//            }
-//        });
-//
-//        // Add the types JComboBox to the mainPanel (top of the layout)
-//        // mainPanel is using GridLayout, so it will be added in the first cell (0,0).
-//        mainPanel.add(types); // No need to specify BorderLayout, just add it to the mainPanel.
-//
-//        // Update the layout and repaint
-//        mainPanel.revalidate();
-//        mainPanel.repaint();
-//    }
-
-//    public void createDropdownForSelectedType(String selectedType) {
-//        // Remove the existing dropdown (if any) before creating a new one
-//        if (centerPanel.getComponentCount() > 0) {
-//            centerPanel.removeAll(); // Clear the center panel
-//        }
-//
-//        // Create a new JComboBox based on the selected type
-//        String[] options;
-//        switch (selectedType) {
-//            case "Camera":
-//                options = new String[]{"Canon", "Nikon", "Sony"};
-//                break;
-//            case "Drones":
-//                options = new String[]{"DJI", "Parrot", "Yuneec"};
-//                break;
-//            case "Stabilizer":
-//                options = new String[]{"GoPro", "DJI", "Zhiyun"};
-//                break;
-//            case "Switches":
-//                options = new String[]{"TP-Link", "Cisco", "Netgear"};
-//                break;
-//            case "Routers":
-//                options = new String[]{"TP-Link", "Netgear", "Asus"};
-//                break;
-//            default:
-//                options = new String[]{};
-//        }
-//
-//        JComboBox<String> newDropdown = new JComboBox<>(options);
-//
-//        // Add newDropdown to centerPanel (center position of BorderLayout)
-//        centerPanel.setLayout(new BorderLayout());  // Ensure BorderLayout is in use
-//        centerPanel.add(newDropdown, BorderLayout.CENTER);
-//
-//        // Revalidate and repaint the panel to make the dropdown visible
-//        centerPanel.revalidate();
-//        centerPanel.repaint();
-//    }
 
