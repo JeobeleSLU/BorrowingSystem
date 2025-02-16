@@ -47,18 +47,23 @@ public class ClientHandler implements Runnable {
             this.inputStream = new DataInputStream(socket.getInputStream());
             this.outputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Conenction Lost");
         }
     }
 
     @Override
     public void run() {
-
-        while (!socket.isClosed()){
-            receiveRequest();
-            respondToRequest();
-        }
-
+      while (!socket.isClosed()){
+          try {
+              if (inputStream.available() > 0){
+                  System.out.println(inputStream.available());
+                  receiveRequest();
+                  respondToRequest();
+              }
+          } catch (IOException e) {
+              System.out.println("Cannot receive Request");
+          }
+      }
     }
 
     /**
@@ -66,8 +71,14 @@ public class ClientHandler implements Runnable {
      */
 
     private void respondToRequest() {
+        if (!saveFile.exists() || saveFile.length() == 0) {
+            System.out.println("Request file is empty or missing.");
+            return;
+        }
         String request = RequestUtility.getRequest(saveFile);
+        System.out.println("Client Request:" + request);
         if (request.equals("AUTH")){
+            System.out.println("Authenticating");
            authenticateUser();
         }else if (request.equals("SIGNUP")){
             createUser();
@@ -117,6 +128,7 @@ public class ClientHandler implements Runnable {
      * response file Path
      */
     private void sendToStream(ArrayList<String> res, String[] responseAttributes) {
+        System.out.println("Creating xml ");
         File file  = RequestUtility.createXMLResponse(res, responseAttributes, responseFilePath);
         sendResponseXML(file);
     }
@@ -132,7 +144,9 @@ public class ClientHandler implements Runnable {
             int bytesRead;
             while ((bytesRead = fileInputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, bytesRead);
+                System.out.println("sending");
             }
+            System.out.println("Sent");
             outputStream.flush();
         } catch (IOException e) {
             throw new RuntimeException("Error while sending XML file", e);
@@ -146,21 +160,30 @@ public class ClientHandler implements Runnable {
      */
     private void receiveRequest() {
         try {
-            saveFile = new File(handler.getXMLFile("Cache") + sessionID);
+            saveFile = new File(handler.getFilePath("Cache") + "ClientRequest.xml");
             responseFilePath = new File(handler.getFilePath("Cache") + sessionID + "Response.xml");
 
             try (FileOutputStream fileOutputStream = new FileOutputStream(saveFile)) {
                 byte[] buffer = new byte[4096];
                 int bytesRead;
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    fileOutputStream.write(buffer, 0, bytesRead);
-                }
-            }
+                boolean receivedData = false;
 
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    System.out.println("reading");
+                    fileOutputStream.write(buffer, 0, bytesRead);
+                    receivedData = true;
+                    break;
+                }
+                if (!receivedData) {
+                    System.out.println("No data received from client.");
+                }
+                System.out.println("Done receiving");
+            }
         } catch (IOException e) {
             System.err.println("Error receiving file: " + e.getMessage());
         }
     }
+
 
 
     private void closeResources() {

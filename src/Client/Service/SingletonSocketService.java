@@ -56,6 +56,7 @@ public class SingletonSocketService {
      * inside the cache folder and saves it inside the response.xml
      */
     private void receiveResponse() {
+        System.out.println("waiting for response");
 
         try {
             saveFile = new File("./Client/Cache/response.xml");
@@ -65,6 +66,7 @@ public class SingletonSocketService {
                 int bytesRead;
                 while ((bytesRead = inputStream.read(buffer)) != -1) {
                     fileOutputStream.write(buffer, 0, bytesRead);
+                    break;
                 }
             }
 

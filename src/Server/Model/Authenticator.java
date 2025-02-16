@@ -29,7 +29,7 @@ public class Authenticator{
     }
     public String[] getResponseAttributes(){
         return new String[]{
-          "Result","Role"
+         "Role", "Result"
         };
     }
 
@@ -51,10 +51,13 @@ public class Authenticator{
         if (!manager.userExists(id)){
             logger.warning("Create an account first");
             response  ="-1";
+            arrayList.add("UNKNOWN");
+
 
         }else if (!isCorrectPassword(id,password)){
             logger.warning("Incorrect Password, Try again");
             response = "0";
+            arrayList.add("UNKNOWN");
         }
         else{
             logger.info("Successfully Log in");

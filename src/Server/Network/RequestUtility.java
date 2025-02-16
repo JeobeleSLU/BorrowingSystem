@@ -40,6 +40,7 @@ public class RequestUtility {
                     System.err.println("Warning: Node '" + node + "' not found in the XML.");
                 }
             }
+            arrayList.forEach(e-> System.out.println(e));
             return arrayList;
 
         } catch (ParserConfigurationException e) {
@@ -78,7 +79,6 @@ public class RequestUtility {
             StreamResult result = new StreamResult(file);
             transformer.transform(source, result);
             return file;
-
 
         } catch (ParserConfigurationException e) {
             throw new RuntimeException(e);

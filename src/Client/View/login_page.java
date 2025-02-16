@@ -43,16 +43,8 @@ public class login_page extends JFrame {
 
 
 
-        //Login Button listener
-        loginBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                login();
 
-            }
-        });
-
-        //go to sign up field
+        //Login Button         //go to sign up field
         signUpLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -63,21 +55,15 @@ public class login_page extends JFrame {
             }
         });
     }
+    public void showWrongPasswordPrompt(){
+        JOptionPane.showMessageDialog(null, "Invalid Username or Password", "Warning", 2);
 
-    public void login() {
-        if (unField.getText().equals("ad") && passField.getText().equals("ad")) {
-            homePageAdmin homePageAdmin = new homePageAdmin();
-            homePageAdmin.setVisible(true);
-            setVisible(false);
-        } else if (unField.getText().equals("un") && passField.getText().equals("un")) {
-            clientHomePage = new HomepageClient();
-            clientHomePage.setVisible(true);
-            setVisible(false);
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Invalid Username or Password", "Warning", 2);
-        }
     }
+    public void showNoUSerPrompt(){
+        JOptionPane.showMessageDialog(null, "No User found in the database", "Warning", 2);
+
+    }
+
 
 }
 
