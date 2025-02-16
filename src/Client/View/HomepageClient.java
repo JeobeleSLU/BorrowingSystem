@@ -1,4 +1,6 @@
 package Client.View;
+import Server.Model.Equipment;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -7,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class HomepageClient extends JFrame {
     private JPanel mainPanel;
@@ -29,7 +32,7 @@ public class HomepageClient extends JFrame {
     private boolean showingSettings = false;
     private boolean isClicked = false;
     private boolean show;
-    private List<Object[]> allEquipments = new ArrayList<>();
+    private ArrayList<Equipment> allEquipments = new ArrayList<>();
 
 
 
@@ -222,11 +225,11 @@ public class HomepageClient extends JFrame {
                 return column == 3;
             }
         };
-            centerPanel.removeAll();
+        centerPanel.removeAll();
 
-            equipTable = new JTable(model);
-            equipTable.setRowHeight(50);
-            equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        equipTable = new JTable(model);
+        equipTable.setRowHeight(50);
+        equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
 
         // Wrap JTable in JScrollPane
@@ -244,7 +247,7 @@ public class HomepageClient extends JFrame {
             equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
             equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
             equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
-            }
+        }
 
         centerPanel.add(scrollPane, BorderLayout.WEST);
 
@@ -267,7 +270,65 @@ public class HomepageClient extends JFrame {
         setVisible(true);
     }
 //===================================================================================================================
+public void populateTableList(ArrayList<Equipment> equipmentList) {
+    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Drone", "E001", "Drones"));
+    equipmentList.add(new Equipment(true, new AtomicInteger(5), "Camera", "E002", "Cameras"));
+    equipmentList.add(new Equipment(false, new AtomicInteger(3), "Stabilizer", "E003", "Accessories"));
+    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Switch", "E004", "Electronics"));
 
+    centerPanel.setLayout(new BorderLayout());
+
+    String[] columnNames = new String[]{"Equipment Image", "Equipment Name", "Quantity", "Avail"};
+    Object[][] data = new Object[equipmentList.size()][4];
+
+    for (int i = 0; i < equipmentList.size(); i++) {
+        Equipment equipment = equipmentList.get(i);
+
+        String equipmentName = equipment.getName();
+        String quantity = String.valueOf(equipment.getQuantity());
+        String availability = "add";
+        ImageIcon icon = equipment.getImageIcon();
+
+        data[i] = new Object[]{icon, equipmentName, quantity, availability};
+    }
+    DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column == 3;
+        }
+    };
+    equipTable = new JTable(model);
+    equipTable.setRowHeight(50);
+    equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+    equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
+    equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
+    equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
+
+    equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
+    equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
+    equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
+    equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+    JScrollPane scrollPane = new JScrollPane(equipTable);
+    scrollPane.setPreferredSize(new Dimension(530, 500));
+
+    centerPanel.add(scrollPane, BorderLayout.WEST);
+
+    receiptArea = new JTextArea();
+    receiptArea.setEditable(false);
+    JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
+    receiptScrollPane.setPreferredSize(new Dimension(300, 500));
+    centerPanel.add(receiptScrollPane, BorderLayout.EAST);
+
+    SwingUtilities.invokeLater(() -> {
+        equipTable.revalidate();
+        equipTable.repaint();
+        centerPanel.revalidate();
+        centerPanel.repaint();
+    });
+
+    setVisible(true);
+}
 
 private void searchAndUpdateTable() {
     String searchTerm = searchField.getText().trim().toLowerCase();
