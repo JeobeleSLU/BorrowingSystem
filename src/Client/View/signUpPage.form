@@ -68,7 +68,9 @@
               </component>
               <vspacer id="a03b5">
                 <constraints>
-                  <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                    <preferred-size width="17" height="14"/>
+                  </grid>
                 </constraints>
               </vspacer>
               <component id="29664" class="javax.swing.JLabel">
@@ -134,7 +136,7 @@
                   <text value="Sign Up"/>
                 </properties>
               </component>
-              <component id="f09ad" class="javax.swing.JTextField" binding="firstNameLbl">
+              <component id="f09ad" class="javax.swing.JTextField" binding="firstNameField">
                 <constraints>
                   <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="8" use-parent-layout="false">
                     <preferred-size width="150" height="25"/>
@@ -146,7 +148,7 @@
                   <visible value="true"/>
                 </properties>
               </component>
-              <component id="2e23e" class="javax.swing.JTextField" binding="lastNameLbl">
+              <component id="2e23e" class="javax.swing.JTextField" binding="lastNameField">
                 <constraints>
                   <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="8" use-parent-layout="false">
                     <preferred-size width="150" height="25"/>
