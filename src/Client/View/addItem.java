@@ -86,8 +86,16 @@ public class addItem extends javax.swing.JFrame {
     String[] newRow() {
         return new String[]{equipCodeFld.getText(), equipNameFld.getText(), null};
     }
+    public void showInvalidEnter(){
+            JOptionPane.showMessageDialog(null,
+                    "Can't add the equipment to server please contact Jesus ", "Invalid insertion", 2);
+        this.dispose();
 
-    public static void main(String[] args) {
-        new addItem();
+        }
+    public void showValid(){
+        JOptionPane.showMessageDialog(null,
+                "Added to the server successfully", "Invalid insertion", 1);
+        this.dispose();
     }
+
 }

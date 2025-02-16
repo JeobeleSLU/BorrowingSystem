@@ -14,11 +14,21 @@ public class AddItemController {
         model = new AddItemModel();
         view.getAddButton().addActionListener(e-> {
             reqAddEquipment();
+            getServerResponse();
         });
     }
+
+    private void getServerResponse() {
+        String response =  model.parseServerResponse();
+        if (response.equals("1")){
+            view.showValid();
+        }else
+            view.showInvalidEnter();
+    }
+
     private void reqAddEquipment() {
         String name = view.getEquipNameFld().getText();
-        String qty = view.getTypefld().getText();
+        String qty = view.getQtyfld().getText();
         String id = view.getEquipCodeFld().getText();
         String type = view.getTypefld().getText();
         System.out.println("Requesting add to server");

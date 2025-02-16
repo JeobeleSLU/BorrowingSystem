@@ -18,6 +18,7 @@ public class HomepageAdminController {
         model = new HomepageAdminModel();
         server  = SingletonSocketService.getInstance();
         requestEquipment();
+        getResponse();
         view.getAddItem().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -33,4 +34,5 @@ public class HomepageAdminController {
     private void requestEquipment() {
         server.sendXMLToServer(model.createRequest("EQUIPMENT"));
     }
+
 }

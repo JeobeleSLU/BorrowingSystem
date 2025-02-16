@@ -74,7 +74,12 @@ public class EquipmentManager {
                 "name",
                 "quantity"
          */
-        AtomicInteger quantity = new AtomicInteger(Integer.parseInt(attributes.get(4))) ;
+        for (int i = 0; i < attributes.size(); i++){
+            System.out.println(attributes);
+            System.out.println(i);
+        }
+        AtomicInteger quantity = new AtomicInteger(Integer.parseInt(attributes.get(3))) ;
+
         Equipment equipmentToAdd = new Equipment(true,quantity,attributes.get(2),attributes.get(1),attributes.get(0) );
         if (writer.createXML(equipmentToAdd,"Equipment")){
             equipmentArrayList.clear();

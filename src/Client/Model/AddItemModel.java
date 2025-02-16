@@ -12,6 +12,9 @@ public class AddItemModel {
                 "name",
                 "quantity"
     };
+    private static final String[] NODE_TO_RECEIVE = new String[]{
+            "Result"
+    };
 
     public AddItemModel() {
     }
@@ -23,5 +26,12 @@ public class AddItemModel {
         attributes.add(name);
         attributes.add(qty);
         return SingletonRequestService.createXMLRequest("ADD_EQUIPMENT",attributes,NODES_TO_SEND);
+    }
+
+    public String parseServerResponse() {
+       ArrayList<String> response = new ArrayList<>();
+        File file = new File("./Client/Cache/response.xml");
+        response.addAll(SingletonRequestService.getContent(file,NODE_TO_RECEIVE));
+        return response.get(0);
     }
 }

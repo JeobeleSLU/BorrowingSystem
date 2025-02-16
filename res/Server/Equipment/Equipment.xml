@@ -14,4 +14,25 @@
         <id>11</id>
         <type>Server</type>
     </Equipment>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>9</quantity>
+        <name>switch catalyst</name>
+        <id>930000</id>
+        <type>Switch</type>
+    </Equipment>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>3</quantity>
+        <name>JeobeleNewEquipment</name>
+        <id>66969</id>
+        <type>Fiber</type>
+    </Equipment>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>99</quantity>
+        <name>newnewnew</name>
+        <id>93021</id>
+        <type>Fiber Equipment</type>
+    </Equipment>
 </Equipments>
