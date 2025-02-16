@@ -15,6 +15,8 @@ public class signUpPage extends JFrame {
     private JButton signUpBtn;
     private JLabel fNameLbl;
     private JLabel lNameLbl;
+    private JTextField firstNameField;
+    private JTextField lastNameField;
 
     public signUpPage() {
         setContentPane(loginPanel);
@@ -52,6 +54,18 @@ public class signUpPage extends JFrame {
 
         //EMAIL FIELD
         emailField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        firstNameField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        lastNameField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
