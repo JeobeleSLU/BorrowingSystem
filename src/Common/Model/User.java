@@ -24,6 +24,8 @@ public class User implements XMLTemplate {
         this.idNumber = id;
         this.userType = userType;
         this.password = password;
+        this.lastName = lastName;
+        this.name = name;
     }
     public String getPassword() {
         return password;

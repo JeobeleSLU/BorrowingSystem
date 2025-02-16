@@ -103,9 +103,10 @@ public class Authenticator{
     public String[] getSingUpAttributes() {
 
         return new String[]{
-                "mail","id","lastName","firsName","password"
+                "mail","id","lastName","firstName","password"
         };
     }
+
     public int createUser(String [] credentials){
         String userType = "Student";
         /*
@@ -114,7 +115,10 @@ public class Authenticator{
         if (credentials.length !=5){
             return -1;
         }
-       User user = new User(credentials[0],0,credentials[1],userType,credentials[2],credentials[3],credentials[4]);
+        /*
+        email, failed,id,ln,utype,name,pass
+         */
+       User user = new User(credentials[0],0,credentials[1],credentials[2],userType,credentials[3],credentials[4]);
        return createUseAccount(user);
     }
     public String[] getCreationNodeResponse(){

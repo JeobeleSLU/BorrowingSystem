@@ -101,8 +101,11 @@ public class ClientHandler implements Runnable {
 
     private void createUser() {
         ArrayList<String> attributes = RequestUtility.getContent(saveFile,auth.getSingUpAttributes());
+        System.out.println("Attributes");
+        attributes.forEach(e-> System.out.println(e));
        int response =  auth.createUser(attributes.toArray(new String[0]));
        ArrayList<String> creationResponse = new ArrayList<>();
+       creationResponse.add(String.valueOf(response));
 
        sendResponseXML(RequestUtility.createXMLResponse(creationResponse,auth.getCreationNodeResponse(),saveFile));
     }

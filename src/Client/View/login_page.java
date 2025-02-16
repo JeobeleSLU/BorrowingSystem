@@ -41,19 +41,6 @@ public class login_page extends JFrame {
         setResizable(false);
 
 
-
-
-
-        //Login Button         //go to sign up field
-        signUpLbl.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                signUpPage = new signUpPage();
-                signUpPage.setVisible(true);
-                setVisible(false);
-            }
-        });
     }
     public void showWrongPasswordPrompt(){
         JOptionPane.showMessageDialog(null, "Invalid Username or Password", "Warning", 2);
