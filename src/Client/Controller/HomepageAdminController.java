@@ -3,10 +3,10 @@ import Client.View.homePageAdmin;
 
 public class HomepageAdminController {
   homePageAdmin view;
-  HomepageAdminController controller;
+  homePageAdmin controller;
 
     public HomepageAdminController() {
         view = new homePageAdmin();
-        controller = new HomepageAdminController();
+        controller = new homePageAdmin();
     }
 }

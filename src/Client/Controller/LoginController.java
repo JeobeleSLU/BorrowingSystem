@@ -47,6 +47,7 @@ public class LoginController {
                 view.dispose();
             }else if (role.equals("Admin")){
                 new HomepageAdminController();
+                view.dispose();
             }
         }else if (result.equals("0")){
             view.showWrongPasswordPrompt();
