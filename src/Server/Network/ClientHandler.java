@@ -1,5 +1,6 @@
 package Server.Network;
 
+import Common.Factories.SingletonEquipmentFactory;
 import Common.Utilities.FileHandler;
 import Server.Model.Authenticator;
 import Client.Model.EquipmentManager;
@@ -85,11 +86,25 @@ public class ClientHandler implements Runnable {
             createUser();
         }else if (request.equals("EQUIPMENT")){
             sendResponseXML(handler.getXMLFile("Equipment"));
-        }else if (request.equals("TRANSACT")){
+        }else if (request.equals("TRANSACT")) {
             transact();
-        } else if (request.equals("DISCONNECT")) {
+        } else if (request.equals("ADDEQUIPMENT")) {
+            addEquipment();
+         } else if (request.equals("DISCONNECT")) {
             closeResources();
         }
+    }
+
+    private void addEquipment() {
+        String[] node = {
+                "Result"
+        };
+        ArrayList<String>attributes = RequestUtility.getContent(saveFile,equipmentManager.getNodes());
+        String response = equipmentManager.addEquipment(attributes);
+        ArrayList<String> res = new ArrayList<>();
+        res.add(response);
+
+       sendToStream(res,node);
     }
 
     /**
@@ -102,7 +117,6 @@ public class ClientHandler implements Runnable {
     private void createUser() {
         ArrayList<String> attributes = RequestUtility.getContent(saveFile,auth.getSingUpAttributes());
         System.out.println("Attributes");
-        attributes.forEach(e-> System.out.println(e));
        int response =  auth.createUser(attributes.toArray(new String[0]));
        ArrayList<String> creationResponse = new ArrayList<>();
        creationResponse.add(String.valueOf(response));
@@ -163,7 +177,7 @@ public class ClientHandler implements Runnable {
      */
     private void receiveRequest() {
         try {
-            saveFile = new File(handler.getFilePath("Cache") + "ClientRequest.xml");
+            saveFile = new File(handler.getFilePath("Cache") + sessionID+ "request.xml");
             responseFilePath = new File(handler.getFilePath("Cache") + sessionID + "Response.xml");
 
             try (FileOutputStream fileOutputStream = new FileOutputStream(saveFile)) {
@@ -186,9 +200,6 @@ public class ClientHandler implements Runnable {
             System.err.println("Error receiving file: " + e.getMessage());
         }
     }
-
-
-
     private void closeResources() {
         try {
             if (inputStream != null) inputStream.close();

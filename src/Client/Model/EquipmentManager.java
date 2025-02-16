@@ -9,6 +9,7 @@ import Server.Model.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This class will facilitate the transactions
@@ -20,6 +21,15 @@ public class EquipmentManager {
     ArrayList<Equipment> equipmentArrayList;
     FileHandler handler;
     File equipmentXML;
+    /*
+     <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>3</quantity>
+        <name>CiscoServer</name>
+        <id>11</id>
+        <type>Server</type>
+    </Equipment>
+     */
 
     public EquipmentManager() {
         initComponents();
@@ -57,6 +67,24 @@ public class EquipmentManager {
                 .filter(e-> e.getType()
                         .equals(filter)).toList());
     }
+    public String addEquipment(ArrayList<String> attributes){
+        /*
+           "type",
+                "id",
+                "name",
+                "quantity"
+         */
+        AtomicInteger quantity = new AtomicInteger(Integer.parseInt(attributes.get(4))) ;
+        Equipment equipmentToAdd = new Equipment(true,quantity,attributes.get(2),attributes.get(1),attributes.get(0) );
+        if (writer.createXML(equipmentToAdd,"Equipment")){
+            equipmentArrayList.clear();
+            equipmentArrayList.addAll( retrieveData());
+            return "1";
+        }else {
+            return "-1";
+        }
+
+    }
 
 
 
@@ -82,5 +110,14 @@ public class EquipmentManager {
          */
         return  -1;
 
+    }
+
+    public String[] getNodes() {
+        return new String[]{
+                "type",
+                "id",
+                "name",
+                "quantity"
+        };
     }
 }
