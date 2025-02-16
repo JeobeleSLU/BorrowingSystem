@@ -8,6 +8,5 @@ public class HomepageAdminController {
     public HomepageAdminController() {
         view = new homePageAdmin();
         controller = new HomepageAdminController();
-        view.setVisible(true);
     }
 }

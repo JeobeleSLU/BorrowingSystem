@@ -20,10 +20,28 @@ import java.util.ArrayList;
  */
 public class SingletonRequestService {
 
+    /**
+     *
+     * @param requstType
+     * @param requests
+     * @param nodes
+     * @return xml file
+     * Will take in the requestType based on that request type will save it on the client side
+     * via xml
+     *   /*
+     *         Type of Requests:
+     *         AUTH - authenticating
+     *         SIGNUP - creating Accounts
+     *         EQUIPMENT- getting the equipments;
+     *         TRANSACT: "Transaction of the user" (WIP)
+     *         DISCONNECT: "disconnects the users" (WIP)
+     *         --- EOL
+     *          */
+
     static public File createXMLRequest(String requstType,ArrayList<String> requests, String[] nodes ) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setIgnoringElementContentWhitespace(true);
-        File file = new File("./Client/Cache/Request.xml");
+        File file = new File("./Client/Cache/Request"+requstType+".xml");
         try {
             DocumentBuilder docBuilder = factory.newDocumentBuilder();
             Document doc = docBuilder.newDocument();

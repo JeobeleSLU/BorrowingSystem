@@ -6,13 +6,14 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class LoginModel {
+    public static final String requst = "AUTH";
     public static final String[] responseNode = new String[]{
             "Role","Result"
     };
-    ArrayList<String> respose;
+    ArrayList<String> response;
 
     public LoginModel() {
-        respose = new ArrayList<>();
+        response = new ArrayList<>();
     }
 
 
@@ -30,11 +31,15 @@ public class LoginModel {
         return SingletonRequestService.createXMLRequest(request,nodes,fields);
     }
     void parseXML(){
-        respose.addAll(SingletonRequestService.getContent(new File("./Client/Cache/response.xml"),responseNode));
+        response.addAll(SingletonRequestService.getContent(new File("./Client/Cache/response.xml"),responseNode));
     }
 
+
     public ArrayList<String> getResponse() {
+        if (!response.isEmpty()){
+            response.clear();
+        }
         parseXML();
-        return respose;
+        return response;
     }
 }

@@ -10,5 +10,6 @@ public class HomepageController {
     public HomepageController() {
         view = new HomepageClient();
         model = new HomepageModel();
+        view.setVisible(true);
     }
 }

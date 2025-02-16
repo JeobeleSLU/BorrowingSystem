@@ -233,6 +233,5 @@ public class homePageAdmin extends JFrame {
 
 
 
-        setVisible(true);
     }
 }

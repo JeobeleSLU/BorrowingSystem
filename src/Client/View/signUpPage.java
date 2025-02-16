@@ -58,4 +58,28 @@ public class signUpPage extends JFrame {
             }
         });
     }
+
+    public JLabel getlNameLbl() {
+        return lNameLbl;
+    }
+
+    public JLabel getfNameLbl() {
+        return fNameLbl;
+    }
+
+    public JTextField getEmailField() {
+        return emailField;
+    }
+
+    public JButton getSignUpBtn() {
+        return signUpBtn;
+    }
+
+    public JTextField getPassField() {
+        return passField;
+    }
+
+    public JTextField getUnField() {
+        return unField;
+    }
 }

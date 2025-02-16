@@ -44,6 +44,7 @@ public class LoginController {
         if (result.equals("1")){
             if (role.equals("Student")){
                 new HomepageController();
+                view.dispose();
             }else if (role.equals("Admin")){
                 new HomepageAdminController();
             }

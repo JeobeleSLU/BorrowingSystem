@@ -1,0 +1,11 @@
+[2025-02-11 17:17:17] [SEVERE] java.io.FileNotFoundException: .\res\Server\Transaction\Transaction.xml (The system cannot find the path specified)
+[2025-02-11 17:32:38] [SEVERE] java.io.FileNotFoundException: .\res\Server\Transaction\Transaction.xml\Transaction.xml (The system cannot find the path specified)
+[2025-02-11 17:33:11] [INFO] Successfully created Transaction.xml
+[2025-02-11 17:34:50] [INFO] Successfully created Transaction.xml
+[2025-02-11 17:37:12] [INFO] Successfully created Transaction.xml
+[2025-02-11 17:38:08] [INFO] Successfully created Transaction.xml
+[2025-02-11 17:39:34] [INFO] Successfully created Transaction.xml
+[2025-02-11 17:43:27] [INFO] Successfully created Transaction.xml
+[2025-02-11 17:44:12] [INFO] Successfully created Transaction.xml
+[2025-02-12 21:07:58] [INFO] Successfully created User.xml
+[2025-02-12 21:07:58] [INFO] Account Successfully Created

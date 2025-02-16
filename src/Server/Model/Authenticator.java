@@ -83,6 +83,8 @@ public class Authenticator{
             // if (checkIfValid(User user)) todo: Validation vodoo
             if (manager.writeUserToXml(user)){
                 logger.info("Account Successfully Created");
+                //When creating account refetch the database to log the person
+                manager.fetchUserData();
                 return 1;
             }
             logger.warning("This account already existed");
@@ -114,5 +116,10 @@ public class Authenticator{
         }
        User user = new User(credentials[0],0,credentials[1],userType,credentials[2],credentials[3],credentials[4]);
        return createUseAccount(user);
+    }
+    public String[] getCreationNodeResponse(){
+        return new String[] {
+                "Result"
+        };
     }
 }

@@ -75,6 +75,7 @@ public class ClientHandler implements Runnable {
             System.out.println("Request file is empty or missing.");
             return;
         }
+
         String request = RequestUtility.getRequest(saveFile);
         System.out.println("Client Request:" + request);
         if (request.equals("AUTH")){
@@ -101,8 +102,9 @@ public class ClientHandler implements Runnable {
     private void createUser() {
         ArrayList<String> attributes = RequestUtility.getContent(saveFile,auth.getSingUpAttributes());
        int response =  auth.createUser(attributes.toArray(new String[0]));
+       ArrayList<String> creationResponse = new ArrayList<>();
 
-
+       sendResponseXML(RequestUtility.createXMLResponse(creationResponse,auth.getCreationNodeResponse(),saveFile));
     }
 
     /**
@@ -113,8 +115,6 @@ public class ClientHandler implements Runnable {
      * arraylist based on the login and then returns the user type
      */
     private void authenticateUser() {
-
-
        ArrayList<String> result= auth.authenticate(RequestUtility.getContent(saveFile, auth.getLoginAttributes()));
        sendToStream(result, auth.getResponseAttributes());
     }
