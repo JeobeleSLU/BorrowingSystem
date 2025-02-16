@@ -22,6 +22,7 @@ public class HomepageController {
 
     private void getResponse() {
         equipment = model.storeEqToMemory();
+        view.populateTableList(model.storeEqToMemory().getEquipmentArrayList());
     }
 
     private void requestEquipment() {

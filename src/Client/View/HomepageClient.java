@@ -267,14 +267,15 @@ public class HomepageClient extends JFrame {
             centerPanel.repaint();
         });
 
-        setVisible(true);
+        setVisible(false);
     }
 //===================================================================================================================
 public void populateTableList(ArrayList<Equipment> equipmentList) {
-    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Drone", "E001", "Drones"));
-    equipmentList.add(new Equipment(true, new AtomicInteger(5), "Camera", "E002", "Cameras"));
-    equipmentList.add(new Equipment(false, new AtomicInteger(3), "Stabilizer", "E003", "Accessories"));
-    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Switch", "E004", "Electronics"));
+        equipmentList.forEach(e-> System.out.println(e.getName()));
+//    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Drone", "E001", "Drones"));
+//    equipmentList.add(new Equipment(true, new AtomicInteger(5), "Camera", "E002", "Cameras"));
+//    equipmentList.add(new Equipment(false, new AtomicInteger(3), "Stabilizer", "E003", "Accessories"));
+//    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Switch", "E004", "Electronics"));
 
     centerPanel.setLayout(new BorderLayout());
 
