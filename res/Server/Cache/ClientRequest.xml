@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Root>
-    <Request>SIGNUP</Request>
-    <mail>asd</mail>
-    <id>2241</id>
-    <lastName>Last Name</lastName>
-    <firsName>First Name</firsName>
-    <password>asd</password>
+    <Request>AUTH</Request>
+    <id>9</id>
+    <password>lorem</password>
 </Root>

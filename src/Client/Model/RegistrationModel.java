@@ -18,4 +18,5 @@ public class RegistrationModel {
         fieldValues.add(pass);
         return SingletonRequestService.createXMLRequest("SIGNUP", fieldValues, fields);
     }
+
 }
