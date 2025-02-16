@@ -27,6 +27,13 @@ public class EquipmentManager {
         equipmentXML = handler.getXMLFile("Equipment");
         equipmentArrayList = retrieveData();
     }
+   public EquipmentManager(String file) {
+        initComponents();
+        equipmentXML = new File(file);
+
+        equipmentXML = handler.getXMLFile("Equipment");
+        equipmentArrayList = retrieveData();
+    }
 
     private void initComponents() {
         writer = new XMLCreator();
