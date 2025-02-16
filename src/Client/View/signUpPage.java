@@ -15,6 +15,8 @@ public class signUpPage extends JFrame {
     private JTextField emailField;
     private JLabel fNameLbl;
     private JLabel lNameLbl;
+    private JTextField firstNameLbl;
+    private JTextField lastNameLbl;
 
     public signUpPage() {
         setContentPane(loginPanel);
