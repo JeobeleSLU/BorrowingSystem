@@ -17,15 +17,21 @@ public class LoginController {
     public LoginController() {
         this.model = new LoginModel();
         this.view = new login_page();
-        server = SingletonSocketService.getInstance();
+        addEventActionListeners();
+
+    }
+
+    private void addEventActionListeners() {
+
         view.getLoginBtn().addActionListener(e-> {
+            server = SingletonSocketService.getInstance();
             requestLogin();
         });
         view.getSignUpLbl().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-             new RegistrationController();
-             view.dispose();
+                new RegistrationController();
+                view.dispose();
             }
         });
     }

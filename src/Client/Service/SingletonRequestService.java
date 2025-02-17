@@ -9,6 +9,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -69,13 +70,16 @@ public class SingletonRequestService {
             return file;
 
         } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null,
+                    "Can't receive information from the server", "Warning", 2);
         } catch (TransformerConfigurationException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null,
+                    "Can't receive information from the server", "Warning", 2);
         } catch (TransformerException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null,
+                    "Can't receive information from the server", "Warning", 2);
         }
-
+        return null;
     }
     public static ArrayList<String> getContent(File file, String[] nodesToGet) {
         ArrayList<String> arrayList = new ArrayList<>();

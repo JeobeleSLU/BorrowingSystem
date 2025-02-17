@@ -35,4 +35,11 @@
         <id>93021</id>
         <type>Fiber Equipment</type>
     </Equipment>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>9</quantity>
+        <name>newCiscojeo</name>
+        <id>69420</id>
+        <type>shit</type>
+    </Equipment>
 </Equipments>
