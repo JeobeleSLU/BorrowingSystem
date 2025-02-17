@@ -24,6 +24,7 @@ import java.util.ArrayList;
  * This class will facilitate creating and parsing xml file fron the server
  */
 public class SingletonRequestService {
+    static String userId;
 
     /**
      *
@@ -51,6 +52,9 @@ public class SingletonRequestService {
             DocumentBuilder docBuilder = factory.newDocumentBuilder();
             Document doc = docBuilder.newDocument();
             Element root = doc.createElement("Root");
+            if (userId != null){
+                root.setAttribute("id", userId);
+            }
             Element requestHeader  = doc.createElement("Request");
             requestHeader.appendChild(doc.createTextNode(requstType));
 
@@ -107,6 +111,10 @@ public class SingletonRequestService {
         } catch (SAXException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void setUserID(String id) {
+        userId = id;
     }
 }
 //public class BillPughSingleton {

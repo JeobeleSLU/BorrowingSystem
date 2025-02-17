@@ -8,8 +8,6 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class HomepageClient extends JFrame {
     private JPanel mainPanel;
@@ -32,7 +30,7 @@ public class HomepageClient extends JFrame {
     private boolean showingSettings = false;
     private boolean isClicked = false;
     private boolean show;
-    private ArrayList<Equipment> allEquipments = new ArrayList<>();
+    ButtonEditor editor;
 
 
 
@@ -44,7 +42,6 @@ public class HomepageClient extends JFrame {
         setSize(1000, 700);
         setLocationRelativeTo(null);
         setResizable(false);
-
 
         receiptArea = new JTextArea();
         receiptArea.setEditable(false);
@@ -58,7 +55,6 @@ public class HomepageClient extends JFrame {
         homePageAdmin.setupHoverEffect(equipment);
         homePageAdmin.setVisible(false);
 
-        populateTable();
 
         types.addActionListener(new ActionListener() {
             @Override
@@ -241,8 +237,7 @@ public class HomepageClient extends JFrame {
             System.out.println(" pero dito hindi umabot");
             equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
             equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
-            equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
-
+            equipTable.getColumnModel().getColumn(3).setCellEditor(this.editor = new ButtonEditor(new JCheckBox()));
             equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
             equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
             equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
@@ -260,6 +255,8 @@ public class HomepageClient extends JFrame {
         //===========================
 
         // Ensure UI updates properly
+        equipTable.revalidate();
+        equipTable.repaint();
         SwingUtilities.invokeLater(() -> {
             equipTable.revalidate();
             equipTable.repaint();
@@ -365,10 +362,10 @@ private void searchAndUpdateTable() {
 
 //=============================================================================================
     class ImageRender extends DefaultTableCellRenderer {
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            if (value instanceof ImageIcon) {
-                ImageIcon imageIcon = (ImageIcon) value;
-                Image image = imageIcon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                        if (value instanceof ImageIcon) {
+                            ImageIcon imageIcon = (ImageIcon) value;
+                            Image image = imageIcon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
                 return new JLabel(new ImageIcon(image));
             }
             return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -387,7 +384,6 @@ private void searchAndUpdateTable() {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             setText((value == null) ? "Borrowed" : value.toString());
-            System.out.println("asdadasdad");
             return this;
         }
     }
@@ -395,7 +391,7 @@ private void searchAndUpdateTable() {
     //================================================================================================================
     // Custom Button Editor (Handles button clicks)
     class ButtonEditor extends DefaultCellEditor {
-        private JButton button;
+        private JButton borrowButton;
         private String label;
         private boolean clicked;
         private JTable table;
@@ -403,14 +399,14 @@ private void searchAndUpdateTable() {
 
         public ButtonEditor(JCheckBox checkBox) {
             super(checkBox);
-            button = new JButton();
-            button.setOpaque(true);
-            button.setPreferredSize(new Dimension(50, 10));
-            button.setLayout(new GridBagLayout());
+            borrowButton = new JButton();
+            borrowButton.setOpaque(true);
+            borrowButton.setPreferredSize(new Dimension(50, 10));
+            borrowButton.setLayout(new GridBagLayout());
             receiptArea.setText("===== Receipt =====\n");
 
             // Handle button click event
-            button.addActionListener(new ActionListener() {
+            borrowButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     clicked = true;
@@ -455,6 +451,14 @@ private void searchAndUpdateTable() {
         protected void fireEditingStopped() {
             super.fireEditingStopped();
         }
+
+        public JButton getBorrowButton() {
+            return borrowButton;
+        }
+    }
+
+    public JButton borrowButton() {
+        return this.editor.getBorrowButton();
     }
 }
 

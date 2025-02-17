@@ -405,4 +405,13 @@
         <Name>gumanafir</Name>
         <Password>password</Password>
     </User>
+    <User>
+        <Mail>2241122@slu.edu.ph</Mail>
+        <FailedAttempts>0</FailedAttempts>
+        <Id>2241122</Id>
+        <LastName>Javier</LastName>
+        <UserType>Student</UserType>
+        <Name>Charles Louis</Name>
+        <Password>hancharles</Password>
+    </User>
 </Users>

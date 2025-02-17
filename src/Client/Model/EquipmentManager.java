@@ -103,17 +103,29 @@ public class EquipmentManager {
      * @return
      *   -1  for no equipment left
      *   0 for the successful
+     * pseudocode :
+     *         check if the equipment that the user will borrow has a quantity > 1
+     *         if the user borrow the equipment bind the transaction to the id
+     *         log it to check the transaction
      *
      */
-    public synchronized int transact(Equipment equipment){
-        /*
-        Todo: Code this
-        pseudocode :
-        check if the equipment that the user will borrow has a quantity > 1
-        if the user borrow the equipment bind the transaction to the id
-        log it to check the transaction
-         */
-        return  -1;
+    public synchronized boolean transact(Equipment equipment){
+
+            Equipment equipment1 = equipmentArrayList.stream().
+                    filter(e-> e.getId()
+                            .equals(equipment.getId()))
+              .findFirst()
+              .stream()
+              .toList()
+              .get(0);
+      if (equipment1.getQuantity().get() < 1){
+          System.out.println("no more equipment");
+          return false;
+      }else equipment1.getQuantity().getAndDecrement();
+
+      equipmentArrayList.forEach(e-> System.out.println(e.getAllValues()));
+        return true;
+
 
     }
 

@@ -2,6 +2,8 @@ package Client.Service;
 
 import javax.swing.*;
 import java.io.*;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.Socket;
 
 /**
@@ -80,6 +82,9 @@ public class SingletonSocketService {
             System.err.println("Error receiving file: " + e.getMessage());
         }
     }
+
+
+
     private static class SingletonHelper{
         private static final SingletonSocketService INSTANCE = new SingletonSocketService();
     }

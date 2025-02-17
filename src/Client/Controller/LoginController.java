@@ -57,6 +57,7 @@ public class LoginController {
         String result = response.get(1);
         String role = response.get(0);
         if (result.equals("1")){
+            model.setUserSessionID(view.getUnField().getText());
             if (role.equals("Student")){
                 new HomepageController();
                 view.dispose();
