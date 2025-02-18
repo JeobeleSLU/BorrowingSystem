@@ -2,6 +2,7 @@ package Server.Network;
 
 import Common.Factories.SingletonEquipmentFactory;
 import Common.Utilities.FileHandler;
+import Server.Controller.TransactionController;
 import Server.Model.Authenticator;
 import Client.Model.EquipmentManager;
 import Server.Model.Equipment;
@@ -37,12 +38,14 @@ public class ClientHandler implements Runnable {
     FileHandler handler;
     File saveFile;
     File responseFilePath;
+    TransactionController transactionController;
 
-    public ClientHandler(Socket client, EquipmentManager equipmentManager, Authenticator authenticator)  {
+    public ClientHandler(Socket client, EquipmentManager equipmentManager, Authenticator authenticator,TransactionController controller)  {
         this.socket = client;
         this.equipmentManager = equipmentManager;
         this.auth = authenticator;
         idNumber = null;
+        this.transactionController = controller;
         this.handler = new FileHandler();
         this.sessionID = UUID.randomUUID().toString();
         try {
@@ -93,19 +96,17 @@ public class ClientHandler implements Runnable {
             addEquipment();
          } else if (request.equals("DISCONNECT")) {
             closeResources();
+        } else if (request.equals("TRANSACTION_HISTORY")) {
+            sendHistory();
         }
     }
 
-    private void addEquipment() {
-        String[] node = {
-                "Result"
-        };
-        ArrayList<String>attributes = RequestUtility.getContent(saveFile,equipmentManager.getNodes());
-        String response = equipmentManager.addEquipment(attributes);
-        ArrayList<String> res = new ArrayList<>();
-        res.add(response);
+    private void sendHistory() {
 
-       sendToStream(res,node);
+    }
+
+    private void addEquipment() {
+
     }
 
     /**
@@ -143,7 +144,12 @@ public class ClientHandler implements Runnable {
      * arraylist based on the login and then returns the user type
      */
     private void authenticateUser() {
-       ArrayList<String> result= auth.authenticate(RequestUtility.getContent(saveFile, auth.getLoginAttributes()));
+        ArrayList<String> request=  RequestUtility.getContent(saveFile, auth.getLoginAttributes());
+       ArrayList<String> result= auth.authenticate(request);
+       if (result.get(1).equals("1")){
+           this.idNumber = request.get(0);
+           System.out.println("User ID Number = " + idNumber);
+       }
        sendToStream(result, auth.getResponseAttributes());
     }
 
