@@ -68,4 +68,44 @@ public class TransactionController {
           "date","time"
         };
     }
+
+    /*
+    scan xml file
+    check date and time
+    if same date and time > qty
+    return false
+    else true
+     */
+
+    public synchronized boolean concurrencyCheck(String itemName, String date, String time) {
+        loadTransactions("base"); // Load transactions from the XML
+
+        // Count occurrences of the item name
+        long totalCount = transactions.stream()
+                .filter(t -> t.getEquipmentName().equals(itemName))
+                .count();
+
+        // Check the maximum allowed quantity from one of the transactions
+        int maxQuantity = transactions.stream()
+                .filter(t -> t.getEquipmentName().equals(itemName))
+                .map(Transaction::getQty)
+                .findFirst()
+                .orElse(0);
+
+        if (totalCount >= maxQuantity) {
+            // Count occurrences for the same date and time
+            long dateTimeCount = transactions.stream()
+                    .filter(t -> t.getEquipmentName().equals(itemName) &&
+                            t.getDate().equals(date) &&
+                            t.getTime().equals(time))
+                    .count();
+
+            if (dateTimeCount >= maxQuantity) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 }
