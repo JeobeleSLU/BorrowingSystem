@@ -19,6 +19,7 @@ public class LoginController {
         this.view = new login_page();
         server = SingletonSocketService.getInstance();
         view.getLoginBtn().addActionListener(e-> {
+
             requestLogin();
         });
         view.getSignUpLbl().addMouseListener(new MouseAdapter() {

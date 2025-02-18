@@ -23,8 +23,9 @@ public class HomepageClient extends JFrame {
     private JTextField searchField;
     private JButton searchButton;
     private JLabel equipLabel;
-    private JPanel innerPanel;
-    private JButton button1;
+    private JComboBox monthBox;
+    private JComboBox startTimeBox;
+    private JComboBox endTimeBox;
     homePageAdmin homePageAdmin;
     private JTextArea receiptArea;
     private boolean showingEquipList = true;
@@ -143,30 +144,36 @@ public class HomepageClient extends JFrame {
         //FOR DATE AND TIME
         // Create a panel for JDateChooser & JSpinner (Time Chooser)
         JPanel datePanel = new JPanel();
-        datePanel.add(new JLabel("Select Date: "));
-        datePanel.add(jDateChooser);
 
-        // Initialize JSpinner for time selection
-        SpinnerDateModel timeModel = new SpinnerDateModel();
-        JSpinner timeSpinner = new JSpinner(timeModel);
-        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm:ss");
-        timeSpinner.setEditor(timeEditor);
 
-        datePanel.add(new JLabel("Select Time: "));
-        datePanel.add(timeSpinner);
 
-        JButton borrowButton = new JButton();
-        borrowButton.setText("Borrow");
+
+
+
+
+        //=================================================================================================
+        //JPanel datePanel = new JPanel();
+        datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 100, 5)); // Adds 20px horizontal gap
+
+        JButton borrowButton = new JButton("Borrow");
         datePanel.add(borrowButton);
 
+        centerPanel.add(datePanel, BorderLayout.NORTH);
+
+
         //BORROW BUTTON FOR CONFIRMATION SO THE RESERVATION WILL GO TO ADMIN
+        //todo: get the receipt area details to finalize the reservation
         borrowButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
 
             }
         });
+
+
+
+        //======================================================================================================
         // Add the date and time panel to the top of the center panel
-        centerPanel.add(datePanel, BorderLayout.NORTH);
+     //   centerPanel.add(datePanel, BorderLayout.NORTH);
 //=====================================================================================================================
         // Define table columns and data
         String[] columnNames;
@@ -269,7 +276,7 @@ public class HomepageClient extends JFrame {
         receiptArea = new JTextArea();
         receiptArea.setEditable(false);
         JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
-        receiptScrollPane.setPreferredSize(new Dimension(300, 500));
+        receiptScrollPane.setPreferredSize(new Dimension(400, 500));
         centerPanel.add(receiptScrollPane, BorderLayout.EAST);
 
         // Ensure UI updates properly

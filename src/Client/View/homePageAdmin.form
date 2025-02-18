@@ -69,7 +69,7 @@
                   <background color="-15849393"/>
                   <font size="20"/>
                   <foreground color="-591873"/>
-                  <text value="   Add Item"/>
+                  <text value=" Add Item"/>
                 </properties>
               </component>
               <grid id="52717" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
