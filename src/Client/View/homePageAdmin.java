@@ -163,69 +163,63 @@
             } else if (showingEquipment) {
                 showingHistory = false;
                 showingLogs = false;
-                columnNames = new String[]{"Equipment ID", "Equipment Name", "Flag"};
-             //   equipTable.getColumnModel().getColumn(2).setCellRenderer(new ButtonRenderer());
-               // equipTable.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable));
+                columnNames = new String[]{"Equipment ID", "Equipment Name", "Action"};
+
                 data = new Object[][]{
-                        {"012345", "Drone", "( removed button)"},
-                        {"012346", "Camera", "( removed button)"},
-                        {"012347", "Switch", "( removed button)"},
+                        {"012345", "Drone", null},
+                        {"012346", "Camera", null},
+                        {"012347", "Switch", null}
                 };
 
-
-                showingEquipment = false;
+                showingEquipment = true;
                 anotherBool = true;
             } else {
                 columnNames = new String[]{};
                 data = new Object[][]{};
             }
 
-
-            // Check if columnNames or data is empty before creating the table
             if (columnNames.length == 0 || data.length == 0) {
                 System.out.println("No data to display.");
-                return; // Skip populating the table
+                return;
             }
 
             DefaultTableModel model = new DefaultTableModel(data, columnNames) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
-                    return column == 2;
+                    return showingEquipment && column == 2; // Only make Action column editable for Equipment
+                }
+
+                @Override
+                public Class<?> getColumnClass(int column) {
+                    // Ensure that the Action column uses JButton class
+                    if (showingEquipment && column == 2) {
+                        return JButton.class;
+                    } else {
+                        return String.class;
+                    }
                 }
             };
-// Apply button renderer and editor to the 4th column
-            equipTable = new JTable(model);
-            equipTable.getColumnModel().getColumn(2).setCellRenderer(new ButtonRenderer());
-            equipTable.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable));
-            //====================
-            if (add && anotherBool) {
-                System.out.println("ADD");
-                //            Client.View.addItem addItem1 = new addItem();
-                String[] row = addItemBtn.row;
-                System.out.println(Arrays.toString(row));
-                model.addRow(row);
-                //            equipTable.repaint();
-                //            centerPanel.repaint();
-                //            mainPanel.repaint();
-            }
-            //======================
-
-            centerPanel.removeAll();
 
             equipTable = new JTable(model);
             equipTable.setRowHeight(50);
             equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
+            // Set ButtonRenderer and ButtonEditor only for showingEquipment
+            if (showingEquipment) {
+                equipTable.getColumnModel().getColumn(2).setCellRenderer(new ButtonRenderer());
+                equipTable.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable));
+            }
+
             JScrollPane scrollPane = new JScrollPane(equipTable);
             scrollPane.setPreferredSize(new Dimension(500, 500));
 
-
-
             equipTable.getColumnModel().getColumn(0).setPreferredWidth(70);
             equipTable.getColumnModel().getColumn(1).setPreferredWidth(100);
-            equipTable.getColumnModel().getColumn(2).setPreferredWidth(120);
-            //        equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+            if (showingEquipment) {
+                equipTable.getColumnModel().getColumn(2).setPreferredWidth(120);
+            }
 
+            centerPanel.removeAll();
             centerPanel.add(scrollPane, BorderLayout.CENTER);
 
             SwingUtilities.invokeLater(() -> {
