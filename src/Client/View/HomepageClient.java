@@ -119,8 +119,8 @@ public class HomepageClient extends JFrame {
         model.setRowCount(0);
 
         Object[][] data = new Object[][] {
-                {new ImageIcon("./src/gui/drone.jpg"), "Drones", "4", "add"},
-                {new ImageIcon("./src/gui/camera.png"), "Camera", "5", "add"},
+                {new ImageIcon("./res/Images/drone.jpg"), "Drones", "4", "add"},
+                {new ImageIcon("./res/Images/drone.jpg"), "Camera", "5", "add"},
                 {3, "Stabelizer", "3", "add"},
                 {4, "Swtiches", "4", "add"}
         };
@@ -175,8 +175,8 @@ public class HomepageClient extends JFrame {
         Object[][] data;
 
         // Example equipment images
-        ImageIcon droneIcon = new ImageIcon("./src/gui/drone.jpg");
-        ImageIcon cameraIcon = new ImageIcon("./src/gui/camera.png");
+        ImageIcon droneIcon = new ImageIcon("./res/Images/drone.jpg");
+        ImageIcon cameraIcon = new ImageIcon("./res/Images/camera.png");
 
         if (showingEquipList) {
             showingBorrowed = false;
@@ -361,8 +361,8 @@ private void searchAndUpdateTable() {
     Object[][] data;
     if (isClicked) {
         data = new Object[][]{
-                {new ImageIcon("./src/gui/drone.jpg"), "Drone", "4", "add"},
-                {new ImageIcon("./src/gui/camera.png"), "Camera", "5", "add"},
+                {new ImageIcon("./res/Images/drone.jpg"), "Drone", "4", "add"},
+                {new ImageIcon("./res/Images/camera.png"), "Camera", "5", "add"},
                 {3, "Stabilizer", "3", "add"},
                 {4, "Switch", "4", "add"}
         };
@@ -449,12 +449,18 @@ private void searchAndUpdateTable() {
             if (selectedRow != -1) {
                 String equipmentName = equipTable.getValueAt(selectedRow, 1).toString();
                 String quantity = equipTable.getValueAt(selectedRow, 2).toString();
+                String month = (String) monthBox.getSelectedItem();
+                String startTime = (String) startTimeBox.getSelectedItem();
+                String endTime = (String) endTimeBox.getSelectedItem();
 
                 // Update the receiptArea with the equipment and quantity
 
                 String receiptText = "";
                 receiptText += "Equipment: " + equipmentName + "\n";
                 receiptText += "Quantity: " + quantity + "\n";
+                receiptText += "Month: " + month + "\n";
+                receiptText += "Start time: " + startTime + "\n";
+                receiptText += "End time: " + endTime + "\n";
                 receiptText += "==================\n";
 
 

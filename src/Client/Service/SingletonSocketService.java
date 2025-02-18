@@ -39,6 +39,7 @@ public class SingletonSocketService {
             System.out.println("Can't establish connection");
             JOptionPane.showMessageDialog(null,
                     "Can't Connect to server", "Warning", 2);
+            establishConnection();
         }
     }
 
