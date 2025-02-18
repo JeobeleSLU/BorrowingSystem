@@ -38,10 +38,20 @@ public class HomepageClient extends JFrame {
     private boolean isClicked = false;
     private boolean show;
     ButtonEditor editor;
+    String itemtoBorrowed;
+    JButton borrowButton;
 
+    public String getStartTime() {
+        return startTime;
+    }
 
+    public String getMonth() {
+        return month;
+    }
 
-
+    public String getEndTime() {
+        return endTime;
+    }
 
     public HomepageClient() {
         setContentPane(mainPanel);
@@ -140,47 +150,22 @@ public class HomepageClient extends JFrame {
     }
     public void populateTable() {
         // Clear previous components and set layout
-        centerPanel.removeAll();
-        centerPanel.setLayout(new BorderLayout());
-//=================================================================================================================
-        //FOR DATE AND TIME
-        // Create a panel for JDateChooser & JSpinner (Time Chooser)
-        JPanel datePanel = new JPanel();
 
-
-
-
-
-
-
-        //=================================================================================================
-        //JPanel datePanel = new JPanel();
-        datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 100, 5)); // Adds 20px horizontal gap
-
-        JButton borrowButton = new JButton("Borrow");
-        datePanel.add(borrowButton);
-
-        centerPanel.add(datePanel, BorderLayout.NORTH);
-
-
-        //BORROW BUTTON FOR CONFIRMATION SO THE RESERVATION WILL GO TO ADMIN
-        //todo: get the receipt area details to finalize the reservation
-        borrowButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-
-            }
-        });
 
     }
-//===================================================================================================================
-public void populateTableList(ArrayList<Equipment> equipmentList) {
-        equipmentList.forEach(e-> System.out.println(e.getName()));
-//    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Drone", "E001", "Drones"));
-//    equipmentList.add(new Equipment(true, new AtomicInteger(5), "Camera", "E002", "Cameras"));
-//    equipmentList.add(new Equipment(false, new AtomicInteger(3), "Stabilizer", "E003", "Accessories"));
-//    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Switch", "E004", "Electronics"));
 
+public void populateTableList(ArrayList<Equipment> equipmentList) {
+    centerPanel.removeAll();
     centerPanel.setLayout(new BorderLayout());
+
+    JPanel datePanel = new JPanel();
+
+    datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 100, 5));
+
+    borrowButton= new JButton("Borrow");
+
+    datePanel.add(borrowButton);
+    centerPanel.add(datePanel, BorderLayout.NORTH);
 
     String[] columnNames = new String[]{"Equipment Name", "Equipment Type", "Quantity", "Avail"};
     Object[][] data = new Object[equipmentList.size()][4];
@@ -238,11 +223,22 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
 }
 
     public void populateTableList2 (ArrayList<Transaction> transactionList) {
+        centerPanel.removeAll();
+        centerPanel.setLayout(new BorderLayout());
+
+        JPanel datePanel = new JPanel();
+        centerPanel.add(datePanel, BorderLayout.NORTH);
+
+        datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 100, 5));
+
+        JButton borrowButton = new JButton("Borrow");
+        datePanel.add(borrowButton);
+
+
+        centerPanel.setLayout(new BorderLayout());
+
     transactionList.forEach(e-> System.out.println(e.getEquipmentName()));
-//    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Drone", "E001", "Drones"));
-//    equipmentList.add(new Equipment(true, new AtomicInteger(5), "Camera", "E002", "Cameras"));
-//    equipmentList.add(new Equipment(false, new AtomicInteger(3), "Stabilizer", "E003", "Accessories"));
-//    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Switch", "E004", "Electronics"));
+
 
     centerPanel.setLayout(new BorderLayout());
 
@@ -330,8 +326,16 @@ private void searchAndUpdateTable() {
     }
 }
 
+    public JButton getBorrowButton() {
+        return borrowButton;
+    }
 
-//=============================================================================================
+    public String getItemToBeBorrowed() {
+        return itemtoBorrowed;
+    }
+
+
+    //=============================================================================================
     class ImageRender extends DefaultTableCellRenderer {
                     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                         if (value instanceof ImageIcon) {
@@ -361,8 +365,8 @@ private void searchAndUpdateTable() {
 
     //================================================================================================================
     // Custom Button Editor (Handles button clicks)
-    class ButtonEditor extends DefaultCellEditor {
-        private JButton borrowButton;
+    public class ButtonEditor extends DefaultCellEditor {
+        public JButton borrowButton;
         private String label;
         private boolean clicked;
         private JTable table;
@@ -393,7 +397,8 @@ private void searchAndUpdateTable() {
 
             int selectedRow = equipTable.getSelectedRow();
             if (selectedRow != -1) {
-                String equipmentName = equipTable.getValueAt(selectedRow, 1).toString();
+                String equipmentName = equipTable.getValueAt(selectedRow, 0).toString();
+                itemtoBorrowed = equipmentName;
                 String quantity = equipTable.getValueAt(selectedRow, 2).toString();
                 startTime = (String) startTimeBox.getSelectedItem();
                 endTime = (String) endTimeBox.getSelectedItem();
@@ -446,6 +451,7 @@ private void searchAndUpdateTable() {
     public JLabel getBorrowedItemlbl() {
         return borrowedItemlbl;
     }
+
 }
 
 

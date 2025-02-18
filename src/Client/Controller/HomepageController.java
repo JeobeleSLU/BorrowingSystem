@@ -8,6 +8,7 @@ import Client.View.HomepageClient;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import Server.Controller.TransactionController;
+import Server.Model.Equipment;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -47,7 +48,16 @@ public class HomepageController {
                 view.populateTableList2(transaction.getArrayList());
             }
         });
+        view.getBorrowButton().addActionListener(_ ->{
+//            extractDetails();
+        } );
     }
+
+//    private void extractDetails() {
+//        String eq = view.getItemToBeBorrowed();
+//        Equipment equipmentToBeBorrowed = equipment.getSearch(eq).get(0);
+//        File file = model.reqestTransaction(equipmentToBeBorrowed,view.getMonth(),view.getStartTime(),view.getEndTime());
+//    }
 
     private void addEventActionListeners() {
 

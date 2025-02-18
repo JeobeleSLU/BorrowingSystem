@@ -2,6 +2,7 @@ package Client.Model;
 
 import Client.Service.SingletonRequestService;
 import Server.Controller.TransactionController;
+import Server.Model.Equipment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,4 +40,20 @@ public class HomepageModel {
         node.add(search1);
         return SingletonRequestService.createXMLRequest("SEARCH",node,requestNode);
     }
+
+//    public File reqestTransaction(Equipment equipmentToBeBorrowed, String startTime, String endTime, String mont) {
+//        /*
+//         <Equipment>
+//        <isAvailable>true</isAvailable>
+//        <quantity>3</quantity>
+//        <name>newnewnew</name>
+//        <id>988</id>
+//        <type>Switch</type>
+//    </Equipment>
+//         */
+//        String[] node  = {
+//                "isAvailable","quantity","name","id","type,","
+//        }
+//        return SingletonRequestService.createXMLRequest("TRANSACT")
+//    }
 }
