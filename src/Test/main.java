@@ -1,3 +1,5 @@
+package Test;
+
 import Client.Model.EquipmentManager;
 import Common.Factories.SingletonEquipmentFactory;
 import Common.Utilities.FileHandler;
@@ -33,4 +35,5 @@ public class main {
         manager.transact(equipment1);
 
     }
+
 }

@@ -137,4 +137,11 @@ public class EquipmentManager {
                 "quantity"
         };
     }
+
+    public String getResponse(boolean result) {
+        if (result){
+            return "1";
+        }else
+            return "-1";
+    }
 }

@@ -276,18 +276,18 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
 
     centerPanel.setLayout(new BorderLayout());
 
-    String[] columnNames = new String[]{"Equipment Image", "Equipment Name", "Quantity", "Avail"};
+    String[] columnNames = new String[]{"Equipment Name", "Equipment Type", "Quantity", "Avail"};
     Object[][] data = new Object[equipmentList.size()][4];
 
     for (int i = 0; i < equipmentList.size(); i++) {
         Equipment equipment = equipmentList.get(i);
 
         String equipmentName = equipment.getName();
+        String type  = equipment.getType();
         String quantity = String.valueOf(equipment.getQuantity());
         String availability = "add";
-        ImageIcon icon = equipment.getImageIcon();
 
-        data[i] = new Object[]{icon, equipmentName, quantity, availability};
+        data[i] = new Object[]{equipmentName,type, quantity, availability};
     }
     DefaultTableModel model = new DefaultTableModel(data, columnNames) {
         @Override
@@ -457,8 +457,7 @@ private void searchAndUpdateTable() {
         }
     }
 
-    public JButton borrowButton() {
-        return this.editor.getBorrowButton();
-    }
+
+
 }
 

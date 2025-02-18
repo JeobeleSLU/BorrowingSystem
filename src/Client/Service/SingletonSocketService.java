@@ -32,7 +32,8 @@ public class SingletonSocketService {
 
     private void establishConnection() {
         try {
-            socket = new Socket("localhost",6969);
+            String inputValue = JOptionPane.showInputDialog("input ip Adresss");
+            socket = new Socket(inputValue,6969);
 
         } catch (IOException e) {
             System.out.println("Can't establish connection");

@@ -18,14 +18,14 @@ public class HomepageController {
         server = SingletonSocketService.getInstance();
         requestEquipment();
         getResponse();
-        addActionEventListners();
+//        addActionEventListners();
     }
 
-    private void addActionEventListners() {
-        view.borrowButton().addActionListener(e-> {
-            requestEquipment();
-        });
-    }
+//    private void addActionEventListners() {
+//        view.borrowButton().addActionListener(e-> {
+//            requestEquipment();
+//        });
+//    }
 
     private void getResponse() {
         equipment = model.storeEqToMemory();

@@ -4,6 +4,7 @@ import Common.Factories.SingletonEquipmentFactory;
 import Common.Utilities.FileHandler;
 import Server.Model.Authenticator;
 import Client.Model.EquipmentManager;
+import Server.Model.Equipment;
 
 import java.io.*;
 import java.net.Socket;
@@ -112,6 +113,16 @@ public class ClientHandler implements Runnable {
      * Transaction logic on how the equipment will be borrowed
      */
     private void transact() {
+        String[] node  = new String[]{
+                "result"
+        };
+        ArrayList<String> attri = RequestUtility.getContent(saveFile,SingletonEquipmentFactory.getInstance().getRequestMember());
+        Equipment equipment = SingletonEquipmentFactory.getInstance().createObject(attri.toArray(new String[0]));
+        boolean result= equipmentManager.transact(equipment);
+        String response = equipmentManager.getResponse(result);
+        ArrayList<String> resultNode = new ArrayList<>();
+        resultNode.add(response);
+        sendToStream(resultNode,node);
     }
 
     private void createUser() {
