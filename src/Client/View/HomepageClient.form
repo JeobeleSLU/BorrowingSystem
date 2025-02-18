@@ -284,20 +284,20 @@
                 <item value="11:30"/>
                 <item value="12:00"/>
                 <item value="12:30"/>
-                <item value="1:00"/>
-                <item value="1:30"/>
-                <item value="2:00"/>
-                <item value="2:30"/>
-                <item value="3:00"/>
-                <item value="3:30"/>
-                <item value="4:00"/>
-                <item value="4:30"/>
-                <item value="5:00"/>
-                <item value="5:30"/>
-                <item value="6:00"/>
-                <item value="6:30"/>
-                <item value="7:00"/>
-                <item value="7:30"/>
+                <item value="13:00"/>
+                <item value="13:30"/>
+                <item value="14:00"/>
+                <item value="14:30"/>
+                <item value="15:00"/>
+                <item value="15:30"/>
+                <item value="16:00"/>
+                <item value="16:30"/>
+                <item value="17:00"/>
+                <item value="17:30"/>
+                <item value="18:00"/>
+                <item value="18:30"/>
+                <item value="19:00"/>
+                <item value="19:30"/>
               </model>
             </properties>
           </component>
@@ -327,20 +327,20 @@
                 <item value="11:30"/>
                 <item value="12:00"/>
                 <item value="12:30"/>
-                <item value="1:00"/>
-                <item value="1:30"/>
-                <item value="2:00"/>
-                <item value="2:30"/>
-                <item value="3:00"/>
-                <item value="3:30"/>
-                <item value="4:00"/>
-                <item value="4:30"/>
-                <item value="5:00"/>
-                <item value="5:30"/>
-                <item value="6:00"/>
-                <item value="6:30"/>
-                <item value="7:00"/>
-                <item value="7:30"/>
+                <item value="13:00"/>
+                <item value="13:30"/>
+                <item value="14:00"/>
+                <item value="14:30"/>
+                <item value="15:00"/>
+                <item value="15:30"/>
+                <item value="16:00"/>
+                <item value="16:30"/>
+                <item value="17:00"/>
+                <item value="17:30"/>
+                <item value="18:00"/>
+                <item value="18:30"/>
+                <item value="19:00"/>
+                <item value="19:30"/>
               </model>
             </properties>
           </component>
