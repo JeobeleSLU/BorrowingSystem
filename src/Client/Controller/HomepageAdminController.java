@@ -25,6 +25,16 @@ public class HomepageAdminController {
     }
 
     private void addEventActionListeners() {
+        view.getHistory().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                server.sendXMLToServer(model.createRequest("TRANSACTION_HISTORY_ADMIN"));
+                transactions = model.storeTransactionsToMemory();
+                view.populateTable(transactions.getArrayList());
+
+            }
+        });
         view.getAddItem().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

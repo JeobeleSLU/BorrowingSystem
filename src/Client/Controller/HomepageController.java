@@ -22,7 +22,7 @@ public class HomepageController {
     }
 
 //    private void addActionEventListners() {
-//        view.borrowButton().addActionListener(e-> {
+//        view.getHis().addActionListener(e-> {
 //            requestEquipment();
 //        });
 //    }

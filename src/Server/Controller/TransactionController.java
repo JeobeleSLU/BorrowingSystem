@@ -28,7 +28,7 @@ public class TransactionController {
         if (path.equals("base")){
             file = handler.getXMLFile("Transaction");
         }else {
-            file = new File("path");
+            file = new File(path);
         }
         if (!file.exists()){
             System.out.println("No transactions found in: " + file.getName());
@@ -56,4 +56,7 @@ public class TransactionController {
     }
 
 
+    public ArrayList<Transaction> getArrayList() {
+        return this.transactions;
+    }
 }

@@ -33,11 +33,12 @@
         private boolean showingHistory = false;
         private boolean showingLogs = true;
         private boolean showingEquipment = false;
-        private ArrayList<Transaction> transactions = new ArrayList<>();
 
         public JLabel getAddItem() {
             return addItem;
         }
+
+
 
         private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss");
         private final String stamp = LocalDateTime.now().format(dateTimeFormatter);
@@ -54,7 +55,6 @@
             setVisible(true);
             setResizable(false);
 
-            populateTable(transactions);
 
             setupHoverEffect(addItem);
             setupHoverEffect(logs);
@@ -83,7 +83,7 @@
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
                     showingLogs = true;
-                    populateTable(transactions);
+
                 }
             });
 
@@ -93,7 +93,6 @@
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
                     showingHistory = true;  // Set to true to show history
-                    populateTable(transactions);
                 }
             });
 
@@ -103,7 +102,6 @@
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
                     showingEquipment = true;
-                    populateTable(transactions);
                 }
             });
         }
@@ -138,7 +136,7 @@
 
         }
 
-        void populateTable(ArrayList<Transaction> transactionList) {
+       public void populateTable(ArrayList<Transaction> transactionList) {
             centerPanel.setLayout(new BorderLayout());
 
             String[] columnNames;
@@ -310,5 +308,12 @@
                     return "Remove";
                 }
             }
+        }
+        public JLabel getHistory() {
+            return history;
+        }
+
+        public JLabel getEquipment() {
+            return equipment;
         }
     }
