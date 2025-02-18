@@ -1,5 +1,6 @@
 package Client.View;
-import com.toedter.calendar.JDateChooser;
+
+import Server.Model.Equipment;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -8,7 +9,6 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomepageClient extends JFrame {
     private JPanel mainPanel;
@@ -33,12 +33,11 @@ public class HomepageClient extends JFrame {
     private boolean showingSettings = false;
     private boolean isClicked = false;
     private boolean show;
-    private List<Object[]> allEquipments = new ArrayList<>();
+    ButtonEditor editor;
 
 
 
 
-    JDateChooser jDateChooser = new JDateChooser();
 
     public HomepageClient() {
         setContentPane(mainPanel);
@@ -204,6 +203,7 @@ public class HomepageClient extends JFrame {
                     {"Drone", "12-01-2025", "Returned"},
                     {"Switch", "02-27-2026", "In Progress"}
             };
+
             showingBorrowed = false;
             show = false;
 
@@ -225,6 +225,7 @@ public class HomepageClient extends JFrame {
             JLabel emailLabel = new JLabel("Email: ");
             JLabel email = new JLabel("john.doe@example.com");
 
+            // Add labels to the panel
             centerPanel.add(firstNameLabel);
             centerPanel.add(firstName);
             centerPanel.add(lastNameLabel);
@@ -240,46 +241,49 @@ public class HomepageClient extends JFrame {
             data = new Object[][]{};
         }
 
-        //END OF POPULATING TABLE BY GETTING DATA
-//=====================================================================================================================
-        // Create table model
+
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 3; // Only "add" button column is editable
+                return column == 3;
             }
         };
+            centerPanel.removeAll();
 
-        // Create JTable and set properties
         equipTable = new JTable(model);
         equipTable.setRowHeight(50);
         equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
+
         // Wrap JTable in JScrollPane
         JScrollPane scrollPane = new JScrollPane(equipTable);
         scrollPane.setPreferredSize(new Dimension(530, 500));
-        centerPanel.add(scrollPane, BorderLayout.WEST);
-//=====================================================================================================================
-        //FORMATTING THE TABLE
-        if (show) {
+
+        System.out.println("aabot ata dito");
+        if (show){
+            System.out.println(" pero dito hindi umabot");
             equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
             equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
-            equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
-
+            equipTable.getColumnModel().getColumn(3).setCellEditor(this.editor = new ButtonEditor(new JCheckBox()));
             equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
             equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
             equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
             equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
         }
 
-        // Panel for receipt
+        centerPanel.add(scrollPane, BorderLayout.WEST);
+
+        //============================
         receiptArea = new JTextArea();
         receiptArea.setEditable(false);
         JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
-        receiptScrollPane.setPreferredSize(new Dimension(400, 500));
+        receiptScrollPane.setPreferredSize(new Dimension(300, 500));
         centerPanel.add(receiptScrollPane, BorderLayout.EAST);
+        //===========================
 
         // Ensure UI updates properly
+        equipTable.revalidate();
+        equipTable.repaint();
         SwingUtilities.invokeLater(() -> {
             equipTable.revalidate();
             equipTable.repaint();
@@ -287,12 +291,71 @@ public class HomepageClient extends JFrame {
             centerPanel.repaint();
         });
 
-        setVisible(true);
+        setVisible(false);
     }
 
 
 //===================================================================================================================
+public void populateTableList(ArrayList<Equipment> equipmentList) {
+        equipmentList.forEach(e-> System.out.println(e.getName()));
+//    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Drone", "E001", "Drones"));
+//    equipmentList.add(new Equipment(true, new AtomicInteger(5), "Camera", "E002", "Cameras"));
+//    equipmentList.add(new Equipment(false, new AtomicInteger(3), "Stabilizer", "E003", "Accessories"));
+//    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Switch", "E004", "Electronics"));
 
+    centerPanel.setLayout(new BorderLayout());
+
+    String[] columnNames = new String[]{"Equipment Name", "Equipment Type", "Quantity", "Avail"};
+    Object[][] data = new Object[equipmentList.size()][4];
+
+    for (int i = 0; i < equipmentList.size(); i++) {
+        Equipment equipment = equipmentList.get(i);
+
+        String equipmentName = equipment.getName();
+        String type  = equipment.getType();
+        String quantity = String.valueOf(equipment.getQuantity());
+        String availability = "add";
+
+        data[i] = new Object[]{equipmentName,type, quantity, availability};
+    }
+    DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column == 3;
+        }
+    };
+    equipTable = new JTable(model);
+    equipTable.setRowHeight(50);
+    equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+    equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
+    equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
+    equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
+
+    equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
+    equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
+    equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
+    equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+    JScrollPane scrollPane = new JScrollPane(equipTable);
+    scrollPane.setPreferredSize(new Dimension(530, 500));
+
+    centerPanel.add(scrollPane, BorderLayout.WEST);
+
+    receiptArea = new JTextArea();
+    receiptArea.setEditable(false);
+    JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
+    receiptScrollPane.setPreferredSize(new Dimension(300, 500));
+    centerPanel.add(receiptScrollPane, BorderLayout.EAST);
+
+    SwingUtilities.invokeLater(() -> {
+        equipTable.revalidate();
+        equipTable.repaint();
+        centerPanel.revalidate();
+        centerPanel.repaint();
+    });
+
+    setVisible(true);
+}
 
 private void searchAndUpdateTable() {
     String searchTerm = searchField.getText().trim().toLowerCase();
@@ -328,10 +391,10 @@ private void searchAndUpdateTable() {
 
 //=============================================================================================
     class ImageRender extends DefaultTableCellRenderer {
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            if (value instanceof ImageIcon) {
-                ImageIcon imageIcon = (ImageIcon) value;
-                Image image = imageIcon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                        if (value instanceof ImageIcon) {
+                            ImageIcon imageIcon = (ImageIcon) value;
+                            Image image = imageIcon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
                 return new JLabel(new ImageIcon(image));
             }
             return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -350,7 +413,6 @@ private void searchAndUpdateTable() {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             setText((value == null) ? "Borrowed" : value.toString());
-            System.out.println("asdadasdad");
             return this;
         }
     }
@@ -358,7 +420,7 @@ private void searchAndUpdateTable() {
     //================================================================================================================
     // Custom Button Editor (Handles button clicks)
     class ButtonEditor extends DefaultCellEditor {
-        private JButton button;
+        private JButton borrowButton;
         private String label;
         private boolean clicked;
         private JTable table;
@@ -366,14 +428,14 @@ private void searchAndUpdateTable() {
 
         public ButtonEditor(JCheckBox checkBox) {
             super(checkBox);
-            button = new JButton();
-            button.setOpaque(true);
-            button.setPreferredSize(new Dimension(50, 10));
-            button.setLayout(new GridBagLayout());
+            borrowButton = new JButton();
+            borrowButton.setOpaque(true);
+            borrowButton.setPreferredSize(new Dimension(50, 10));
+            borrowButton.setLayout(new GridBagLayout());
             receiptArea.setText("===== Receipt =====\n");
 
             // Handle button click event
-            button.addActionListener(new ActionListener() {
+            borrowButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     clicked = true;
@@ -418,6 +480,9 @@ private void searchAndUpdateTable() {
         protected void fireEditingStopped() {
             super.fireEditingStopped();
         }
+        }
     }
-}
+
+
+
 

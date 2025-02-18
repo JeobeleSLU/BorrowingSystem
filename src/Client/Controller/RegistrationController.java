@@ -11,18 +11,31 @@ public class RegistrationController {
             this.view = new signUpPage();
             this.model = new RegistrationModel();
             server = SingletonSocketService.getInstance();
+            view.show();
             view.getSignUpBtn().addActionListener(e->{
                 requestSignUp();
+                showResult();
             });
     }
 
+    private void showResult() {
+        String response = model.parse();
+        if (response.equals("1")){
+            view.showValidUser();
+            view.dispose();
+        } else if (response.equals("-1")) {
+            view.showErrorMessage();
+            view.dispose();
+        }
+        new LoginController();
+    }
+
     private void requestSignUp() {
-        String firstName = view.getfNameLbl().getText();
+        String firstName = view.getFirstNameField().getText();
         String id = view.getUnField().getText();
         String pass = view.getPassField().getText();
         String email = view.getEmailField().getText();
-        String lastName = "";
+        String lastName = view.getLastNameField().getText();
         server.sendXMLToServer(model.createRequestXML(firstName,lastName,id,pass,email));
-
     }
 }

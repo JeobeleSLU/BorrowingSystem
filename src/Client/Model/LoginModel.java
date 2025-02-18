@@ -42,4 +42,8 @@ public class LoginModel {
         parseXML();
         return response;
     }
+
+    public void setUserSessionID(String id) {
+        SingletonRequestService.setUserID(id);
+    }
 }

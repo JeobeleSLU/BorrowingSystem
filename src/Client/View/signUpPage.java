@@ -24,7 +24,6 @@ public class signUpPage extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(380, 400);
         setLocationRelativeTo(null);
-        setVisible(true);
         setResizable(false);
 
         //Username Field
@@ -97,5 +96,17 @@ public class signUpPage extends JFrame {
         return unField;
     }
 
+    public JTextField getFirstNameField() {
+        return firstNameField;
+    }
 
+    public JTextField getLastNameField() {
+        return lastNameField;
+    }
+    public void showErrorMessage(){
+        JOptionPane.showMessageDialog(null, "Can't create User, please contact the admin", "Account Creation Faild", 2);
+    }
+    public void showValidUser(){
+        JOptionPane.showMessageDialog(null, "Account created, please login!", "Success Creation", JOptionPane.PLAIN_MESSAGE);
+    }
 }

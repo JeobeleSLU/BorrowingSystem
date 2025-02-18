@@ -6,6 +6,7 @@ import Client.Model.ImageHandler;
 import Common.Utilities.FileLogger;
 import Common.Utilities.XMLTemplate;
 
+import javax.swing.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Equipment implements XMLTemplate {
@@ -72,6 +73,12 @@ public class Equipment implements XMLTemplate {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+    public ImageIcon getImageIcon() {
+        if (imagePath != null && !imagePath.isEmpty()) {
+            return new ImageIcon(imagePath); // Return the ImageIcon
+        }
+        return null; // Return null if no image path is provided
     }
 
     @Override

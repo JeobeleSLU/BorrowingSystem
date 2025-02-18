@@ -13,8 +13,8 @@ public class addItem extends javax.swing.JFrame {
     private JButton addButton;
     private JTextField equipNameFld;
     private JTextField equipCodeFld;
-    private JTextField qtyFld;
-    private JTextField qty;
+    private JTextField typefld;
+    private JTextField qtyfld;
     private JLabel type;
     public String[] row;
 
@@ -44,13 +44,6 @@ public class addItem extends javax.swing.JFrame {
         });
 
         //Equipment QUANTITY JtextField
-        qtyFld.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
 
 
         //ADD BUTTON
@@ -62,10 +55,47 @@ public class addItem extends javax.swing.JFrame {
 
             }
         });
+        qtyfld.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    public JTextField getEquipNameFld() {
+        return equipNameFld;
+    }
+
+    public JTextField getEquipCodeFld() {
+        return equipCodeFld;
+    }
+
+    public JTextField getTypefld() {
+        return typefld;
+    }
+
+    public JTextField getQtyfld() {
+        return qtyfld;
+    }
 
     String[] newRow() {
         return new String[]{equipCodeFld.getText(), equipNameFld.getText(), null};
     }
+    public void showInvalidEnter(){
+            JOptionPane.showMessageDialog(null,
+                    "Can't add the equipment to server please contact Jesus ", "Invalid insertion", 2);
+        this.dispose();
+
+        }
+    public void showValid(){
+        JOptionPane.showMessageDialog(null,
+                "Added to the server successfully", "Invalid insertion", 1);
+        this.dispose();
+    }
+
 }

@@ -271,15 +271,16 @@
                     public void actionPerformed(ActionEvent e) {
                         clicked = true;
                         fireEditingStopped(); // Stop editing when button is clicked
-
                         // Remove the selected row
                         if (table.getModel() instanceof DefaultTableModel) {
                             DefaultTableModel model = (DefaultTableModel) table.getModel();
                             model.removeRow(row);
                         }
+
                     }
                 });
-            }
+                }
+
 
             @Override
             public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

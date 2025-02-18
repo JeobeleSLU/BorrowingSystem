@@ -40,6 +40,7 @@ public class XMLCreator {
     private boolean buildXML(HashMap<String, String> elements, String type) {
 
         try {
+
             if (type == null) {
                 logger.severe("Type is null!");
                 return false;

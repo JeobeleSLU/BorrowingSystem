@@ -1,6 +1,9 @@
 package Client.Service;
 
+import javax.swing.*;
 import java.io.*;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.Socket;
 
 /**
@@ -29,11 +32,13 @@ public class SingletonSocketService {
 
     private void establishConnection() {
         try {
-            socket = new Socket("localhost",6969);
+            String inputValue = JOptionPane.showInputDialog("input ip Adresss");
+            socket = new Socket(inputValue,6969);
 
         } catch (IOException e) {
             System.out.println("Can't establish connection");
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null,
+                    "Can't Connect to server", "Warning", 2);
         }
     }
 
@@ -47,6 +52,8 @@ public class SingletonSocketService {
             outputStream.flush();
             receiveResponse();
         } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Can't Connect to server", "Warning", 2);
             System.out.println("Error Reading file");
         }
     }
@@ -71,9 +78,14 @@ public class SingletonSocketService {
             }
 
         } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Can't Connect to server", "Warning", 2);
             System.err.println("Error receiving file: " + e.getMessage());
         }
     }
+
+
+
     private static class SingletonHelper{
         private static final SingletonSocketService INSTANCE = new SingletonSocketService();
     }

@@ -1,7 +1,9 @@
 package Server.Network;
 
+import Common.Utilities.XMLTemplate;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -14,6 +16,9 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class RequestUtility {
 
@@ -87,6 +92,92 @@ public class RequestUtility {
         } catch (TransformerException e) {
             throw new RuntimeException(e);
         }
-
     }
+
+    public static <T extends XMLTemplate> boolean buildObjectXML(T object, String type, File file) {
+        HashMap<String, String> elements = getAllVariables(object.getAllValues());
+        return buildXML(elements, type,file);
+    }
+
+
+    /*
+    Todo: Handle use case where xml already exists and if the item already exist so that u just append on it
+     */
+    private static boolean buildXML(HashMap<String, String> elements, String type,File file) {
+
+        try {
+
+            if (type == null) {
+                return false;
+            }
+
+            DOMSource domSource = buildDOMSource(elements, type);
+            if (domSource == null) {
+                return false;
+            }
+
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            StreamResult result = new StreamResult(file);
+
+            // LOg successful creation
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(domSource,result);
+//            fileHandler.saveXML(transformer,domSource,result);
+            return true;
+        } catch (ParserConfigurationException | TransformerException e) {
+            return false;
+        } catch (IOException | SAXException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static DOMSource buildDOMSource(HashMap<String, String> elements, String type) throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setIgnoringElementContentWhitespace(true);
+        DocumentBuilder docBuilder = factory.newDocumentBuilder();
+        Document doc;
+        Element root;
+
+        doc = docBuilder.newDocument();
+        root = doc.createElement(type+"s");
+        doc.appendChild(root);
+
+        Element tempRoot = doc.createElement(type);
+        root.appendChild(tempRoot);
+
+        if (elements.isEmpty()) {
+            return null;
+        }
+        //Hashmap first
+        Iterator<Map.Entry<String, String>> iterator = elements.entrySet().iterator();
+        if (!iterator.hasNext()) {
+            return null;
+        }
+
+        // The first entry becomes the main element
+
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> entry = iterator.next();
+            Element temp = doc.createElement(entry.getKey());
+            temp.appendChild(doc.createTextNode(entry.getValue()));
+            tempRoot.appendChild(temp);
+        }
+
+        return new DOMSource(doc);
+    }
+
+    private static HashMap<String, String> getAllVariables(String allValues) {
+        HashMap<String, String> variables = new HashMap<>();
+        String[] members = allValues.split(",");
+
+        for (String member : members) {
+            String[] temp = member.split(":");
+            if (temp.length == 2) {
+                variables.put(temp[0].trim(), temp[1].trim());
+            }
+        }
+
+        return variables;
+    }
+
 }

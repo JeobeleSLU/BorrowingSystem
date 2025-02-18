@@ -14,7 +14,7 @@ public class SingletonEquipmentFactory implements Getter, Factory {
     public Equipment createObject(String[] members) {
         //todo: continue this
         int quantity = Integer.parseInt(members[3]);
-        boolean flag = quantity < 1;
+        boolean flag = quantity > 1;
 
         return new Equipment(flag,new AtomicInteger(quantity),members[2],members[1],members[0]);
     }
@@ -33,6 +33,15 @@ public class SingletonEquipmentFactory implements Getter, Factory {
                 "name",
                 "quantity",
                 "isAvailable"
+        };
+
+    }
+    public String[] getRequestMember() {
+        return new String[]{
+                "type",
+                "id",
+                "name",
+                "quantity",
         };
 
     }

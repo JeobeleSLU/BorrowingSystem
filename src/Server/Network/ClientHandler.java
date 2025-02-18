@@ -1,8 +1,12 @@
 package Server.Network;
 
+import Common.Factories.SingletonEquipmentFactory;
+import Common.Model.Transaction;
 import Common.Utilities.FileHandler;
+import Server.Controller.TransactionController;
 import Server.Model.Authenticator;
 import Client.Model.EquipmentManager;
+import Server.Model.Equipment;
 
 import java.io.*;
 import java.net.Socket;
@@ -35,12 +39,14 @@ public class ClientHandler implements Runnable {
     FileHandler handler;
     File saveFile;
     File responseFilePath;
+    TransactionController transactionController;
 
-    public ClientHandler(Socket client, EquipmentManager equipmentManager, Authenticator authenticator)  {
+    public ClientHandler(Socket client, EquipmentManager equipmentManager, Authenticator authenticator,TransactionController controller)  {
         this.socket = client;
         this.equipmentManager = equipmentManager;
         this.auth = authenticator;
         idNumber = null;
+        this.transactionController = controller;
         this.handler = new FileHandler();
         this.sessionID = UUID.randomUUID().toString();
         try {
@@ -85,24 +91,62 @@ public class ClientHandler implements Runnable {
             createUser();
         }else if (request.equals("EQUIPMENT")){
             sendResponseXML(handler.getXMLFile("Equipment"));
-        }else if (request.equals("TRANSACT")){
+        }else if (request.equals("TRANSACT")) {
             transact();
-        } else if (request.equals("DISCONNECT")) {
+        } else if (request.equals("ADD_EQUIPMENT")) {
+            addEquipment();
+         } else if (request.equals("DISCONNECT")) {
             closeResources();
+        } else if (request.equals("TRANSACTION_HISTORY")) {
+            sendHistory();
+        } else if (request.equals("TRANSACTION_HISTORY_ADMIN")) {
+            sendResponseXML(handler.getXMLFile("Transaction"));
         }
     }
 
+    private void sendHistory() {
+        ArrayList<Transaction> userTransactions=  transactionController.getUserTransaction(idNumber);
+        if (responseFilePath.exists()){
+            responseFilePath.delete();
+        }
+        userTransactions.forEach(e-> RequestUtility.buildObjectXML(e, "Transaction",responseFilePath));
+        sendResponseXML(responseFilePath);
+    }
+
+    private void addEquipment() {
+        String[] node = {
+                "Result"
+        };
+        ArrayList<String>attributes = RequestUtility.getContent(saveFile,equipmentManager.getNodes());
+        String response = equipmentManager.addEquipment(attributes);
+        ArrayList<String> res = new ArrayList<>();
+        res.add(response);
+
+        sendToStream(res,node);
+    }
     /**
      * TODO:
      * Transaction logic on how the equipment will be borrowed
      */
     private void transact() {
+        String[] node  = new String[]{
+                "result"
+        };
+        ArrayList<String> attri = RequestUtility.getContent(saveFile,SingletonEquipmentFactory.getInstance().getRequestMember());
+        Equipment equipment = SingletonEquipmentFactory.getInstance().createObject(attri.toArray(new String[0]));
+        boolean result= equipmentManager.transact(equipment);
+        String response = equipmentManager.getResponse(result);
+        ArrayList<String> resultNode = new ArrayList<>();
+        resultNode.add(response);
+        sendToStream(resultNode,node);
     }
 
     private void createUser() {
         ArrayList<String> attributes = RequestUtility.getContent(saveFile,auth.getSingUpAttributes());
+        System.out.println("Attributes");
        int response =  auth.createUser(attributes.toArray(new String[0]));
        ArrayList<String> creationResponse = new ArrayList<>();
+       creationResponse.add(String.valueOf(response));
 
        sendResponseXML(RequestUtility.createXMLResponse(creationResponse,auth.getCreationNodeResponse(),saveFile));
     }
@@ -115,7 +159,12 @@ public class ClientHandler implements Runnable {
      * arraylist based on the login and then returns the user type
      */
     private void authenticateUser() {
-       ArrayList<String> result= auth.authenticate(RequestUtility.getContent(saveFile, auth.getLoginAttributes()));
+        ArrayList<String> request=  RequestUtility.getContent(saveFile, auth.getLoginAttributes());
+       ArrayList<String> result= auth.authenticate(request);
+       if (result.get(1).equals("1")){
+           this.idNumber = request.get(0);
+           System.out.println("User ID Number = " + idNumber);
+       }
        sendToStream(result, auth.getResponseAttributes());
     }
 
@@ -160,7 +209,7 @@ public class ClientHandler implements Runnable {
      */
     private void receiveRequest() {
         try {
-            saveFile = new File(handler.getFilePath("Cache") + "ClientRequest.xml");
+            saveFile = new File(handler.getFilePath("Cache") + sessionID+ "request.xml");
             responseFilePath = new File(handler.getFilePath("Cache") + sessionID + "Response.xml");
 
             try (FileOutputStream fileOutputStream = new FileOutputStream(saveFile)) {
@@ -183,9 +232,6 @@ public class ClientHandler implements Runnable {
             System.err.println("Error receiving file: " + e.getMessage());
         }
     }
-
-
-
     private void closeResources() {
         try {
             if (inputStream != null) inputStream.close();

@@ -17,15 +17,21 @@ public class LoginController {
     public LoginController() {
         this.model = new LoginModel();
         this.view = new login_page();
-        server = SingletonSocketService.getInstance();
-        view.getLoginBtn().addActionListener(e-> {
+        addEventActionListeners();
 
+    }
+
+    private void addEventActionListeners() {
+
+        view.getLoginBtn().addActionListener(e-> {
+            server = SingletonSocketService.getInstance();
             requestLogin();
         });
         view.getSignUpLbl().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-             new RegistrationController();
+                new RegistrationController();
+                view.dispose();
             }
         });
     }
@@ -51,6 +57,7 @@ public class LoginController {
         String result = response.get(1);
         String role = response.get(0);
         if (result.equals("1")){
+            model.setUserSessionID(view.getUnField().getText());
             if (role.equals("Student")){
                 new HomepageController();
                 view.dispose();
