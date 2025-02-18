@@ -226,4 +226,8 @@ public class homePageAdmin extends JFrame {
     public JLabel getAddItem() {
         return addItem;
     }
+
+    public static void main(String[] args) {
+        new HomepageClient();
+    }
 }

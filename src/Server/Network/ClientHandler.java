@@ -1,6 +1,7 @@
 package Server.Network;
 
 import Common.Factories.SingletonEquipmentFactory;
+import Common.Model.Transaction;
 import Common.Utilities.FileHandler;
 import Server.Controller.TransactionController;
 import Server.Model.Authenticator;
@@ -98,11 +99,18 @@ public class ClientHandler implements Runnable {
             closeResources();
         } else if (request.equals("TRANSACTION_HISTORY")) {
             sendHistory();
+        } else if (request.equals("TRANSACTION_HISTORY_ADMIN")) {
+            sendResponseXML(handler.getXMLFile("Transaction"));
         }
     }
 
     private void sendHistory() {
-
+        ArrayList<Transaction> userTransactions=  transactionController.getUserTransaction(idNumber);
+        if (responseFilePath.exists()){
+            responseFilePath.delete();
+        }
+        userTransactions.forEach(e-> RequestUtility.buildObjectXML(e, "Transaction",responseFilePath));
+        sendResponseXML(responseFilePath);
     }
 
     private void addEquipment() {

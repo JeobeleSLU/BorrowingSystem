@@ -94,7 +94,7 @@ public class RequestUtility {
         }
     }
 
-    public <T extends XMLTemplate> boolean buildObjectXML(T object, String type,File file) {
+    public static <T extends XMLTemplate> boolean buildObjectXML(T object, String type, File file) {
         HashMap<String, String> elements = getAllVariables(object.getAllValues());
         return buildXML(elements, type,file);
     }
@@ -103,7 +103,7 @@ public class RequestUtility {
     /*
     Todo: Handle use case where xml already exists and if the item already exist so that u just append on it
      */
-    private boolean buildXML(HashMap<String, String> elements, String type,File file) {
+    private static boolean buildXML(HashMap<String, String> elements, String type,File file) {
 
         try {
 
@@ -131,7 +131,7 @@ public class RequestUtility {
         }
     }
 
-    private DOMSource buildDOMSource(HashMap<String, String> elements, String type) throws ParserConfigurationException, IOException, SAXException {
+    private static DOMSource buildDOMSource(HashMap<String, String> elements, String type) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setIgnoringElementContentWhitespace(true);
         DocumentBuilder docBuilder = factory.newDocumentBuilder();
@@ -166,7 +166,7 @@ public class RequestUtility {
         return new DOMSource(doc);
     }
 
-    private HashMap<String, String> getAllVariables(String allValues) {
+    private static HashMap<String, String> getAllVariables(String allValues) {
         HashMap<String, String> variables = new HashMap<>();
         String[] members = allValues.split(",");
 

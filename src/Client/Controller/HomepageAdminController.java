@@ -3,6 +3,7 @@ import Client.Model.EquipmentManager;
 import Client.Model.HomepageAdminModel;
 import Client.Service.SingletonSocketService;
 import Client.View.homePageAdmin;
+import Server.Controller.TransactionController;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,6 +13,7 @@ public class HomepageAdminController {
   HomepageAdminModel model;
   SingletonSocketService server;
   EquipmentManager equipment;
+  TransactionController transactions;
 
     public HomepageAdminController() {
         view = new homePageAdmin();
@@ -19,6 +21,10 @@ public class HomepageAdminController {
         server  = SingletonSocketService.getInstance();
         requestEquipment();
         getResponse();
+       addEventActionListeners();
+    }
+
+    private void addEventActionListeners() {
         view.getAddItem().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -26,7 +32,10 @@ public class HomepageAdminController {
                 new AddItemController();
             }
         });
+
+
     }
+
     private void getResponse() {
         equipment = model.storeEqToMemory();
     }
