@@ -31,7 +31,7 @@ public class HomepageAdminController {
                 super.mouseClicked(e);
                 server.sendXMLToServer(model.createRequest("TRANSACTION_HISTORY_ADMIN"));
                 transactions = model.storeTransactionsToMemory();
-                view.populateTable(transactions.getArrayList());
+                view.populateTableTransaction(transactions.getArrayList());
 
             }
         });
@@ -40,6 +40,13 @@ public class HomepageAdminController {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 new AddItemController();
+            }
+        });
+        view.getEquipment().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
             }
         });
 

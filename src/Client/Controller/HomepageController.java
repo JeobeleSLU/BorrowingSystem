@@ -18,18 +18,24 @@ public class HomepageController {
         server = SingletonSocketService.getInstance();
         requestEquipment();
         getResponse();
-//        addActionEventListners();
+        addActionEventListners();
     }
 
-//    private void addActionEventListners() {
-//        view.getHis().addActionListener(e-> {
-//            requestEquipment();
-//        });
-//    }
+    private void addActionEventListners() {
+       view.getSearchButton().addActionListener(e-> {
+           String search = view.getSearchField().getText();
+           server.sendXMLToServer(model.request("SEARCH",search));
+           equipment.clear();
+           getResponse();
+       });
+    }
 
     private void getResponse() {
+
         equipment = model.storeEqToMemory();
         view.populateTableList(model.storeEqToMemory().getEquipmentArrayList());
+        System.out.println("Search plss");
+        equipment.getEquipmentArrayList().forEach(e-> System.out.println("Search query: "+ e.getName()));
     }
 
     private void requestEquipment() {

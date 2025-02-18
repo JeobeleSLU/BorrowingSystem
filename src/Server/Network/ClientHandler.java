@@ -101,7 +101,19 @@ public class ClientHandler implements Runnable {
             sendHistory();
         } else if (request.equals("TRANSACTION_HISTORY_ADMIN")) {
             sendResponseXML(handler.getXMLFile("Transaction"));
+        } else if (request.equals("SEARCH")) {
+            searchEquipment();
         }
+    }
+
+    private void searchEquipment() {
+        String[] node = new String[]{
+          "SEARCH"
+        };
+        ArrayList<String> attri = RequestUtility.getContent(saveFile,node);
+        ArrayList<Equipment> equipment = equipmentManager.getSearch(attri.get(0));
+        equipment.forEach(e-> RequestUtility.buildObjectXML(e,"Equipment",responseFilePath));
+        sendResponseXML(responseFilePath);
     }
 
     private void sendHistory() {
@@ -134,10 +146,13 @@ public class ClientHandler implements Runnable {
         };
         ArrayList<String> attri = RequestUtility.getContent(saveFile,SingletonEquipmentFactory.getInstance().getRequestMember());
         Equipment equipment = SingletonEquipmentFactory.getInstance().createObject(attri.toArray(new String[0]));
+        ArrayList<String> dateAndTime = RequestUtility.getContent(saveFile,transactionController.getDateAndTime());
         boolean result= equipmentManager.transact(equipment);
         String response = equipmentManager.getResponse(result);
         ArrayList<String> resultNode = new ArrayList<>();
         resultNode.add(response);
+        Transaction transaction = new Transaction(1,equipment.getName(),dateAndTime.get(0),dateAndTime.get(1),idNumber, equipment.getId());
+        transactionController.writeUserToXml(transaction);
         sendToStream(resultNode,node);
     }
 

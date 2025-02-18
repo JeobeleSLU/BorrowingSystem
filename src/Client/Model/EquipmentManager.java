@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * This class will facilitate the transactions
@@ -143,5 +144,13 @@ public class EquipmentManager {
             return "1";
         }else
             return "-1";
+    }
+
+    public ArrayList<Equipment> getSearch(String s) {
+        return (ArrayList<Equipment>) equipmentArrayList.stream().filter(e-> e.getName().contains(s)).collect(Collectors.toList());
+    }
+
+    public void clear() {
+        this.equipmentArrayList.clear();
     }
 }

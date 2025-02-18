@@ -293,11 +293,17 @@ public class HomepageClient extends JFrame {
 
 //===================================================================================================================
 public void populateTableList(ArrayList<Equipment> equipmentList) {
+
         equipmentList.forEach(e-> System.out.println(e.getName()));
 //    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Drone", "E001", "Drones"));
 //    equipmentList.add(new Equipment(true, new AtomicInteger(5), "Camera", "E002", "Cameras"));
 //    equipmentList.add(new Equipment(false, new AtomicInteger(3), "Stabilizer", "E003", "Accessories"));
 //    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Switch", "E004", "Electronics"));
+
+    if (equipTable != null) {
+        DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
+        model.setRowCount(0);
+    }
 
     centerPanel.setLayout(new BorderLayout());
 
@@ -476,6 +482,20 @@ private void searchAndUpdateTable() {
         protected void fireEditingStopped() {
             super.fireEditingStopped();
         }
+
+
+
+    }
+    public JButton getSearchButton() {
+        return searchButton;
+    }
+
+    public JTextField getSearchField() {
+        return searchField;
+    }
+    public void clearTable() {
+        DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
+        model.setRowCount(0);
     }
 
 

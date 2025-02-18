@@ -88,13 +88,6 @@
             });
 
             //All finished transactions
-            history.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    super.mouseClicked(e);
-                    showingHistory = true;  // Set to true to show history
-                }
-            });
 
             //EQUIPMENT LIST
             equipment.addMouseListener(new MouseAdapter() {
@@ -133,10 +126,9 @@
             System.out.println("Showing logs: " + showingLogs);
             System.out.println("Showing history: " + showingHistory);
             System.out.println("Showing equipment: " + showingEquipment);
-
         }
 
-       public void populateTable(ArrayList<Transaction> transactionList) {
+       public void populateTableTransaction(ArrayList<Transaction> transactionList) {
             centerPanel.setLayout(new BorderLayout());
 
             String[] columnNames;

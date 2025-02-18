@@ -2,7 +2,6 @@ package Server.Controller;
 
 import Common.Factories.SingletonTransactionFactory;
 import Common.Model.Transaction;
-import Common.Model.User;
 import Common.Utilities.FileHandler;
 import Common.Utilities.XMLCreator;
 import Common.Utilities.XMLParser;
@@ -51,12 +50,21 @@ public class TransactionController {
 
         return (ArrayList<Transaction>) transactions.stream().filter(e-> e.getUserId().equals(idNumber)).collect(Collectors.toList());
     }
-    public synchronized boolean writeUserToXml(User user){
-       return writer.createXML(user,"Transaction");
+    public synchronized boolean writeUserToXml(Transaction transaction){
+      if (writer.createXML(transaction,"Transaction")){
+          loadTransactions("base");
+          return true;
+
+      }else return false;
     }
 
 
     public ArrayList<Transaction> getArrayList() {
         return this.transactions;
+    }
+    public String[] getDateAndTime(){
+        return new String[]{
+          "date","time"
+        };
     }
 }

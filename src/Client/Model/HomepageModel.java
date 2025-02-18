@@ -25,4 +25,13 @@ public class HomepageModel {
     public EquipmentManager storeEqToMemory() {
         return new EquipmentManager("./Client/Cache/response.xml");
     }
+
+    public File request(String search, String search1) {
+        String requestNode[] = new String[]{
+          search
+        };
+        ArrayList<String> node = new ArrayList<>();
+        node.add(search1);
+        return SingletonRequestService.createXMLRequest("SEARCH",node,requestNode);
+    }
 }
