@@ -403,9 +403,9 @@ private void searchAndUpdateTable() {
 
                 String receiptText = "";
                 receiptText += "Equipment: " + equipmentName + "\n";
-                receiptText += "Quantity: " + quantity + "\n";\
-                receiptText += "Start Time: " + startTime + "\n";\
-                receiptText += "End Time: " + endTime + "\n";\
+                receiptText += "Quantity: " + quantity + "\n";
+                receiptText += "Start Time: " + startTime + "\n";
+                receiptText += "End Time: " + endTime + "\n";
                 receiptText += "==================\n";
 
 
