@@ -9,6 +9,7 @@ import Common.Utilities.XMLParser;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TransactionController {
     XMLParser parser;
@@ -46,7 +47,9 @@ public class TransactionController {
         handler = new FileHandler();   
     }
     public ArrayList<Transaction> getUserTransaction(String idNumber){
-         return (ArrayList<Transaction>) transactions.stream().filter(e-> e.getUserId().equals(idNumber));
+        transactions.forEach(e-> System.out.println(e.getUserId()));
+
+        return (ArrayList<Transaction>) transactions.stream().filter(e-> e.getUserId().equals(idNumber)).collect(Collectors.toList());
     }
     public synchronized boolean writeUserToXml(User user){
        return writer.createXML(user,"Transaction");

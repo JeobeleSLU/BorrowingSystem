@@ -31,6 +31,10 @@
         private boolean showingLogs = true;
         private boolean showingEquipment = false;
 
+        public JLabel getAddItem() {
+            return addItem;
+        }
+
         private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss");
         private final String stamp = LocalDateTime.now().format(dateTimeFormatter);
         public boolean add;
@@ -279,7 +283,7 @@
 
                     }
                 });
-                }
+            }
 
 
             @Override

@@ -36,9 +36,6 @@ public class HomepageClient extends JFrame {
     ButtonEditor editor;
 
 
-
-
-
     public HomepageClient() {
         setContentPane(mainPanel);
         setTitle("Client Homepage");
@@ -60,7 +57,7 @@ public class HomepageClient extends JFrame {
         homePageAdmin.setupHoverEffect(equipment);
         homePageAdmin.setVisible(false);
 
-        populateTable();
+//        populateTable();
 
         types.addActionListener(new ActionListener() {
             @Override
@@ -102,7 +99,6 @@ public class HomepageClient extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 showingBorrowed = true;
-                populateTable();
             }
         });
 
@@ -480,7 +476,12 @@ private void searchAndUpdateTable() {
         protected void fireEditingStopped() {
             super.fireEditingStopped();
         }
-        }
+    }
+
+
+    public static void main(String[] args) {
+        new HomepageClient();
+    }
     }
 
 

@@ -2,9 +2,12 @@ package Test;
 
 import Client.Model.EquipmentManager;
 import Common.Factories.SingletonEquipmentFactory;
+import Common.Factories.SingletonTransactionFactory;
+import Common.Model.Transaction;
 import Common.Utilities.FileHandler;
 import Common.Utilities.XMLCreator;
 import Common.Utilities.XMLParser;
+import Server.Controller.TransactionController;
 import Server.Model.Equipment;
 
 import java.util.ArrayList;
@@ -33,7 +36,12 @@ public class main {
         manager.transact(equipment1);
         manager.transact(equipment1);
         manager.transact(equipment1);
-
+        Transaction transaction = new Transaction(4,"name","date","time","10","eqID");
+        creator.createXML(transaction,"Transaction");
+        ArrayList<Transaction>transactopns  = parser.parse(SingletonTransactionFactory.getInstance(),handler.getXMLFile("Transaction"));
+        transactopns.forEach(e-> System.out.println(e.getAllValues()));
+        TransactionController controller = new TransactionController();
+        controller.getUserTransaction("10").forEach(e-> System.out.println(e.getAllValues()));
     }
 
 }
