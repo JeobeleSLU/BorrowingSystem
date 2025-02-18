@@ -1,6 +1,6 @@
 package Common.Model;
 import Common.Utilities.XMLTemplate;
-
+//test
 public class Transaction implements XMLTemplate {
     String userId;
     String equipmentId;
