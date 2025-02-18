@@ -35,7 +35,7 @@ public class XMLParser{
     public <T>ArrayList<T> parse(Factory<T> objectToBeCreated, File file) {
         ArrayList<T> arrayList = new ArrayList<>();
         String[] dataMembers = objectToBeCreated.getDataMembers();
-        String[]  attributes= new String[objectToBeCreated.getDataMembers().length];
+        String[]  attributes = new String[objectToBeCreated.getDataMembers().length];
 
 
         try {

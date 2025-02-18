@@ -2,6 +2,7 @@ package Test;
 
 import Client.Model.EquipmentManager;
 import Common.Factories.SingletonEquipmentFactory;
+import Common.Factories.SingletonTransactionFactory;
 import Common.Model.Transaction;
 import Common.Utilities.FileHandler;
 import Common.Utilities.XMLCreator;
@@ -35,7 +36,8 @@ public class main {
         manager.transact(equipment1);
         manager.transact(equipment1);
 
-        creator.createXML(new Transaction(1,"dildo","12:14","10","22"),"Transaction");
+        creator.createXML(new Transaction(1,"dildo","12:14","10","22", "123415"),"Transaction");
+        parser.parse(SingletonTransactionFactory.getInstance(), handler.getXMLFile("Transaction"));
     }
 
 }

@@ -297,8 +297,4 @@
                 return "Remove";
             }
         }
-
-        public JLabel getAddItem() {
-            return addItem;
-        }
     }
