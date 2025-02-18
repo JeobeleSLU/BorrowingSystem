@@ -15,14 +15,9 @@ public class SingletonSocketService {
     DataInputStream inputStream ;
     DataOutputStream outputStream;
     File saveFile;
-    static String serverAddress;
-
-    public static void setServerAddress(String server) {
-        serverAddress = server;
-    }
 
     private SingletonSocketService(){
-        establishConnection(serverAddress);
+        establishConnection();
         initializeComponents();
     }
 
@@ -35,16 +30,16 @@ public class SingletonSocketService {
         }
     }
 
-    private void establishConnection(String serverAd) {
+    private void establishConnection() {
         try {
-//            String inputValue = JOptionPane.showInputDialog("input ip Adresss");
-            socket = new Socket(serverAd,6969);
+            String inputValue = JOptionPane.showInputDialog("input ip Adresss");
+            socket = new Socket(inputValue,6969);
 
         } catch (IOException e) {
             System.out.println("Can't establish connection");
             JOptionPane.showMessageDialog(null,
                     "Can't Connect to server", "Warning", 2);
-//            establishConnection();
+            establishConnection();
         }
     }
 

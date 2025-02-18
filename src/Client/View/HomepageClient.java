@@ -124,8 +124,8 @@ public class HomepageClient extends JFrame {
         model.setRowCount(0);
 
         Object[][] data = new Object[][] {
-                {new ImageIcon("./src/gui/drone.jpg"), "Drones", "4", "add"},
-                {new ImageIcon("./src/gui/camera.png"), "Camera", "5", "add"},
+                {new ImageIcon("./res/Images/drone.jpg"), "Drones", "4", "add"},
+                {new ImageIcon("./res/Images/camera.png"), "Camera", "5", "add"},
                 {3, "Stabelizer", "3", "add"},
                 {4, "Swtiches", "4", "add"}
         };
@@ -297,8 +297,8 @@ private void searchAndUpdateTable() {
     Object[][] data;
     if (isClicked) {
         data = new Object[][]{
-                {new ImageIcon("./src/gui/drone.jpg"), "Drone", "4", "add"},
-                {new ImageIcon("./src/gui/camera.png"), "Camera", "5", "add"},
+                {new ImageIcon("./res/Images/drone.jpg"), "Drone", "4", "add"},
+                {new ImageIcon("./res/Images/camera.png"), "Camera", "5", "add"},
                 {3, "Stabilizer", "3", "add"},
                 {4, "Switch", "4", "add"}
         };
