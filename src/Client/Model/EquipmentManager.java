@@ -110,24 +110,51 @@ public class EquipmentManager {
      *         log it to check the transaction
      *
      */
-    public synchronized boolean transact(Equipment equipment){
+    public synchronized boolean transact(Equipment equipment) {
+        Equipment equipment1 = equipmentArrayList.stream()
+                .filter(e -> e.getId().equals(equipment.getId()))
+                .findFirst()
+                .orElse(null);
 
-            Equipment equipment1 = equipmentArrayList.stream().
-                    filter(e-> e.getId()
-                            .equals(equipment.getId()))
-              .findFirst()
-              .stream()
-              .toList()
-              .get(0);
-      if (equipment1.getQuantity().get() < 1){
-          System.out.println("no more equipment");
-          return false;
-      }else equipment1.getQuantity().getAndDecrement();
+        if (equipment1 == null) {
+            System.out.println("Equipment not found.");
+            return false;
+        }
 
-      equipmentArrayList.forEach(e-> System.out.println(e.getAllValues()));
+        synchronized (equipment1) {
+            if (equipment1.getQuantity().get() < 1) {
+                System.out.println("No more equipment available.");
+                return false;
+            }
+            equipment1.getQuantity().getAndDecrement();
+        }
+
+        System.out.println("Equipment successfully transacted.");
+        System.out.println("Equipment ArrayList size: " + equipmentArrayList.size());
+        equipmentArrayList.forEach(e -> System.out.println(e.getName()));
+
+        reWriteXML();
+
         return true;
+    }
 
+    private void reWriteXML() {
+        File file = handler.getXMLFile("Equipment");
 
+        if (file.exists()) {
+            // **Delete the file first to prevent duplication**
+            if (file.delete()) {
+                System.out.println("Existing XML file deleted successfully.");
+            } else {
+                System.out.println("Failed to delete the existing XML file.");
+                return;
+            }
+        }
+
+        // **Write all equipment again**
+        equipmentArrayList.forEach(e -> writer.createXML(e, "Equipment"));
+
+        System.out.println("Rewriting XML with updated equipment list.");
     }
 
     public String[] getNodes() {
