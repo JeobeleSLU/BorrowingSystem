@@ -1,11 +1,13 @@
 package Server.Network;
 
 import Client.Model.EquipmentManager;
+import Client.Service.SingletonSocketService;
 import Server.Controller.TransactionController;
 import Server.Model.Authenticator;
 import Server.Network.ClientHandler;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -18,7 +20,15 @@ public class Server {
         TransactionController controller = new TransactionController();
         EquipmentManager equipmentManager = new EquipmentManager();
         Authenticator authenticator = new Authenticator();
-        ServerSocket server= new ServerSocket(6969);
+
+        InetAddress localhost = InetAddress.getLocalHost();
+
+        String ip = String.valueOf(InetAddress.getLocalHost());
+
+        SingletonSocketService.setServerAddress(ip);
+
+
+        ServerSocket server = new ServerSocket(6969);
         ExecutorService threadPool = Executors.newFixedThreadPool(20);
         while (true) {
             Socket client = server.accept();

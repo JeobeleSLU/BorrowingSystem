@@ -8,7 +8,7 @@ public class Transaction implements XMLTemplate {
     String equipmentName;
     int qty;
     String time;
-    String type;
+    String date;
 
     /*
 
@@ -19,12 +19,18 @@ public class Transaction implements XMLTemplate {
         <equipmentId>224</equipmentId>
      */
 
-    public Transaction(int qty,String equipmentName,String time, String userId,String equipmentId) {
+
+    public Transaction(int qty, String equipmentName, String date, String time, String userId, String equipmentId) {
         this.userId = userId;
         this.equipmentId = equipmentId;
         this.equipmentName = equipmentName;
         this.qty = qty;
         this.time = time;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public String getUserId() {
@@ -50,6 +56,7 @@ public class Transaction implements XMLTemplate {
     public void setEquipmentName(String equipmentName) {
         this.equipmentName = equipmentName;
     }
+
 
     public int getQty() {
         return qty;
@@ -85,6 +92,7 @@ public class Transaction implements XMLTemplate {
                 "equipmentName",
                 "qty",
                 "time"
+                ,"date"
         };
     }
 
@@ -105,6 +113,7 @@ public class Transaction implements XMLTemplate {
                 .append("equipmentId:").append(this.equipmentId).append(",")
                 .append("equipmentName:").append(this.equipmentName).append(",")
                 .append("time:").append(this.time).append(",")
+                .append("date:").append(this.date).append(",")
                 .append("qty:").append(this.qty)
                 .toString();
     }
