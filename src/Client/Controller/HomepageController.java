@@ -44,7 +44,6 @@ public class HomepageController {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 model.requestEquipment("TRANSACTION_HISTORY");
-                System.out.println("TITE");
                 transaction = model.stroreTransacToMem();
                 view.populateTableList2(transaction.getArrayList());
             }
