@@ -1,5 +1,6 @@
 package Client.View;
 
+import Common.Model.Transaction;
 import Server.Model.Equipment;
 
 import javax.swing.*;
@@ -34,6 +35,9 @@ public class HomepageClient extends JFrame {
     private boolean isClicked = false;
     private boolean show;
     ButtonEditor editor;
+
+
+
 
 
     public HomepageClient() {
@@ -119,8 +123,8 @@ public class HomepageClient extends JFrame {
         model.setRowCount(0);
 
         Object[][] data = new Object[][] {
-                {new ImageIcon("./src/gui/drone.jpg"), "Drones", "4", "add"},
-                {new ImageIcon("./src/gui/camera.png"), "Camera", "5", "add"},
+                {new ImageIcon("./res/Images/drone.jpg"), "Drones", "4", "add"},
+                {new ImageIcon("./res/Images/camera.png"), "Camera", "5", "add"},
                 {3, "Stabelizer", "3", "add"},
                 {4, "Swtiches", "4", "add"}
         };
@@ -164,146 +168,14 @@ public class HomepageClient extends JFrame {
             }
         });
 
-
-
-        //======================================================================================================
-        // Add the date and time panel to the top of the center panel
-     //   centerPanel.add(datePanel, BorderLayout.NORTH);
-//=====================================================================================================================
-        // Define table columns and data
-        String[] columnNames;
-        Object[][] data;
-
-        // Example equipment images
-        ImageIcon droneIcon = new ImageIcon("./src/gui/drone.jpg");
-        ImageIcon cameraIcon = new ImageIcon("./src/gui/camera.png");
-
-        if (showingEquipList) {
-            showingBorrowed = false;
-            showingSettings = false;
-            columnNames = new String[]{"Image", "Equipment Name", "Quantity", "Avail"};
-            data = new Object[][]{
-                    {droneIcon, "Drone", "4", "add"},
-                    {cameraIcon, "Camera", "5", "add"},
-                    {3, "Stabilizer", "3", "add"},
-                    {4, "Switch", "4", "add"}
-            };
-            showingEquipList = false;
-            show = true;
-
-        } else if (showingBorrowed) {
-            showingEquipList = false;
-            showingSettings = false;
-            columnNames = new String[]{"Equipment Name", "Borrowed Date", "Status"};
-            data = new Object[][]{
-                    {"Drone", "12-01-2025", "Returned"},
-                    {"Switch", "02-27-2026", "In Progress"}
-            };
-
-            showingBorrowed = false;
-            show = false;
-
-        } else if (showingSettings) {
-            showingEquipList = false;
-            showingBorrowed = false;
-            showingSettings = false;
-            show = false;
-
-            // Display user profile settings
-            centerPanel.setLayout(new GridLayout(10, 50, 200, 2200));
-
-            JLabel firstNameLabel = new JLabel("First Name: ");
-            JLabel firstName = new JLabel("John");
-
-            JLabel lastNameLabel = new JLabel("Last Name: ");
-            JLabel lastName = new JLabel("Doe");
-
-            JLabel emailLabel = new JLabel("Email: ");
-            JLabel email = new JLabel("john.doe@example.com");
-
-            // Add labels to the panel
-            centerPanel.add(firstNameLabel);
-            centerPanel.add(firstName);
-            centerPanel.add(lastNameLabel);
-            centerPanel.add(lastName);
-            centerPanel.add(emailLabel);
-            centerPanel.add(email);
-
-            centerPanel.revalidate();
-            centerPanel.repaint();
-            return; // Exit early to avoid setting up the table
-        } else {
-            columnNames = new String[]{};
-            data = new Object[][]{};
-        }
-
-
-        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return column == 3;
-            }
-        };
-            centerPanel.removeAll();
-
-        equipTable = new JTable(model);
-        equipTable.setRowHeight(50);
-        equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-
-        // Wrap JTable in JScrollPane
-        JScrollPane scrollPane = new JScrollPane(equipTable);
-        scrollPane.setPreferredSize(new Dimension(530, 500));
-
-        System.out.println("aabot ata dito");
-        if (show){
-            System.out.println(" pero dito hindi umabot");
-            equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
-            equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
-            equipTable.getColumnModel().getColumn(3).setCellEditor(this.editor = new ButtonEditor(new JCheckBox()));
-            equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
-            equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
-            equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
-            equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
-        }
-
-        centerPanel.add(scrollPane, BorderLayout.WEST);
-
-        //============================
-        receiptArea = new JTextArea();
-        receiptArea.setEditable(false);
-        JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
-        receiptScrollPane.setPreferredSize(new Dimension(300, 500));
-        centerPanel.add(receiptScrollPane, BorderLayout.EAST);
-        //===========================
-
-        // Ensure UI updates properly
-        equipTable.revalidate();
-        equipTable.repaint();
-        SwingUtilities.invokeLater(() -> {
-            equipTable.revalidate();
-            equipTable.repaint();
-            centerPanel.revalidate();
-            centerPanel.repaint();
-        });
-
-        setVisible(false);
     }
-
-
 //===================================================================================================================
 public void populateTableList(ArrayList<Equipment> equipmentList) {
-
         equipmentList.forEach(e-> System.out.println(e.getName()));
 //    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Drone", "E001", "Drones"));
 //    equipmentList.add(new Equipment(true, new AtomicInteger(5), "Camera", "E002", "Cameras"));
 //    equipmentList.add(new Equipment(false, new AtomicInteger(3), "Stabilizer", "E003", "Accessories"));
 //    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Switch", "E004", "Electronics"));
-
-    if (equipTable != null) {
-        DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
-        model.setRowCount(0);
-    }
 
     centerPanel.setLayout(new BorderLayout());
 
@@ -320,6 +192,8 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
 
         data[i] = new Object[]{equipmentName,type, quantity, availability};
     }
+
+
     DefaultTableModel model = new DefaultTableModel(data, columnNames) {
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -348,6 +222,7 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
     JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
     receiptScrollPane.setPreferredSize(new Dimension(300, 500));
     centerPanel.add(receiptScrollPane, BorderLayout.EAST);
+        centerPanel.add(receiptScrollPane, BorderLayout.EAST);
 
     SwingUtilities.invokeLater(() -> {
         equipTable.revalidate();
@@ -359,6 +234,68 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
     setVisible(true);
 }
 
+    public void populateTableList2 (ArrayList<Transaction> transactionList) {
+    transactionList.forEach(e-> System.out.println(e.getEquipmentName()));
+//    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Drone", "E001", "Drones"));
+//    equipmentList.add(new Equipment(true, new AtomicInteger(5), "Camera", "E002", "Cameras"));
+//    equipmentList.add(new Equipment(false, new AtomicInteger(3), "Stabilizer", "E003", "Accessories"));
+//    equipmentList.add(new Equipment(true, new AtomicInteger(4), "Switch", "E004", "Electronics"));
+
+    centerPanel.setLayout(new BorderLayout());
+
+    String[] columnNames = new String[]{"Equipment Name", "Borrowed Time", "Status"};
+    Object[][] data = new Object[transactionList.size()][3];
+
+    for (int i = 0; i < transactionList.size(); i++) {
+        Transaction transaction = transactionList.get(i);
+
+        String equipmentName = transaction.getEquipmentName();
+        String borrowedTime  = transaction.getTime();
+        String status = "In-Progress";
+
+
+        data[i] = new Object[]{equipmentName,borrowedTime, status,};
+    }
+    DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column == 3;
+        }
+    };
+    equipTable = new JTable(model);
+    equipTable.setRowHeight(50);
+    equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+    equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
+    equipTable.getColumnModel().getColumn(2).setCellRenderer(new ButtonRenderer());
+    equipTable.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox()));
+
+    equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
+    equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
+    equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
+    equipTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+    JScrollPane scrollPane = new JScrollPane(equipTable);
+    scrollPane.setPreferredSize(new Dimension(530, 500));
+
+    centerPanel.add(scrollPane, BorderLayout.WEST);
+
+    receiptArea = new JTextArea();
+    receiptArea.setEditable(false);
+    JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
+    receiptScrollPane.setPreferredSize(new Dimension(350, 500));
+    centerPanel.add(receiptScrollPane, BorderLayout.EAST);
+
+    SwingUtilities.invokeLater(() -> {
+        equipTable.revalidate();
+        equipTable.repaint();
+        centerPanel.revalidate();
+        centerPanel.repaint();
+    });
+
+    setVisible(true);
+}
+
+
 private void searchAndUpdateTable() {
     String searchTerm = searchField.getText().trim().toLowerCase();
     DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
@@ -367,8 +304,8 @@ private void searchAndUpdateTable() {
     Object[][] data;
     if (isClicked) {
         data = new Object[][]{
-                {new ImageIcon("./src/gui/drone.jpg"), "Drone", "4", "add"},
-                {new ImageIcon("./src/gui/camera.png"), "Camera", "5", "add"},
+                {new ImageIcon("./res/Images/drone.jpg"), "Drone", "4", "add"},
+                {new ImageIcon("./res/Images/camera.png"), "Camera", "5", "add"},
                 {3, "Stabilizer", "3", "add"},
                 {4, "Switch", "4", "add"}
         };
@@ -496,13 +433,12 @@ private void searchAndUpdateTable() {
     public void clearTable() {
         DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
         model.setRowCount(0);
-    }
+        }
 
-
-    public static void main(String[] args) {
-        new HomepageClient();
+    public JLabel getBorrowedItemlbl() {
+        return borrowedItemlbl;
     }
-    }
+}
 
 
 

@@ -308,4 +308,8 @@
         public JLabel getEquipment() {
             return equipment;
         }
+
+        public JLabel getAddItem() {
+            return addItem;
+        }
     }
