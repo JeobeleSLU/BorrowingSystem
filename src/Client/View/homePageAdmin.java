@@ -1,5 +1,7 @@
     package Client.View;
 
+    import Common.Model.Transaction;
+
     import javax.swing.*;
     import javax.swing.table.DefaultTableModel;
     import javax.swing.table.TableCellRenderer;
@@ -10,6 +12,7 @@
     import java.awt.event.MouseEvent;
     import java.time.LocalDateTime;
     import java.time.format.DateTimeFormatter;
+    import java.util.ArrayList;
     import java.util.Arrays;
     import java.util.Calendar;
     import java.util.Date;
@@ -30,6 +33,7 @@
         private boolean showingHistory = false;
         private boolean showingLogs = true;
         private boolean showingEquipment = false;
+        private ArrayList<Transaction> transactions = new ArrayList<>();
 
         public JLabel getAddItem() {
             return addItem;
@@ -50,7 +54,7 @@
             setVisible(true);
             setResizable(false);
 
-            populateTable();
+            populateTable(transactions);
 
             setupHoverEffect(addItem);
             setupHoverEffect(logs);
@@ -79,7 +83,7 @@
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
                     showingLogs = true;
-                    populateTable();
+                    populateTable(transactions);
                 }
             });
 
@@ -89,7 +93,7 @@
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
                     showingHistory = true;  // Set to true to show history
-                    populateTable();
+                    populateTable(transactions);
                 }
             });
 
@@ -99,7 +103,7 @@
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
                     showingEquipment = true;
-                    populateTable();
+                    populateTable(transactions);
                 }
             });
         }
@@ -134,7 +138,7 @@
 
         }
 
-        void populateTable() {
+        void populateTable(ArrayList<Transaction> transactionList) {
             centerPanel.setLayout(new BorderLayout());
 
             String[] columnNames;
@@ -144,39 +148,53 @@
                 showingLogs = false;
                 showingEquipment = false;
                 columnNames = new String[]{"StudentId", "Equipment Name", "Date Borrowed", "Status"};
-                data = new Object[][]{
-                        {"2242815", "Drone", "02-14-25", "Returned"},
-                        {"2240696", "Camera", "02-14-25", "Returned"},
-                        {"2241615", "Switch", "02-14-25", "Returned"},
-                        {"2241122", "Router", "02-14-25", "Returned"}
-                };
+                data = new Object[transactionList.size()][3];
+
+                for (int i = 0; i < transactionList.size(); i++) {
+                    Transaction transaction = transactionList.get(i);
+
+                    String studId = transaction.getUserId();
+                    String equipmentName = transaction.getEquipmentName();
+                    String dateBorrowed = transaction.getTime();
+                    String status = "Returned";
+
+                    data[i] = new Object[]{studId, equipmentName, dateBorrowed, status};
+                }
                 showingHistory = false;
                 anotherBool = false;
             } else if (showingLogs) {
                 showingHistory = false;
                 showingEquipment = false;
                 columnNames = new String[]{"StudentId", "Equipment Name", "Date", "Time", "Status"};
-                data = new Object[][]{
-                        {"2242815", "Drone", "02-14-25", "1:00-2:00", "In progress"},
-                        {"2240696", "Camera", "02-14-25", "1:00-2:00", "Returned"},
-                        {"2241615", "Switch", "02-14-25", "1:00-2:00", "Not claimed"},
-                        {"2241122", "Router", "02-14-25", "1:00-2:00", "In progress"}
-                };
+                data = new Object[transactionList.size()][4];
+
+                for (int i = 0; i < transactionList.size(); i++) {
+                    Transaction transaction = transactionList.get(i);
+
+                    String studId = transaction.getUserId();
+                    String equipmentName = transaction.getEquipmentName();
+                    String time = transaction.getTime();
+                    String status = "Returned";
+
+                    data[i] = new Object[]{studId, equipmentName, time, status};
+                }
                 showingLogs = false;
                 anotherBool = false;
             } else if (showingEquipment) {
                 showingHistory = false;
                 showingLogs = false;
                 columnNames = new String[]{"Equipment ID", "Equipment Name", "Flag"};
-             //   equipTable.getColumnModel().getColumn(2).setCellRenderer(new ButtonRenderer());
-               // equipTable.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable));
-                data = new Object[][]{
-                        {"012345", "Drone", "( removed button)"},
-                        {"012346", "Camera", "( removed button)"},
-                        {"012347", "Switch", "( removed button)"},
-                };
+                data = new Object[transactionList.size()][2];
 
+                for (int i = 0; i < transactionList.size(); i++) {
+                    Transaction transaction = transactionList.get(i);
 
+                    String equipId = transaction.getEquipmentId();
+                    String equipmentName = transaction.getEquipmentName();
+                    String status = "Returned";
+
+                    data[i] = new Object[]{equipId, equipmentName, status};
+                }
                 showingEquipment = false;
                 anotherBool = true;
             } else {
@@ -194,23 +212,20 @@
             DefaultTableModel model = new DefaultTableModel(data, columnNames) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
-                    return column == 2;
+                    return column == 5;
                 }
             };
-// Apply button renderer and editor to the 4th column
-            equipTable = new JTable(model);
-            equipTable.getColumnModel().getColumn(2).setCellRenderer(new ButtonRenderer());
-            equipTable.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable));
+
             //====================
             if (add && anotherBool) {
                 System.out.println("ADD");
-                //            Client.View.addItem addItem1 = new addItem();
+//            Client.View.addItem addItem1 = new addItem();
                 String[] row = addItemBtn.row;
                 System.out.println(Arrays.toString(row));
                 model.addRow(row);
-                //            equipTable.repaint();
-                //            centerPanel.repaint();
-                //            mainPanel.repaint();
+//            equipTable.repaint();
+//            centerPanel.repaint();
+//            mainPanel.repaint();
             }
             //======================
 
@@ -223,12 +238,10 @@
             JScrollPane scrollPane = new JScrollPane(equipTable);
             scrollPane.setPreferredSize(new Dimension(500, 500));
 
-
-
             equipTable.getColumnModel().getColumn(0).setPreferredWidth(70);
             equipTable.getColumnModel().getColumn(1).setPreferredWidth(100);
             equipTable.getColumnModel().getColumn(2).setPreferredWidth(120);
-            //        equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+//        equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
 
             centerPanel.add(scrollPane, BorderLayout.CENTER);
 
@@ -240,61 +253,62 @@
                 mainPanel.revalidate();
                 mainPanel.repaint();
             });
-        }
 
-        //======================================================================================================
-        // Custom Button Renderer (Displays "Remove" button in the table)
-        static class ButtonRenderer extends JButton implements TableCellRenderer {
-            public ButtonRenderer() {
-                setOpaque(true);
-                setText("Remove"); // Set text to "Remove"
+
+            //======================================================================================================
+            // Custom Button Renderer (Displays "Remove" button in the table)
+            class ButtonRenderer extends JButton implements TableCellRenderer {
+                public ButtonRenderer() {
+                    setOpaque(true);
+                    setText("Remove"); // Set text to "Remove"
+                }
+
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    return this;
+                }
             }
 
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                return this;
-            }
-        }
+            // Custom Button Editor (Handles "Remove" button clicks)
+            class ButtonEditor extends DefaultCellEditor {
+                private JButton button;
+                private boolean clicked;
+                private JTable table;
+                private int row;
 
-        // Custom Button Editor (Handles "Remove" button clicks)
-        class ButtonEditor extends DefaultCellEditor {
-            private JButton button;
-            private boolean clicked;
-            private JTable table;
-            private int row;
+                public ButtonEditor(JCheckBox checkBox, JTable table) {
+                    super(checkBox);
+                    this.table = table;
+                    button = new JButton("Remove");
+                    button.setOpaque(true);
 
-            public ButtonEditor(JCheckBox checkBox, JTable table) {
-                super(checkBox);
-                this.table = table;
-                button = new JButton("Remove");
-                button.setOpaque(true);
+                    // Handle button click event
+                    button.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            clicked = true;
+                            fireEditingStopped(); // Stop editing when button is clicked
+                            // Remove the selected row
+                            if (table.getModel() instanceof DefaultTableModel) {
+                                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                                model.removeRow(row);
+                            }
 
-                // Handle button click event
-                button.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        clicked = true;
-                        fireEditingStopped(); // Stop editing when button is clicked
-                        // Remove the selected row
-                        if (table.getModel() instanceof DefaultTableModel) {
-                            DefaultTableModel model = (DefaultTableModel) table.getModel();
-                            model.removeRow(row);
                         }
-
-                    }
-                });
-            }
+                    });
+                }
 
 
-            @Override
-            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-                this.row = row; // Store the row index for removal
-                return button;
-            }
+                @Override
+                public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+                    this.row = row; // Store the row index for removal
+                    return button;
+                }
 
-            @Override
-            public Object getCellEditorValue() {
-                return "Remove";
+                @Override
+                public Object getCellEditorValue() {
+                    return "Remove";
+                }
             }
         }
     }
