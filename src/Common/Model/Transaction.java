@@ -1,6 +1,6 @@
 package Common.Model;
 import Common.Utilities.XMLTemplate;
-
+//test
 public class Transaction implements XMLTemplate {
     String userId;
     String equipmentId;
@@ -56,17 +56,7 @@ public class Transaction implements XMLTemplate {
     public void setTime(String time) {
         this.time = time;
     }
-    /*
-        return new String[]{
-                    "type",
-                    "id",
-                    "name",
-                    "quantity"
-                    ,"image",
-                    "isAvailable"
-            };
-        }
-     */
+
     @Override
     public String[] getDataMembers() {
         return new String[] {
@@ -100,3 +90,4 @@ public class Transaction implements XMLTemplate {
                 .toString();
     }
 }
+

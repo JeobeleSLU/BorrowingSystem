@@ -29,6 +29,7 @@ public class TransactionController {
         }else {
             file = new File(path);
         }
+
         if (!file.exists()){
             System.out.println("No transactions found in: " + file.getName());
         }else {
@@ -54,6 +55,7 @@ public class TransactionController {
       if (writer.createXML(transaction,"Transaction")){
           loadTransactions("base");
           return true;
+
 
       }else return false;
     }

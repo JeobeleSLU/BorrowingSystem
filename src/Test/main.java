@@ -2,10 +2,12 @@ package Test;
 
 import Client.Model.EquipmentManager;
 import Common.Factories.SingletonEquipmentFactory;
+import Common.Factories.SingletonTransactionFactory;
 import Common.Model.Transaction;
 import Common.Utilities.FileHandler;
 import Common.Utilities.XMLCreator;
 import Common.Utilities.XMLParser;
+import Server.Controller.TransactionController;
 import Server.Model.Equipment;
 
 import java.util.ArrayList;
@@ -28,14 +30,26 @@ public class main {
 //        <id>66969</id>
 //        <type>Fiber</type>
 //    </Equipment>
-        Equipment equipment1 = new Equipment(true,new AtomicInteger(1),"asd","66969","fiber");
-        EquipmentManager manager = new EquipmentManager();
-        manager.transact(equipment1);
-        manager.transact(equipment1);
-        manager.transact(equipment1);
-        manager.transact(equipment1);
+//        Equipment equipment1 = new Equipment(true,new AtomicInteger(1),"asd","66969","fiber");
+//        EquipmentManager manager = new EquipmentManager();
+//        manager.transact(equipment1);
+//        manager.transact(equipment1);
+//        manager.transact(equipment1);
+//        manager.transact(equipment1);
+//
+//        creator.createXML(new Transaction(1,"dildo","12:14","10","22","sad"),"Transaction");
+//
+//
 
-        creator.createXML(new Transaction(1,"dildo","12:14","10","22","sad"),"Transaction");
+
+
+
+        Transaction transaction = new Transaction(4,"name","date","time","10","eqID");
+        creator.createXML(transaction,"Transaction");
+        ArrayList<Transaction>transactopns  = parser.parse(SingletonTransactionFactory.getInstance(),handler.getXMLFile("Transaction"));
+        transactopns.forEach(e-> System.out.println(e.getAllValues()));
+        TransactionController controller = new TransactionController();
+        controller.getUserTransaction("10").forEach(e-> System.out.println(e.getAllValues()));
     }
 
 }

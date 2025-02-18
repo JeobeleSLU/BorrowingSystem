@@ -23,7 +23,7 @@
     </Equipment>
     <Equipment>
         <isAvailable>true</isAvailable>
-        <quantity>3</quantity>
+        <quantity>0</quantity>
         <name>JeobeleNewEquipment</name>
         <id>66969</id>
         <type>Fiber</type>

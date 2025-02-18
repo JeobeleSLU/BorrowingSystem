@@ -12,6 +12,7 @@ import Server.Model.Equipment;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 public class HomepageController {
     HomepageClient view;
@@ -49,15 +50,25 @@ public class HomepageController {
             }
         });
         view.getBorrowButton().addActionListener(_ ->{
-//            extractDetails();
+            extractDetails();
         } );
     }
 
-//    private void extractDetails() {
-//        String eq = view.getItemToBeBorrowed();
-//        Equipment equipmentToBeBorrowed = equipment.getSearch(eq).get(0);
-//        File file = model.reqestTransaction(equipmentToBeBorrowed,view.getMonth(),view.getStartTime(),view.getEndTime());
-//    }
+    private void extractDetails() {
+        String eq = view.getItemToBeBorrowed();
+        Equipment equipmentToBeBorrowed = equipment.getSearch(eq).get(0);
+        System.out.println(equipmentToBeBorrowed.getAllValues());
+        System.out.println("Month: " + view.getMonth());
+        System.out.println("Start Time: " + view.getStartTime());
+        System.out.println("End Time: " + view.getEndTime());
+        System.out.println("Day: " + view.getDayString());
+        System.out.println("Equipment to be Borrowed: " + equipmentToBeBorrowed);
+
+       server.sendXMLToServer(model.reqestTransaction(equipmentToBeBorrowed,view.getMonth(),
+               view.getStartTime(),
+               view.getEndTime(),
+               view.getDayString()));
+    }
 
     private void addEventActionListeners() {
 

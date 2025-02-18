@@ -1,17 +1,21 @@
 package Server.Network;
 
 import Common.Factories.SingletonEquipmentFactory;
+import Common.Factories.SingletonTransactionFactory;
 import Common.Model.Transaction;
 import Common.Utilities.FileHandler;
+import Common.Utilities.XMLCreator;
 import Server.Controller.TransactionController;
 import Server.Model.Authenticator;
 import Client.Model.EquipmentManager;
 import Server.Model.Equipment;
 
+import javax.swing.text.Style;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This is what will handle the client and will have a shared resources which would be the
@@ -40,6 +44,7 @@ public class ClientHandler implements Runnable {
     File saveFile;
     File responseFilePath;
     TransactionController transactionController;
+    XMLCreator writer ;
 
     public ClientHandler(Socket client, EquipmentManager equipmentManager, Authenticator authenticator,TransactionController controller)  {
         this.socket = client;
@@ -49,6 +54,7 @@ public class ClientHandler implements Runnable {
         this.transactionController = controller;
         this.handler = new FileHandler();
         this.sessionID = UUID.randomUUID().toString();
+        this.writer = new XMLCreator();
         try {
             this.inputStream = new DataInputStream(socket.getInputStream());
             this.outputStream = new DataOutputStream(socket.getOutputStream());
@@ -144,15 +150,32 @@ public class ClientHandler implements Runnable {
         String[] node  = new String[]{
                 "result"
         };
-        ArrayList<String> attri = RequestUtility.getContent(saveFile,SingletonEquipmentFactory.getInstance().getRequestMember());
-        Equipment equipment = SingletonEquipmentFactory.getInstance().createObject(attri.toArray(new String[0]));
-        ArrayList<String> dateAndTime = RequestUtility.getContent(saveFile,transactionController.getDateAndTime());
+//        String[] borrowNode  = {
+//                "isAvailable","quantity","name","id","type","startTime","EndTime","Date"
+//        };
+        String[] borrowNode  = {
+                "isAvailable", "quantity", "name", "id", "type", "startTime", "EndTime", "Date"
+        };
+
+        ArrayList<String> nodes = RequestUtility.getContent(saveFile,borrowNode);
+        String startAndEnd = nodes.get(5)+"-"+nodes.get(6);
+        nodes.stream().map(e-> e.replaceAll(":","-"));
+        nodes.forEach(e-> System.out.println(e));
+        Equipment equipment = new Equipment(
+                Boolean.parseBoolean(nodes.get(0)),new AtomicInteger(Integer.parseInt(nodes.get(1)))
+                ,nodes.get(2),
+                nodes.get(4),nodes.get(5));
+
+        Transaction transaction = new Transaction(1,nodes.get(2),nodes.get(7),startAndEnd,idNumber,nodes.get(3));
+//        Transaction transaction = new Transaction(4,"name","date","time","10","eqID");
+        writer.createXML(transaction,"Transaction");
+
+
         boolean result= equipmentManager.transact(equipment);
         String response = equipmentManager.getResponse(result);
         ArrayList<String> resultNode = new ArrayList<>();
         resultNode.add(response);
-        Transaction transaction = new Transaction(1,equipment.getName(),dateAndTime.get(0),dateAndTime.get(1),idNumber, equipment.getId());
-        transactionController.writeUserToXml(transaction);
+        equipmentManager.transact(equipment);
         sendToStream(resultNode,node);
     }
 

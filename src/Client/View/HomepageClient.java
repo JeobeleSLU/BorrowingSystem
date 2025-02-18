@@ -27,6 +27,7 @@ public class HomepageClient extends JFrame {
     private JComboBox monthBox;
     private JComboBox startTimeBox;
     private JComboBox endTimeBox;
+    private JComboBox day;
     private String month;
     private String startTime;
     private String endTime;
@@ -40,6 +41,7 @@ public class HomepageClient extends JFrame {
     ButtonEditor editor;
     String itemtoBorrowed;
     JButton borrowButton;
+    String dayString;
 
     public String getStartTime() {
         return startTime;
@@ -57,7 +59,7 @@ public class HomepageClient extends JFrame {
         setContentPane(mainPanel);
         setTitle("Client Homepage");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 700);
+        setSize(1050, 700);
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -65,7 +67,7 @@ public class HomepageClient extends JFrame {
         receiptArea = new JTextArea();
         receiptArea.setEditable(false);
         JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
-        receiptScrollPane.setPreferredSize(new Dimension(350, 500));
+        receiptScrollPane.setPreferredSize(new Dimension(400, 500));
         centerPanel.add(receiptScrollPane, BorderLayout.EAST);
 
         homePageAdmin = new homePageAdmin();
@@ -160,7 +162,7 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
 
     JPanel datePanel = new JPanel();
 
-    datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 100, 5));
+    datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 180, 5));
 
     borrowButton= new JButton("Borrow");
 
@@ -208,7 +210,7 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
     receiptArea = new JTextArea();
     receiptArea.setEditable(false);
     JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
-    receiptScrollPane.setPreferredSize(new Dimension(300, 500));
+    receiptScrollPane.setPreferredSize(new Dimension(430, 500));
     centerPanel.add(receiptScrollPane, BorderLayout.EAST);
         centerPanel.add(receiptScrollPane, BorderLayout.EAST);
 
@@ -229,7 +231,7 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
         JPanel datePanel = new JPanel();
         centerPanel.add(datePanel, BorderLayout.NORTH);
 
-        datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 100, 5));
+        datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 250, 5));
 
         JButton borrowButton = new JButton("Borrow");
         datePanel.add(borrowButton);
@@ -402,6 +404,8 @@ private void searchAndUpdateTable() {
                 String quantity = equipTable.getValueAt(selectedRow, 2).toString();
                 startTime = (String) startTimeBox.getSelectedItem();
                 endTime = (String) endTimeBox.getSelectedItem();
+                dayString = (String) day.getSelectedItem();
+                month = (String) monthBox.getSelectedItem();
 
 
                 // Update the receiptArea with the equipment and quantity
@@ -455,6 +459,9 @@ private void searchAndUpdateTable() {
         return borrowedItemlbl;
     }
 
+    public String getDayString() {
+        return dayString;
+    }
 }
 
 

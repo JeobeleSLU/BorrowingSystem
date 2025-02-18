@@ -41,19 +41,21 @@ public class HomepageModel {
         return SingletonRequestService.createXMLRequest("SEARCH",node,requestNode);
     }
 
-//    public File reqestTransaction(Equipment equipmentToBeBorrowed, String startTime, String endTime, String mont) {
-//        /*
-//         <Equipment>
-//        <isAvailable>true</isAvailable>
-//        <quantity>3</quantity>
-//        <name>newnewnew</name>
-//        <id>988</id>
-//        <type>Switch</type>
-//    </Equipment>
-//         */
-//        String[] node  = {
-//                "isAvailable","quantity","name","id","type,","
-//        }
-//        return SingletonRequestService.createXMLRequest("TRANSACT")
-//    }
+    public File reqestTransaction(Equipment equipmentToBeBorrowed, String startTime, String endTime, String month,String day) {
+
+        String[] node  = {
+                "isAvailable","quantity","name","id","type","startTime","EndTime","Date"
+        };
+        String date = month + "colon" + day;
+        ArrayList<String> response= new ArrayList<>();
+        response.add(equipmentToBeBorrowed.getName());
+        response.add(equipmentToBeBorrowed.getId());
+        response.add(equipmentToBeBorrowed.getType());
+        response.add(startTime);
+        response.add(endTime);
+        response.add(date);
+
+        response.forEach(e-> System.out.println(e));
+        return SingletonRequestService.createXMLRequest("TRANSACT",response,node);
+    }
 }
