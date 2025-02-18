@@ -53,4 +53,6 @@ public class TransactionController {
     }
 
 
+    public ArrayList<Transaction> getArrayList() { return this.transactions;
+    }
 }

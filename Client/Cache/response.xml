@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Response>
-    <Role>Student</Role>
-    <Result>1</Result>
-</Response>
+<Equipments>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>5</quantity>
+        <name>Dell Inspiron</name>
+        <id>EQ-001</id>
+        <type>Laptop</type>
+    </Equipment>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>3</quantity>
+        <name>CiscoServer</name>
+        <id>11</id>
+        <type>Server</type>
+    </Equipment>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>9</quantity>
+        <name>switch catalyst</name>
+        <id>930000</id>
+        <type>Switch</type>
+    </Equipment>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>3</quantity>
+        <name>JeobeleNewEquipment</name>
+        <id>66969</id>
+        <type>Fiber</type>
+    </Equipment>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>99</quantity>
+        <name>newnewnew</name>
+        <id>93021</id>
+        <type>Fiber Equipment</type>
+    </Equipment>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>9</quantity>
+        <name>newCiscojeo</name>
+        <id>69420</id>
+        <type>shit</type>
+    </Equipment>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>3</quantity>
+        <name>newnewnew</name>
+        <id>988</id>
+        <type>Switch</type>
+    </Equipment>
+</Equipments>
