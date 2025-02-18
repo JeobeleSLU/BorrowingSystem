@@ -106,9 +106,16 @@ public class ClientHandler implements Runnable {
     }
 
     private void addEquipment() {
+        String[] node = {
+                "Result"
+        };
+        ArrayList<String>attributes = RequestUtility.getContent(saveFile,equipmentManager.getNodes());
+        String response = equipmentManager.addEquipment(attributes);
+        ArrayList<String> res = new ArrayList<>();
+        res.add(response);
 
+        sendToStream(res,node);
     }
-
     /**
      * TODO:
      * Transaction logic on how the equipment will be borrowed

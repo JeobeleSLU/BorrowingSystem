@@ -42,4 +42,11 @@
         <id>69420</id>
         <type>shit</type>
     </Equipment>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>3</quantity>
+        <name>newnewnew</name>
+        <id>988</id>
+        <type>Switch</type>
+    </Equipment>
 </Equipments>
