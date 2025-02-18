@@ -42,7 +42,7 @@ public class EquipmentManager {
         initComponents();
         equipmentXML = new File(file);
 
-        equipmentXML = handler.getXMLFile("Equipment");
+//        equipmentXML = handler.getXMLFile("Equipment");
         equipmentArrayList = retrieveData();
     }
 

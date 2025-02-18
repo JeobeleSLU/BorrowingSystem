@@ -33,9 +33,12 @@ public class HomepageController {
     private void getResponse() {
 
         equipment = model.storeEqToMemory();
-        view.populateTableList(model.storeEqToMemory().getEquipmentArrayList());
+        view.populateTableList(model.storeEqToMemory()
+                .getEquipmentArrayList());
+
         System.out.println("Search plss");
         equipment.getEquipmentArrayList().forEach(e-> System.out.println("Search query: "+ e.getName()));
+
     }
 
     private void requestEquipment() {
