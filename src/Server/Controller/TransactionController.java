@@ -1,6 +1,7 @@
 package Server.Controller;
 
 import Common.Factories.SingletonTransactionFactory;
+import Common.Model.Transaction;
 import Common.Utilities.FileHandler;
 import Common.Utilities.XMLCreator;
 import Common.Utilities.XMLParser;
@@ -58,11 +59,10 @@ public class TransactionController {
     }
 
 
-    public ArrayList<Transaction> getArrayList() { return this.transactions;
-    }
     public ArrayList<Transaction> getArrayList() {
         return this.transactions;
     }
+
     public String[] getDateAndTime(){
         return new String[]{
           "date","time"

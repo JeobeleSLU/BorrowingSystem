@@ -35,7 +35,7 @@ public class main {
         manager.transact(equipment1);
         manager.transact(equipment1);
 
-        creator.createXML(new Transaction(1,"dildo","12:14","10","22"),"Transaction");
+        creator.createXML(new Transaction(1,"dildo","12:14","10","22","sad"),"Transaction");
     }
 
 }

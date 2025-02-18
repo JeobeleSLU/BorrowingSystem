@@ -301,6 +301,7 @@
                 }
             }
         }
+
         public JLabel getHistory() {
             return history;
         }
@@ -309,7 +310,4 @@
             return equipment;
         }
 
-        public JLabel getAddItem() {
-            return addItem;
-        }
     }
