@@ -27,6 +27,9 @@ public class HomepageClient extends JFrame {
     private JComboBox monthBox;
     private JComboBox startTimeBox;
     private JComboBox endTimeBox;
+    private String month;
+    private String startTime;
+    private String endTime;
     homePageAdmin homePageAdmin;
     private JTextArea receiptArea;
     private boolean showingEquipList = true;
@@ -392,12 +395,17 @@ private void searchAndUpdateTable() {
             if (selectedRow != -1) {
                 String equipmentName = equipTable.getValueAt(selectedRow, 1).toString();
                 String quantity = equipTable.getValueAt(selectedRow, 2).toString();
+                startTime = (String) startTimeBox.getSelectedItem();
+                endTime = (String) endTimeBox.getSelectedItem();
+
 
                 // Update the receiptArea with the equipment and quantity
 
                 String receiptText = "";
                 receiptText += "Equipment: " + equipmentName + "\n";
-                receiptText += "Quantity: " + quantity + "\n";
+                receiptText += "Quantity: " + quantity + "\n";\
+                receiptText += "Start Time: " + startTime + "\n";\
+                receiptText += "End Time: " + endTime + "\n";\
                 receiptText += "==================\n";
 
 
