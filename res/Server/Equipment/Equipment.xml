@@ -2,16 +2,16 @@
 <Equipments>
     <Equipment>
         <isAvailable>true</isAvailable>
-        <quantity>79</quantity>
-        <name>Dell Inspiron</name>
-        <id>EQ-001</id>
-        <type>Laptop</type>
+        <quantity>13</quantity>
+        <name>Cisco Catalyst 9300</name>
+        <id>CIS9300</id>
+        <type>Switch</type>
     </Equipment>
     <Equipment>
         <isAvailable>true</isAvailable>
-        <quantity>4</quantity>
-        <name>lorem</name>
-        <id>303</id>
-        <type>filler</type>
+        <quantity>10</quantity>
+        <name>cor</name>
+        <id>unum</id>
+        <type>et</type>
     </Equipment>
 </Equipments>

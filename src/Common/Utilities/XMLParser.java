@@ -72,7 +72,9 @@ public class XMLParser{
             }
             return arrayList;
         } catch(SAXException | IOException | ParserConfigurationException e){
-            throw new RuntimeException(e);
+            System.out.println("Cant parse");
+            return null;
         }
+
     }
 }

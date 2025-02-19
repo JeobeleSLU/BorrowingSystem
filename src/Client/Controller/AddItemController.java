@@ -14,7 +14,6 @@ public class AddItemController {
         model = new AddItemModel();
         view.getAddButton().addActionListener(e-> {
             reqAddEquipment();
-            getServerResponse();
         });
     }
 
@@ -33,5 +32,6 @@ public class AddItemController {
         String type = view.getTypefld().getText();
         System.out.println("Requesting add to server");
         server.sendXMLToServer(model.sendEquipmentToServer(name,qty,id,type));
+        getServerResponse();
     }
 }

@@ -36,7 +36,9 @@ static int transactions = 0;
         initComponents();
 
         equipmentXML = handler.getXMLFile("Equipment");
-        equipmentArrayList = retrieveData();
+        if (handler.getXMLFile("Equipment").exists()){
+            equipmentArrayList = retrieveData();
+        }
     }
    public EquipmentManager(String file) {
         initComponents();
@@ -180,4 +182,21 @@ static int transactions = 0;
     public void clear() {
         this.equipmentArrayList.clear();
     }
+
+    public String searchAndRemove(String s) {
+        Equipment equipmentToRemove = equipmentArrayList.stream()
+                .filter(e -> e.getName().equals(s))
+                .findFirst()
+                .orElse(null);
+
+        if (equipmentToRemove == null) {
+            return "-1`";
+        }
+
+        equipmentArrayList.remove(equipmentToRemove);
+        reWriteXML(); // Update XML to reflect removal
+
+        return "1";
+    }
+
 }

@@ -48,5 +48,22 @@ public class HomepageAdminModel {
     }
 
 
+    public File requestRemove(String itemToRemove) {
+        String[] requestNode = new String[] {
+                "EQUIPMENT"
+        };
+        ArrayList<String> nodes = new ArrayList<>();
+        nodes.add(itemToRemove);
+        return SingletonRequestService.createXMLRequest("REMOVE_EQUIPMENT",nodes,requestNode);
+    }
+    public String parseServerResponse() {
+        String[] NODE_TO_RECEIVE = new String[]{
+                "Result"
+        };
 
+        ArrayList<String> response = new ArrayList<>();
+        File file = new File("./Client/Cache/response.xml");
+        response.addAll(SingletonRequestService.getContent(file,NODE_TO_RECEIVE));
+        return response.get(0);
+    }
 }

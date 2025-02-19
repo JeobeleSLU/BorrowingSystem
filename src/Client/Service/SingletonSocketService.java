@@ -34,7 +34,7 @@ public class SingletonSocketService {
         try {
             String inputValue = JOptionPane.showInputDialog("input ip Adresss");
             socket = new Socket(inputValue,6969);
-
+            socket.setSoTimeout(500);
         } catch (IOException e) {
             System.out.println("Can't establish connection");
             JOptionPane.showMessageDialog(null,

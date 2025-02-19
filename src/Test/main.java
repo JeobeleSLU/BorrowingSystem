@@ -21,6 +21,7 @@ public class main {
 
         Equipment equipment =
                 new Equipment(true, new AtomicInteger(3),"CiscoServer","11","Server");
+        creator.createXML(equipment,"Equipment");
         ArrayList<Equipment> eq= parser.parse(SingletonEquipmentFactory.getInstance(),handler.getXMLFile("Equipment"));
 
 //        <Equipment>

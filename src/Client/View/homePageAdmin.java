@@ -34,6 +34,7 @@
         private boolean showingHistory = false;
         private boolean showingLogs = true;
         private boolean showingEquipment = false;
+        private String itemToRemove;
 
         public JLabel getAddItem() {
             return addItem;
@@ -98,7 +99,7 @@
                 }
             });
         }
-        public void populateEquipmentTable(ArrayList<Equipment> equipmentList) {
+        public void populateEquipmentTable(ArrayList<Equipment> equipmentList, ActionListener removeActionListener) {
             clearTable();
             centerPanel.setLayout(new BorderLayout());
 
@@ -132,9 +133,8 @@
             equipTable.getColumnModel().getColumn(1).setPreferredWidth(150);
             equipTable.getColumnModel().getColumn(2).setPreferredWidth(100);
 
-            // Add button functionality
-            equipTable.getColumnModel().getColumn(2).setCellRenderer(new ButtonRenderer());
-            equipTable.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable, equipmentList));
+            // Add button functionality with a callback
+            equipTable.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable, equipmentList, removeActionListener));
 
             JScrollPane scrollPane = new JScrollPane(equipTable);
             scrollPane.setPreferredSize(new Dimension(500, 500));
@@ -152,40 +152,36 @@
             });
         }
 
+
         // Custom Button Renderer
-        class ButtonRenderer extends JButton implements TableCellRenderer {
-            public ButtonRenderer() {
-                setOpaque(true);
-                setText("Remove");
-            }
-
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                return this;
-            }
-        }
-
-        // Custom Button Editor (Handles Remove action)
         class ButtonEditor extends DefaultCellEditor {
             private JButton button;
             private JTable table;
             private ArrayList<Equipment> equipmentList;
             private int row;
+            private ActionListener removeActionListener;
 
-            public ButtonEditor(JCheckBox checkBox, JTable table, ArrayList<Equipment> equipmentList) {
+            public ButtonEditor(JCheckBox checkBox, JTable table, ArrayList<Equipment> equipmentList, ActionListener removeActionListener) {
                 super(checkBox);
                 this.table = table;
                 this.equipmentList = equipmentList;
+                this.removeActionListener = removeActionListener;
 
                 button = new JButton("Remove");
                 button.setOpaque(true);
 
                 button.addActionListener(e -> {
                     fireEditingStopped(); // Stop editing when button is clicked
-
                     if (row >= 0 && row < equipmentList.size()) {
+                        String equipmentName = table.getValueAt(row, 1).toString(); // Get Equipment Name from Column 1
+                        itemToRemove = equipmentName;
                         equipmentList.remove(row); // Remove from list
                         ((DefaultTableModel) table.getModel()).removeRow(row); // Remove from table
+
+                        // Notify controller
+                        if (removeActionListener != null) {
+                            removeActionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, equipmentName));
+                        }
                     }
                 });
             }
@@ -201,7 +197,6 @@
                 return "Remove";
             }
         }
-
 
 
         public void setupHoverEffect(JLabel label) {
@@ -301,5 +296,18 @@
             return equipment;
         }
 
+        public String getItemToRemove() {
+            return itemToRemove;
+        }
+        public void showInvalidEnter(){
+            JOptionPane.showMessageDialog(null,
+                    "Can't add the equipment to server please contact Jesus ", "Invalid insertion", 2);
+            this.dispose();
 
+        }
+        public void showValid(String itemToRemove){
+            JOptionPane.showMessageDialog(null,
+                    "Successfully Removed: " + itemToRemove, "Removed To server", 1);
+            this.dispose();
+        }
     }

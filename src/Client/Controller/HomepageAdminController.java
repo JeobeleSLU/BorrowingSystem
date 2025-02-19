@@ -5,6 +5,8 @@ import Client.Service.SingletonSocketService;
 import Client.View.homePageAdmin;
 import Server.Controller.TransactionController;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -52,21 +54,33 @@ public class HomepageAdminController {
             }
         });
 
+    }
 
-    } private void requestEquipment() {
+
+    private void requestEquipment() {
         server.sendXMLToServer(model.requestEquipment("EQUIPMENT"));
         getResponse();
+    }
+    private void getServerResponse() {
+        String response =  model.parseServerResponse();
+        if (response.equals("1")){
+            view.showValid(view.getItemToRemove());
+        }else
+            view.showInvalidEnter();
     }
 
 
 
     private void getResponse() {
-
         equipment = model.storeEqToMemory();
         System.out.println("Search plss");
         equipment.getEquipmentArrayList().forEach(e-> System.out.println("Search query: "+ e.getName()));
-        view.populateEquipmentTable(equipment.getEquipmentArrayList());
-
+        view.populateEquipmentTable(equipment.getEquipmentArrayList(), this::handleRemoveButtonClick);
     }
 
+    private void handleRemoveButtonClick(ActionEvent actionEvent) {
+        server.sendXMLToServer(model.requestRemove(view.getItemToRemove()));
+        getServerResponse();
+    }
 }
+

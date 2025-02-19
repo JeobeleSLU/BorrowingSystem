@@ -96,7 +96,9 @@ public class ClientHandler implements Runnable {
         }else if (request.equals("SIGNUP")){
             createUser();
         }else if (request.equals("EQUIPMENT")){
-            sendResponseXML(handler.getXMLFile("Equipment"));
+            if ((handler.getXMLFile("Equipment").exists())){
+                sendResponseXML(handler.getXMLFile("Equipment"));
+            }
         }else if (request.equals("TRANSACT")) {
             transact();
         } else if (request.equals("ADD_EQUIPMENT")) {
@@ -109,7 +111,23 @@ public class ClientHandler implements Runnable {
             sendResponseXML(handler.getXMLFile("Transaction"));
         } else if (request.equals("SEARCH")) {
             searchEquipment();
+        }else if (request.equals("REMOVE_EQUIPMENT")){
+            removeEquipment();
         }
+    }
+
+    private void removeEquipment() {
+        String[] node = new String[]{
+                "EQUIPMENT"
+        };
+        ArrayList<String> eqToRemove = RequestUtility.getContent(saveFile,node);
+        String response = equipmentManager.searchAndRemove(eqToRemove.get(0));
+        String[] nodeResult = {
+                "Result"
+        };
+        ArrayList<String> temp = new ArrayList<>();
+        temp.add(response);
+        sendToStream(temp,nodeResult);
     }
 
     private void searchEquipment() {
