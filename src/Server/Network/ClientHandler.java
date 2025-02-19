@@ -170,7 +170,6 @@ public class ClientHandler implements Runnable {
 //        Transaction transaction = new Transaction(4,"name","date","time","10","eqID");
         writer.createXML(transaction,"Transaction");
 
-
         boolean result= equipmentManager.transact(equipment);
         String response = equipmentManager.getResponse(result);
         ArrayList<String> resultNode = new ArrayList<>();

@@ -462,6 +462,16 @@ private void searchAndUpdateTable() {
     public String getDayString() {
         return dayString;
     }
+    public void showNoEquipment(){
+        JOptionPane.showMessageDialog(null, "No Equipment left", "Warning", 2);
+
+
+    }
+    public void showSuccess(){
+        JOptionPane.showMessageDialog(null,
+                "Successfully reserved", "Warning", 1);
+
+    }
 }
 
 

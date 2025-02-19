@@ -44,7 +44,6 @@ public class HomepageController {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 model.requestEquipment("TRANSACTION_HISTORY");
-                System.out.println("TITE");
                 transaction = model.stroreTransacToMem();
                 view.populateTableList2(transaction.getArrayList());
             }
@@ -68,6 +67,11 @@ public class HomepageController {
                view.getStartTime(),
                view.getEndTime(),
                view.getDayString()));
+
+      if (model.getSuccess()){
+          view.showNoEquipment();
+      }else
+          view.showSuccess();
     }
 
     private void addEventActionListeners() {
@@ -82,6 +86,7 @@ public class HomepageController {
 
         System.out.println("Search plss");
         equipment.getEquipmentArrayList().forEach(e-> System.out.println("Search query: "+ e.getName()));
+
 
         view.populateTableList(model.storeEqToMemory().getEquipmentArrayList());
 

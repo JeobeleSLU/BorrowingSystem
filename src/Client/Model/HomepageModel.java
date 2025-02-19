@@ -15,6 +15,9 @@ public class HomepageModel {
         return null;
     }
 
+    private static final String[] NODE_TO_RECEIVE = new String[]{
+            "result"
+    };
     public File requestEquipment(String request) {
         String[] requestNode = new String[] {
             "equipment"
@@ -60,4 +63,16 @@ public class HomepageModel {
         response.forEach(e-> System.out.println(e));
         return SingletonRequestService.createXMLRequest("TRANSACT",response,node);
     }
+
+    public boolean getSuccess() {
+       return parseServerResponse().equals("1");
+    }
+
+    public String parseServerResponse() {
+        ArrayList<String> response = new ArrayList<>();
+        File file = new File("./Client/Cache/response.xml");
+        response.addAll(SingletonRequestService.getContent(file,NODE_TO_RECEIVE));
+        return response.get(0);
+    }
+
 }

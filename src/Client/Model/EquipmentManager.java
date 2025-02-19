@@ -132,7 +132,6 @@ public class EquipmentManager {
         System.out.println("Equipment successfully transacted.");
         System.out.println("Equipment ArrayList size: " + equipmentArrayList.size());
         equipmentArrayList.forEach(e -> System.out.println(e.getName()));
-
         reWriteXML();
 
         return true;
