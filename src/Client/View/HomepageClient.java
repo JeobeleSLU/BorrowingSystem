@@ -62,7 +62,8 @@ public class HomepageClient extends JFrame {
         setSize(1050, 700);
         setLocationRelativeTo(null);
         setResizable(false);
-
+        borrowButton = new JButton("Borrow");
+        borrowButton.setVisible(false);
 
         receiptArea = new JTextArea();
         receiptArea.setEditable(false);
@@ -160,10 +161,9 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
 
     datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 180, 5));
 
-    borrowButton= new JButton("Borrow");
-
     datePanel.add(borrowButton);
     centerPanel.add(datePanel, BorderLayout.NORTH);
+    borrowButton.setVisible(true);
 
     String[] columnNames = new String[]{"Equipment Name", "Equipment Type", "Quantity", "Avail"};
     Object[][] data = new Object[equipmentList.size()][4];
@@ -230,7 +230,6 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
         centerPanel.add(datePanel, BorderLayout.NORTH);
         datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 250, 5));
 
-        // Ensure borrow button is removed when history is shown
         if (borrowButton != null) {
             borrowButton.setVisible(false);
         }
