@@ -18,10 +18,11 @@ public class HomepageAdminController {
     public HomepageAdminController() {
         view = new homePageAdmin();
         model = new HomepageAdminModel();
+        view.setVisible(true);
         server  = SingletonSocketService.getInstance();
         requestEquipment();
         getResponse();
-       addEventActionListeners();
+        addEventActionListeners();
     }
 
     private void addEventActionListeners() {
@@ -32,7 +33,6 @@ public class HomepageAdminController {
                 server.sendXMLToServer(model.createRequest("TRANSACTION_HISTORY_ADMIN"));
                 transactions = model.storeTransactionsToMemory();
                 view.populateTableTransaction(transactions.getArrayList());
-
             }
         });
         view.getAddItem().addMouseListener(new MouseAdapter() {
