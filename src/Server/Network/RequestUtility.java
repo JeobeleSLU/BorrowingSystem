@@ -111,7 +111,7 @@ public class RequestUtility {
                 return false;
             }
 
-            DOMSource domSource = buildDOMSource(elements, type);
+            DOMSource domSource = buildDOMSource(elements, type,file);
             if (domSource == null) {
                 return false;
             }
@@ -131,7 +131,7 @@ public class RequestUtility {
         }
     }
 
-    private static DOMSource buildDOMSource(HashMap<String, String> elements, String type) throws ParserConfigurationException, IOException, SAXException {
+    private static DOMSource buildDOMSource(HashMap<String, String> elements, String type, File file) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setIgnoringElementContentWhitespace(true);
         DocumentBuilder docBuilder = factory.newDocumentBuilder();
@@ -141,6 +141,17 @@ public class RequestUtility {
         doc = docBuilder.newDocument();
         root = doc.createElement(type+"s");
         doc.appendChild(root);
+
+        if (!file.exists() || file.length() == 0) { //file doesn't exist or is empty, create new
+            doc = docBuilder.newDocument();
+            root = doc.createElement(type+"s");
+            doc.appendChild(root);
+        } else {
+            doc = docBuilder.parse(file);
+            doc.getDocumentElement().normalize();
+            removeWhitespaceNodes(doc.getDocumentElement());
+            root = doc.getDocumentElement(); // use existing root
+        }
 
         Element tempRoot = doc.createElement(type);
         root.appendChild(tempRoot);
@@ -178,6 +189,16 @@ public class RequestUtility {
         }
 
         return variables;
+    }
+    private static void removeWhitespaceNodes(Node node) {
+        for (int i = node.getChildNodes().getLength() - 1; i >= 0; i--) {
+            Node child = node.getChildNodes().item(i);
+            if (child.getNodeType() == Node.TEXT_NODE && child.getNodeValue().trim().isEmpty()) {
+                node.removeChild(child);
+            } else if (child.hasChildNodes()) {
+                removeWhitespaceNodes(child);
+            }
+        }
     }
 
 }

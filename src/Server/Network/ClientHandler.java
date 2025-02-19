@@ -116,6 +116,7 @@ public class ClientHandler implements Runnable {
         String[] node = new String[]{
           "SEARCH"
         };
+
         ArrayList<String> attri = RequestUtility.getContent(saveFile,node);
         ArrayList<Equipment> equipment = equipmentManager.getSearch(attri.get(0));
         equipment.forEach(e-> RequestUtility.buildObjectXML(e,"Equipment",responseFilePath));
@@ -124,12 +125,18 @@ public class ClientHandler implements Runnable {
 
     private void sendHistory() {
         ArrayList<Transaction> userTransactions=  transactionController.getUserTransaction(idNumber);
-
+        clearResponseCache();
         userTransactions.forEach(e-> {
-            System.out.println(e.getUserId());
             RequestUtility.buildObjectXML(e, "Transaction",responseFilePath);
         });
         sendResponseXML(responseFilePath);
+    }
+
+    private void clearResponseCache() {
+        if (responseFilePath.exists()){
+            System.out.println("Deleting file");
+            responseFilePath.delete();
+        }
     }
 
     private void addEquipment() {
@@ -173,7 +180,7 @@ public class ClientHandler implements Runnable {
 
         Transaction transaction = new Transaction(1,nodes.get(2),nodes.get(7),startAndEnd,idNumber,nodes.get(3));
 //        Transaction transaction = new Transaction(4,"name","date","time","10","eqID");
-        writer.createXML(transaction,"Transaction");
+       transactionController.writeUserToXml(transaction);
 
         boolean result= equipmentManager.transact(equipment);
         String response = equipmentManager.getResponse(result);
@@ -230,7 +237,7 @@ public class ClientHandler implements Runnable {
      */
     private void sendResponseXML(File file) {
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
-            byte[] buffer = new byte[4096];
+            byte[] buffer = new byte[20000000];
             int bytesRead;
             while ((bytesRead = fileInputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, bytesRead);
@@ -255,7 +262,7 @@ public class ClientHandler implements Runnable {
             responseFilePath = new File(handler.getFilePath("Cache") + sessionID + "Response.xml");
 
             try (FileOutputStream fileOutputStream = new FileOutputStream(saveFile)) {
-                byte[] buffer = new byte[4096];
+                byte[] buffer = new byte[20000000];
                 int bytesRead;
                 boolean receivedData = false;
 

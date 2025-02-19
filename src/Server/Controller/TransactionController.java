@@ -53,7 +53,9 @@ public class TransactionController {
     }
     public synchronized boolean writeUserToXml(Transaction transaction){
       if (writer.createXML(transaction,"Transaction")){
+          transactions.clear();
           loadTransactions("base");
+
           return true;
 
 

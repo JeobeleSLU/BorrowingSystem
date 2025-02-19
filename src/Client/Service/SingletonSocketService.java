@@ -46,7 +46,7 @@ public class SingletonSocketService {
     public void sendXMLToServer (File file) {
         System.out.println("Sending to server: "+ file.getName());
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
-            byte[] buffer = new byte[4096];
+            byte[] buffer = new byte[20000000];
             int bytesRead;
             while ((bytesRead = fileInputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, bytesRead);
@@ -71,7 +71,7 @@ public class SingletonSocketService {
             saveFile = new File("./Client/Cache/response.xml");
 
             try (FileOutputStream fileOutputStream = new FileOutputStream(saveFile)) {
-                byte[] buffer = new byte[4096];
+                byte[] buffer = new byte[20000000];
                 int bytesRead;
                 while ((bytesRead = inputStream.read(buffer)) != -1) {
                     fileOutputStream.write(buffer, 0, bytesRead);

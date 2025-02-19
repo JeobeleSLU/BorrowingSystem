@@ -1,10 +1,635 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Equipments>
-    <Equipment>
-        <isAvailable>true</isAvailable>
-        <quantity>84</quantity>
-        <name>Dell Inspiron</name>
-        <id>EQ-001</id>
-        <type>Laptop</type>
-    </Equipment>
-</Equipments>
+<Transactions>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>CiscoServer</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>11</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>date</date>
+        <qty>4</qty>
+        <equipmentName>name</equipmentName>
+        <time>time</time>
+        <userId>10</userId>
+        <equipmentId>eqID</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>date</date>
+        <qty>4</qty>
+        <equipmentName>name</equipmentName>
+        <time>time</time>
+        <userId>10</userId>
+        <equipmentId>eqID</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>lorem</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>303</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>lorem</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>303</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>lorem</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>303</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>lorem</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>303</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>11-00colon7</date>
+        <qty>1</qty>
+        <equipmentName>Dell Inspiron</equipmentName>
+        <time>Jun-12-00</time>
+        <userId>10</userId>
+        <equipmentId>EQ-001</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>11-00colon7</date>
+        <qty>1</qty>
+        <equipmentName>lorem</equipmentName>
+        <time>Jun-12-00</time>
+        <userId>10</userId>
+        <equipmentId>303</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>lorem</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>303</equipmentId>
+    </Transaction>
+</Transactions>

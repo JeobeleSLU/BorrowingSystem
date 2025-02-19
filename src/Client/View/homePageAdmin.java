@@ -325,6 +325,16 @@
         }
 
     }
+        public void clearTable() {
+            if (equipTable != null) {
+                DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
+                model.setRowCount(0);
+            }
+
+            centerPanel.removeAll();
+            centerPanel.revalidate();
+            centerPanel.repaint();
+        }
 
         public JLabel getHistory() {
             return history;
