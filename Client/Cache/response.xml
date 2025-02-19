@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Response>
-    <result>-1</result>
-</Response>
+<Equipments>
+    <Equipment>
+        <isAvailable>true</isAvailable>
+        <quantity>89</quantity>
+        <name>Dell Inspiron</name>
+        <id>EQ-001</id>
+        <type>Laptop</type>
+    </Equipment>
+</Equipments>

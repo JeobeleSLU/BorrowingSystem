@@ -31,7 +31,12 @@ public class HomepageController {
     }
 
     private void addActionEventListners() {
-        view.getEquipmenmtlabel();
+        view.getEquipmenmtlabel().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                requestEquipment();
+            }
+        });
        view.getSearchButton().addActionListener(e-> {
            String search = view.getSearchField().getText();
            server.sendXMLToServer(model.request("SEARCH",search));
@@ -43,7 +48,7 @@ public class HomepageController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                model.requestEquipment("TRANSACTION_HISTORY");
+                server.sendXMLToServer(model.requestEquipment("TRANSACTION_HISTORY"));
                 transaction = model.stroreTransacToMem();
                 System.out.println(transaction.getArrayList().size());
                 view.populateTableList2(transaction.getArrayList());
@@ -51,6 +56,7 @@ public class HomepageController {
         });
         view.getBorrowButton().addActionListener(_ ->{
             extractDetails();
+            requestEquipment();
         } );
     }
 
