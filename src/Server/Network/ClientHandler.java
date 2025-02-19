@@ -124,10 +124,11 @@ public class ClientHandler implements Runnable {
 
     private void sendHistory() {
         ArrayList<Transaction> userTransactions=  transactionController.getUserTransaction(idNumber);
-        if (responseFilePath.exists()){
-            responseFilePath.delete();
-        }
-        userTransactions.forEach(e-> RequestUtility.buildObjectXML(e, "Transaction",responseFilePath));
+
+        userTransactions.forEach(e-> {
+            System.out.println(e.getUserId());
+            RequestUtility.buildObjectXML(e, "Transaction",responseFilePath);
+        });
         sendResponseXML(responseFilePath);
     }
 
@@ -161,10 +162,14 @@ public class ClientHandler implements Runnable {
         String startAndEnd = nodes.get(5)+"-"+nodes.get(6);
         nodes.stream().map(e-> e.replaceAll(":","-"));
         nodes.forEach(e-> System.out.println(e));
+        for (int i = 0; i < nodes.size();i++){
+            System.out.println(nodes.get(i));
+            System.out.println("Index: "+i);
+        }
         Equipment equipment = new Equipment(
                 Boolean.parseBoolean(nodes.get(0)),new AtomicInteger(Integer.parseInt(nodes.get(1)))
                 ,nodes.get(2),
-                nodes.get(4),nodes.get(5));
+                nodes.get(3),nodes.get(4));
 
         Transaction transaction = new Transaction(1,nodes.get(2),nodes.get(7),startAndEnd,idNumber,nodes.get(3));
 //        Transaction transaction = new Transaction(4,"name","date","time","10","eqID");
@@ -174,7 +179,6 @@ public class ClientHandler implements Runnable {
         String response = equipmentManager.getResponse(result);
         ArrayList<String> resultNode = new ArrayList<>();
         resultNode.add(response);
-        equipmentManager.transact(equipment);
         sendToStream(resultNode,node);
     }
 
@@ -246,6 +250,7 @@ public class ClientHandler implements Runnable {
      */
     private void receiveRequest() {
         try {
+            System.out.println("Waiting for client's request");
             saveFile = new File(handler.getFilePath("Cache") + sessionID+ "request.xml");
             responseFilePath = new File(handler.getFilePath("Cache") + sessionID + "Response.xml");
 

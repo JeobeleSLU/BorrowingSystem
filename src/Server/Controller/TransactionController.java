@@ -47,8 +47,8 @@ public class TransactionController {
         handler = new FileHandler();   
     }
     public ArrayList<Transaction> getUserTransaction(String idNumber){
+        System.out.println("Getting user Transaction");
         transactions.forEach(e-> System.out.println(e.getUserId()));
-
         return (ArrayList<Transaction>) transactions.stream().filter(e-> e.getUserId().equals(idNumber)).collect(Collectors.toList());
     }
     public synchronized boolean writeUserToXml(Transaction transaction){

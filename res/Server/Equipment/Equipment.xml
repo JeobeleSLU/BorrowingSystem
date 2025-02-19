@@ -2,9 +2,9 @@
 <Equipments>
     <Equipment>
         <isAvailable>true</isAvailable>
-        <quantity>5</quantity>
+        <quantity>99</quantity>
         <name>Dell Inspiron</name>
         <id>EQ-001</id>
         <type>Laptop</type>
-       </Equipment>
+    </Equipment>
 </Equipments>

@@ -48,6 +48,11 @@ public class SingletonRequestService {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setIgnoringElementContentWhitespace(true);
         File file = new File("./Client/Cache/Request"+requstType+".xml");
+        if (file.exists()){
+            if (file.delete()){
+                System.out.println("Deleting File");
+            }
+        }
         try {
             DocumentBuilder docBuilder = factory.newDocumentBuilder();
             Document doc = docBuilder.newDocument();

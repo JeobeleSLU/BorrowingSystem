@@ -31,7 +31,7 @@ public class EquipmentManager {
         <type>Server</type>
     </Equipment>
      */
-
+static int transactions = 0;
     public EquipmentManager() {
         initComponents();
 
@@ -69,12 +69,7 @@ public class EquipmentManager {
                         .equals(filter)).toList());
     }
     public String addEquipment(ArrayList<String> attributes){
-        /*
-           "type",
-                "id",
-                "name",
-                "quantity"
-         */
+
         for (int i = 0; i < attributes.size(); i++){
             System.out.println(attributes);
             System.out.println(i);
@@ -111,6 +106,8 @@ public class EquipmentManager {
      *
      */
     public synchronized boolean transact(Equipment equipment) {
+        System.out.println("Equipment to transact: " + equipment.getId());
+
         Equipment equipment1 = equipmentArrayList.stream()
                 .filter(e -> e.getId().equals(equipment.getId()))
                 .findFirst()
@@ -121,21 +118,25 @@ public class EquipmentManager {
             return false;
         }
 
-        synchronized (equipment1) {
-            if (equipment1.getQuantity().get() < 1) {
-                System.out.println("No more equipment available.");
-                return false;
-            }
-            equipment1.getQuantity().getAndDecrement();
+        if (equipment1.getQuantity().get() < 1) {
+            System.out.println(equipment1.getQuantity());
+            System.out.println("No more equipment available.");
+
+            return false;
         }
 
-        System.out.println("Equipment successfully transacted.");
-        System.out.println("Equipment ArrayList size: " + equipmentArrayList.size());
-        equipmentArrayList.forEach(e -> System.out.println(e.getName()));
+        // Decrement quantity
+        int newQuantity = equipment1.getQuantity().decrementAndGet();
+        System.out.println("New quantity: " + newQuantity);
+        transactions++;
+        System.out.println("Transactions: "+ transactions);
         reWriteXML();
+        equipmentArrayList.clear();
+        equipmentArrayList.addAll(retrieveData());
 
         return true;
     }
+
 
     private void reWriteXML() {
         File file = handler.getXMLFile("Equipment");
@@ -167,9 +168,9 @@ public class EquipmentManager {
 
     public String getResponse(boolean result) {
         if (result){
-            return "1";
-        }else
             return "-1";
+        }else
+            return "1";
     }
 
     public ArrayList<Equipment> getSearch(String s) {

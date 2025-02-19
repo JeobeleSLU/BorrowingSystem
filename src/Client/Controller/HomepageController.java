@@ -27,11 +27,11 @@ public class HomepageController {
         view.setVisible(true);
         server = SingletonSocketService.getInstance();
         requestEquipment();
-        getResponse();
         addActionEventListners();
     }
 
     private void addActionEventListners() {
+        view.getEquipmenmtlabel();
        view.getSearchButton().addActionListener(e-> {
            String search = view.getSearchField().getText();
            server.sendXMLToServer(model.request("SEARCH",search));
@@ -45,6 +45,7 @@ public class HomepageController {
                 super.mouseClicked(e);
                 model.requestEquipment("TRANSACTION_HISTORY");
                 transaction = model.stroreTransacToMem();
+                System.out.println(transaction.getArrayList().size());
                 view.populateTableList2(transaction.getArrayList());
             }
         });
@@ -74,10 +75,6 @@ public class HomepageController {
           view.showSuccess();
     }
 
-    private void addEventActionListeners() {
-
-    }
-
     private void getResponse() {
 
         equipment = model.storeEqToMemory();
@@ -94,5 +91,6 @@ public class HomepageController {
 
     private void requestEquipment() {
         server.sendXMLToServer(model.requestEquipment("EQUIPMENT"));
+        getResponse();
     }
 }

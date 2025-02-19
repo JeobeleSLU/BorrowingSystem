@@ -109,7 +109,6 @@ public class HomepageClient extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 showingEquipList = true;
-                populateTable();
             }
         });
 
@@ -126,7 +125,6 @@ public class HomepageClient extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 showingSettings = true;
-                populateTable();
             }
         });
     }
@@ -150,13 +148,11 @@ public class HomepageClient extends JFrame {
             }
         }
     }
-    public void populateTable() {
-        // Clear previous components and set layout
 
-
-    }
 
 public void populateTableList(ArrayList<Equipment> equipmentList) {
+    clearTable();
+
     centerPanel.removeAll();
     centerPanel.setLayout(new BorderLayout());
 
@@ -214,6 +210,7 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
     centerPanel.add(receiptScrollPane, BorderLayout.EAST);
         centerPanel.add(receiptScrollPane, BorderLayout.EAST);
 
+
     SwingUtilities.invokeLater(() -> {
         equipTable.revalidate();
         equipTable.repaint();
@@ -225,79 +222,62 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
 }
 
     public void populateTableList2 (ArrayList<Transaction> transactionList) {
+        clearTable();
         centerPanel.removeAll();
         centerPanel.setLayout(new BorderLayout());
 
         JPanel datePanel = new JPanel();
         centerPanel.add(datePanel, BorderLayout.NORTH);
-
         datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 250, 5));
 
-        JButton borrowButton = new JButton("Borrow");
-        datePanel.add(borrowButton);
-
-
-        centerPanel.setLayout(new BorderLayout());
-
-    transactionList.forEach(e-> System.out.println(e.getEquipmentName()));
-
-
-    centerPanel.setLayout(new BorderLayout());
-
-    String[] columnNames = new String[]{"Equipment Name", "Borrowed Time", "Status"};
-    Object[][] data = new Object[transactionList.size()][3];
-
-    for (int i = 0; i < transactionList.size(); i++) {
-        Transaction transaction = transactionList.get(i);
-
-        String equipmentName = transaction.getEquipmentName();
-        String borrowedTime  = transaction.getTime();
-        String status = "In-Progress";
-
-
-        data[i] = new Object[]{equipmentName,borrowedTime, status,};
-    }
-    DefaultTableModel model = new DefaultTableModel(data, columnNames) {
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return column == 3;
+        // Ensure borrow button is removed when history is shown
+        if (borrowButton != null) {
+            borrowButton.setVisible(false);
         }
-    };
-    equipTable = new JTable(model);
-    equipTable.setRowHeight(50);
-    equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-    equipTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRender());
-    equipTable.getColumnModel().getColumn(2).setCellRenderer(new ButtonRenderer());
-    equipTable.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox()));
+        String[] columnNames = new String[]{"Equipment Name", "Borrowed Time", "Status"};
+        Object[][] data = new Object[transactionList.size()][3];
 
-    equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
-    equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
-    equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
-    equipTable.getColumnModel().getColumn(2).setPreferredWidth(100);
-    JScrollPane scrollPane = new JScrollPane(equipTable);
-    scrollPane.setPreferredSize(new Dimension(530, 500));
+        for (int i = 0; i < transactionList.size(); i++) {
+            Transaction transaction = transactionList.get(i);
+            data[i] = new Object[]{transaction.getEquipmentName(), transaction.getTime(), "In-Progress"};
+        }
 
-    centerPanel.add(scrollPane, BorderLayout.WEST);
+        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 3;
+            }
+        };
 
-    receiptArea = new JTextArea();
-    receiptArea.setEditable(false);
-    JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
-    receiptScrollPane.setPreferredSize(new Dimension(350, 500));
-    centerPanel.add(receiptScrollPane, BorderLayout.EAST);
+        equipTable = new JTable(model);
+        equipTable.setRowHeight(50);
+        equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-    SwingUtilities.invokeLater(() -> {
+        JScrollPane scrollPane = new JScrollPane(equipTable);
+        scrollPane.setPreferredSize(new Dimension(530, 500));
+
+        centerPanel.add(scrollPane, BorderLayout.WEST);
+
+        receiptArea.setText("");  // Clear receipt when switching views
+
         equipTable.revalidate();
         equipTable.repaint();
         centerPanel.revalidate();
         centerPanel.repaint();
-    });
 
-    setVisible(true);
-}
+        SwingUtilities.invokeLater(() -> {
+            equipTable.revalidate();
+            equipTable.repaint();
+            centerPanel.revalidate();
+            centerPanel.repaint();
+        });
+
+        setVisible(true);
+    }
 
 
-private void searchAndUpdateTable() {
+    private void searchAndUpdateTable() {
     String searchTerm = searchField.getText().trim().toLowerCase();
     DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
     model.setRowCount(0);
@@ -334,6 +314,11 @@ private void searchAndUpdateTable() {
 
     public String getItemToBeBorrowed() {
         return itemtoBorrowed;
+    }
+
+    public JLabel getEquipmenmtlabel() {
+        return equipLabel;
+
     }
 
 
@@ -450,10 +435,16 @@ private void searchAndUpdateTable() {
     public JTextField getSearchField() {
         return searchField;
     }
+
     public void clearTable() {
-        DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
-        model.setRowCount(0);
+        if (equipTable != null) {
+            DefaultTableModel model = (DefaultTableModel) equipTable.getModel();
+            model.setRowCount(0);
+            equipTable.revalidate();
+            equipTable.repaint();
         }
+    }
+
 
     public JLabel getBorrowedItemlbl() {
         return borrowedItemlbl;
