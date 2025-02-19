@@ -1,6 +1,7 @@
     package Client.View;
 
     import Common.Model.Transaction;
+    import Server.Model.Equipment;
 
     import javax.swing.*;
     import javax.swing.table.DefaultTableModel;
@@ -97,6 +98,111 @@
                 }
             });
         }
+        public void populateEquipmentTable(ArrayList<Equipment> equipmentList) {
+            clearTable();
+            centerPanel.setLayout(new BorderLayout());
+
+            // Column headers
+            String[] columnNames = {"Equipment ID", "Equipment Name", "Action"};
+
+            // Data array
+            Object[][] data = new Object[equipmentList.size()][3];
+
+            for (int i = 0; i < equipmentList.size(); i++) {
+                Equipment equipment = equipmentList.get(i);
+                data[i][0] = equipment.getId();
+                data[i][1] = equipment.getName();
+                data[i][2] = "Remove"; // Placeholder for button
+            }
+
+            // Table model
+            DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return column == 2; // Only the "Action" column is editable
+                }
+            };
+
+            equipTable = new JTable(model);
+            equipTable.setRowHeight(40);
+            equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+            // Set column widths
+            equipTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            equipTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+            equipTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+
+            // Add button functionality
+            equipTable.getColumnModel().getColumn(2).setCellRenderer(new ButtonRenderer());
+            equipTable.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable, equipmentList));
+
+            JScrollPane scrollPane = new JScrollPane(equipTable);
+            scrollPane.setPreferredSize(new Dimension(500, 500));
+
+            centerPanel.removeAll();
+            centerPanel.add(scrollPane, BorderLayout.CENTER);
+
+            SwingUtilities.invokeLater(() -> {
+                equipTable.revalidate();
+                equipTable.repaint();
+                centerPanel.revalidate();
+                centerPanel.repaint();
+                mainPanel.revalidate();
+                mainPanel.repaint();
+            });
+        }
+
+        // Custom Button Renderer
+        class ButtonRenderer extends JButton implements TableCellRenderer {
+            public ButtonRenderer() {
+                setOpaque(true);
+                setText("Remove");
+            }
+
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                return this;
+            }
+        }
+
+        // Custom Button Editor (Handles Remove action)
+        class ButtonEditor extends DefaultCellEditor {
+            private JButton button;
+            private JTable table;
+            private ArrayList<Equipment> equipmentList;
+            private int row;
+
+            public ButtonEditor(JCheckBox checkBox, JTable table, ArrayList<Equipment> equipmentList) {
+                super(checkBox);
+                this.table = table;
+                this.equipmentList = equipmentList;
+
+                button = new JButton("Remove");
+                button.setOpaque(true);
+
+                button.addActionListener(e -> {
+                    fireEditingStopped(); // Stop editing when button is clicked
+
+                    if (row >= 0 && row < equipmentList.size()) {
+                        equipmentList.remove(row); // Remove from list
+                        ((DefaultTableModel) table.getModel()).removeRow(row); // Remove from table
+                    }
+                });
+            }
+
+            @Override
+            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+                this.row = row;
+                return button;
+            }
+
+            @Override
+            public Object getCellEditorValue() {
+                return "Remove";
+            }
+        }
+
+
 
         public void setupHoverEffect(JLabel label) {
             // Save the default background and foreground colors
@@ -127,204 +233,55 @@
             System.out.println("Showing equipment: " + showingEquipment);
 
         }
-
-       public void populateTableTransaction(ArrayList<Transaction> transactionList) {
+        public void populateTableList2 (ArrayList<Transaction> transactionList) {
+            clearTable();
+            centerPanel.removeAll();
             centerPanel.setLayout(new BorderLayout());
 
-            String[] columnNames;
-            Object[][] data;
+            JPanel datePanel = new JPanel();
+            centerPanel.add(datePanel, BorderLayout.NORTH);
+            datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 250, 5));
 
-            if (showingHistory) {
-                showingLogs = false;
-                showingEquipment = false;
-                columnNames = new String[]{"StudentId", "Equipment Name", "Date Borrowed", "Status"};
-                data = new Object[transactionList.size()][3];
+            String[] columnNames = new String[]{"Equipment Name", "Borrowed Time", "Status"};
+            Object[][] data = new Object[transactionList.size()][3];
 
-                for (int i = 0; i < transactionList.size(); i++) {
-                    Transaction transaction = transactionList.get(i);
-
-                    String studId = transaction.getUserId();
-                    String equipmentName = transaction.getEquipmentName();
-                    String dateBorrowed = transaction.getTime();
-                    String status = "Returned";
-
-                    data[i] = new Object[]{studId, equipmentName, dateBorrowed, status};
-                }
-                showingHistory = false;
-                anotherBool = false;
-            } else if (showingLogs) {
-                showingHistory = false;
-                showingEquipment = false;
-                columnNames = new String[]{"StudentId", "Equipment Name", "Date", "Time", "Status"};
-                data = new Object[transactionList.size()][4];
-
-                for (int i = 0; i < transactionList.size(); i++) {
-                    Transaction transaction = transactionList.get(i);
-
-                    String studId = transaction.getUserId();
-                    String equipmentName = transaction.getEquipmentName();
-                    String time = transaction.getTime();
-                    String status = "Returned";
-
-                    data[i] = new Object[]{studId, equipmentName, time, status};
-                }
-                showingLogs = false;
-                anotherBool = false;
-            } else if (showingEquipment) {
-                showingHistory = false;
-                showingLogs = false;
-                columnNames = new String[]{"Equipment ID", "Equipment Name", "Flag"};
-                data = new Object[transactionList.size()][2];
-                columnNames = new String[]{"Equipment ID", "Equipment Name", "Action"};
-
-                data = new Object[][]{
-                        {"012345", "Drone", null},
-                        {"012346", "Camera", null},
-                        {"012347", "Switch", null}
-                };
-
-                for (int i = 0; i < transactionList.size(); i++) {
-                    Transaction transaction = transactionList.get(i);
-
-                    String equipId = transaction.getEquipmentId();
-                    String equipmentName = transaction.getEquipmentName();
-                    String status = "Returned";
-
-                    data[i] = new Object[]{equipId, equipmentName, status};
-                }
-                showingEquipment = false;
-                showingEquipment = true;
-                anotherBool = true;
-            } else {
-                columnNames = new String[]{};
-                data = new Object[][]{};
-            }
-
-            if (columnNames.length == 0 || data.length == 0) {
-                System.out.println("No data to display.");
-                return;
+            for (int i = 0; i < transactionList.size(); i++) {
+                Transaction transaction = transactionList.get(i);
+                data[i] = new Object[]{transaction.getEquipmentName(), transaction.getTime(), "In-Progress"};
             }
 
             DefaultTableModel model = new DefaultTableModel(data, columnNames) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
-                    return column == 5;
-//                    return showingEquipment && column == 2; // Only make Action column editable for Equipment
-                }
-
-                @Override
-                public Class<?> getColumnClass(int column) {
-                    // Ensure that the Action column uses JButton class
-                    if (showingEquipment && column == 2) {
-                        return JButton.class;
-                    } else {
-                        return String.class;
-                    }
+                    return column == 3;
                 }
             };
-
-            //====================
-            if (add && anotherBool) {
-                System.out.println("ADD");
-//            Client.View.addItem addItem1 = new addItem();
-                String[] row = addItemBtn.row;
-                System.out.println(Arrays.toString(row));
-                model.addRow(row);
-//            equipTable.repaint();
-//            centerPanel.repaint();
-//            mainPanel.repaint();
 
             equipTable = new JTable(model);
             equipTable.setRowHeight(50);
             equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-            // Set ButtonRenderer and ButtonEditor only for showingEquipment
-            if (showingEquipment) {
-//                equipTable.getColumnModel().getColumn(2).setCellRenderer(new HomepageClient.ButtonRenderer());
-//                equipTable.getColumnModel().getColumn(2).setCellEditor(new HomepageClient.ButtonEditor(new JCheckBox(), equipTable));
-            }
-
             JScrollPane scrollPane = new JScrollPane(equipTable);
-            scrollPane.setPreferredSize(new Dimension(500, 500));
+            scrollPane.setPreferredSize(new Dimension(530, 500));
 
-            equipTable.getColumnModel().getColumn(0).setPreferredWidth(70);
-            equipTable.getColumnModel().getColumn(1).setPreferredWidth(100);
-            if (showingEquipment) {
-                equipTable.getColumnModel().getColumn(2).setPreferredWidth(120);
-            }
+            centerPanel.add(scrollPane, BorderLayout.WEST);
 
-            centerPanel.removeAll();
-            centerPanel.add(scrollPane, BorderLayout.CENTER);
+
+            equipTable.revalidate();
+            equipTable.repaint();
+            centerPanel.revalidate();
+            centerPanel.repaint();
 
             SwingUtilities.invokeLater(() -> {
                 equipTable.revalidate();
                 equipTable.repaint();
                 centerPanel.revalidate();
                 centerPanel.repaint();
-                mainPanel.revalidate();
-                mainPanel.repaint();
             });
 
-
-            //======================================================================================================
-            // Custom Button Renderer (Displays "Remove" button in the table)
-            class ButtonRenderer extends JButton implements TableCellRenderer {
-                public ButtonRenderer() {
-                    setOpaque(true);
-                    setText("Remove"); // Set text to "Remove"
-                }
-
-                @Override
-                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                    return this;
-                }
-            }
-
-            // Custom Button Editor (Handles "Remove" button clicks)
-            class ButtonEditor extends DefaultCellEditor {
-                private JButton button;
-                private boolean clicked;
-                private JTable table;
-                private int row;
-
-                public ButtonEditor(JCheckBox checkBox, JTable table) {
-                    super(checkBox);
-                    this.table = table;
-                    button = new JButton("Remove");
-                    button.setOpaque(true);
-
-                    // Handle button click event
-                    button.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            clicked = true;
-                            fireEditingStopped(); // Stop editing when button is clicked
-
-                            // Remove the selected row
-                            if (table.getModel() instanceof DefaultTableModel) {
-                                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                                model.removeRow(row);
-                            }
-
-                        }
-                    });
-                }
-
-
-                @Override
-                public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-                    this.row = row; // Store the row index for removal
-                    return button;
-                }
-
-                @Override
-                public Object getCellEditorValue() {
-                    return "Remove";
-                }
-            }
+            setVisible(true);
         }
 
-    }
         public void clearTable() {
             if (equipTable != null) {
                 DefaultTableModel model = (DefaultTableModel) equipTable.getModel();

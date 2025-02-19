@@ -32,7 +32,9 @@ public class HomepageAdminController {
                 super.mouseClicked(e);
                 server.sendXMLToServer(model.createRequest("TRANSACTION_HISTORY_ADMIN"));
                 transactions = model.storeTransactionsToMemory();
-                view.populateTableTransaction(transactions.getArrayList());
+                System.out.println("Transaction requesting admin");
+
+                view.populateTableList2(transactions.getArrayList());
             }
         });
         view.getAddItem().addMouseListener(new MouseAdapter() {
@@ -46,19 +48,25 @@ public class HomepageAdminController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
+                requestEquipment();
             }
         });
 
 
+    } private void requestEquipment() {
+        server.sendXMLToServer(model.requestEquipment("EQUIPMENT"));
+        getResponse();
     }
+
+
 
     private void getResponse() {
-        equipment = model.storeEqToMemory();
-    }
 
-    private void requestEquipment() {
-        server.sendXMLToServer(model.createRequest("EQUIPMENT"));
+        equipment = model.storeEqToMemory();
+        System.out.println("Search plss");
+        equipment.getEquipmentArrayList().forEach(e-> System.out.println("Search query: "+ e.getName()));
+        view.populateEquipmentTable(equipment.getEquipmentArrayList());
+
     }
 
 }

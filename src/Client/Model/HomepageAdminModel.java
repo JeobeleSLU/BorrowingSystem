@@ -32,4 +32,21 @@ public class HomepageAdminModel {
     public TransactionController storeTransactionsToMemory() {
         return new TransactionController("./Client/Cache/response.xml");
     }
+
+    public File requestEquipment(String request) {
+        String[] requestNode = new String[] {
+                "equipment"
+        };
+        ArrayList<String> nodes = new ArrayList<>();
+        nodes.add("equipment");
+        return SingletonRequestService.createXMLRequest(request,nodes,requestNode);
+    }
+
+
+    public TransactionController stroreTransacToMem() {
+        return new TransactionController("./Client/Cache/response.xml");
+    }
+
+
+
 }
