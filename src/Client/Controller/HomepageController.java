@@ -54,7 +54,7 @@ public class HomepageController {
                 view.populateTableList2(transaction.getArrayList());
             }
         });
-        view.getBorrowButton().addActionListener(_ ->{
+        view.getBorrowButton().addActionListener(e ->{
             extractDetails();
             requestEquipment();
         } );

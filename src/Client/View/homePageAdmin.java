@@ -104,23 +104,25 @@
             centerPanel.setLayout(new BorderLayout());
 
             // Column headers
-            String[] columnNames = {"Equipment ID", "Equipment Name", "Action"};
+            String[] columnNames = {"Equipment ID", "Equipment Name", "Type","Remaining","Action"};
 
             // Data array
-            Object[][] data = new Object[equipmentList.size()][3];
+            Object[][] data = new Object[equipmentList.size()][5];
 
             for (int i = 0; i < equipmentList.size(); i++) {
                 Equipment equipment = equipmentList.get(i);
                 data[i][0] = equipment.getId();
                 data[i][1] = equipment.getName();
-                data[i][2] = "Remove"; // Placeholder for button
+                data[i][2] = equipment.getType();
+                data[i][3] = equipment.getQuantity();
+                data[i][4] = "Remove"; // Placeholder for button
             }
 
             // Table model
             DefaultTableModel model = new DefaultTableModel(data, columnNames) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
-                    return column == 2; // Only the "Action" column is editable
+                    return column == 4; // Only the "Action" column is editable
                 }
             };
 
@@ -131,10 +133,16 @@
             // Set column widths
             equipTable.getColumnModel().getColumn(0).setPreferredWidth(100);
             equipTable.getColumnModel().getColumn(1).setPreferredWidth(150);
-            equipTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            equipTable.getColumnModel().getColumn(2).setPreferredWidth(150);
+            equipTable.getColumnModel().getColumn(3).setPreferredWidth(150);
+            equipTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+
+
+            equipTable.getColumnModel().getColumn(4).setCellRenderer(new ButtonRenderer());
+         //   equipTable.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox()));
 
             // Add button functionality with a callback
-            equipTable.getColumnModel().getColumn(2).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable, equipmentList, removeActionListener));
+            equipTable.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable, equipmentList, removeActionListener));
 
             JScrollPane scrollPane = new JScrollPane(equipTable);
             scrollPane.setPreferredSize(new Dimension(500, 500));
@@ -151,7 +159,6 @@
                 mainPanel.repaint();
             });
         }
-
 
         // Custom Button Renderer
         class ButtonEditor extends DefaultCellEditor {
@@ -237,27 +244,40 @@
             centerPanel.add(datePanel, BorderLayout.NORTH);
             datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 250, 5));
 
-            String[] columnNames = new String[]{"Equipment Name", "Borrowed Time", "Status"};
-            Object[][] data = new Object[transactionList.size()][3];
+            String[] columnNames = new String[]{"Equipment Name", "Date Borrowed","Time Borrowed", "Status" , "Return"};
+            Object[][] data = new Object[transactionList.size()][5];
 
             for (int i = 0; i < transactionList.size(); i++) {
                 Transaction transaction = transactionList.get(i);
-                data[i] = new Object[]{transaction.getEquipmentName(), transaction.getTime(), "In-Progress"};
+                String availability = "Return";
+                data[i] = new Object[]{transaction.getEquipmentName(), transaction.getDate(), transaction.getTime(), "In-Progress", availability};
             }
 
             DefaultTableModel model = new DefaultTableModel(data, columnNames) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
-                    return column == 3;
+                    return column == 6;
                 }
             };
+
+            equipTable.getColumnModel().getColumn(4).setCellRenderer(new ButtonRenderer());
+           // equipTable.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JCheckBox()));
+        //    equipTable.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable, equipmentList, removeActionListener));
+
 
             equipTable = new JTable(model);
             equipTable.setRowHeight(50);
             equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
             JScrollPane scrollPane = new JScrollPane(equipTable);
-            scrollPane.setPreferredSize(new Dimension(530, 500));
+            scrollPane.setPreferredSize(new Dimension(600, 500));
+
+
+            equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
+            equipTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+            equipTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            equipTable.getColumnModel().getColumn(3).setPreferredWidth(90);
+            equipTable.getColumnModel().getColumn(4).setPreferredWidth(90);
 
             centerPanel.add(scrollPane, BorderLayout.WEST);
 
@@ -308,6 +328,19 @@
         public void showValid(String itemToRemove){
             JOptionPane.showMessageDialog(null,
                     "Successfully Removed: " + itemToRemove, "Removed To server", 1);
-            this.dispose();
+         //   this.dispose();
+        }
+        static class ButtonRenderer extends JButton implements TableCellRenderer {
+            public ButtonRenderer() {
+                setOpaque(true);
+                setPreferredSize(new Dimension(50, 10));
+                setLayout(new GridBagLayout());
+            }
+
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                setText((value == null) ? "Borrowed" : value.toString());
+                return this;
+            }
         }
     }

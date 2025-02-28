@@ -1,17 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Equipments>
-    <Equipment>
-        <isAvailable>true</isAvailable>
-        <quantity>8</quantity>
-        <name>Cisco Catalyst 9300</name>
-        <id>CIS9300</id>
-        <type>Switch</type>
-    </Equipment>
-    <Equipment>
-        <isAvailable>true</isAvailable>
-        <quantity>9</quantity>
-        <name>cor</name>
-        <id>unum</id>
-        <type>et</type>
-    </Equipment>
-</Equipments>
+<Transactions>
+    <Transaction>
+        <date>date</date>
+        <qty>4</qty>
+        <equipmentName>name</equipmentName>
+        <time>time</time>
+        <userId>10</userId>
+        <equipmentId>eqID</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Cisco Catalyst 9300</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>CIS9300</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>cor</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>unum</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>cor</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>unum</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>cor</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>unum</equipmentId>
+    </Transaction>
+    <Transaction>
+        <date>7-30colon1</date>
+        <qty>1</qty>
+        <equipmentName>Cisco Catalyst 9300</equipmentName>
+        <time>Jan-7-30</time>
+        <userId>10</userId>
+        <equipmentId>CIS9300</equipmentId>
+    </Transaction>
+</Transactions>
