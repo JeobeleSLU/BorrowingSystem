@@ -459,7 +459,7 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
     }
     public void showSuccess(){
         JOptionPane.showMessageDialog(null,
-                "Successfully reserved", "Warning", 1);
+                "Successfully reserved", "Confirmation", 1);
 
     }
 }

@@ -7,6 +7,7 @@ import Server.Controller.TransactionController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -36,7 +37,15 @@ public class HomepageAdminController {
                 transactions = model.storeTransactionsToMemory();
                 System.out.println("Transaction requesting admin");
 
-                view.populateTableList2(transactions.getArrayList());
+                view.populateTableList2(transactions.getArrayList(), new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String equipmentName = e.getActionCommand();
+                        System.out.println("Returning: " + equipmentName);
+                        //TODO: ADD RETURN LOGIC (REQUEST TO SERVER)
+                        JOptionPane.showMessageDialog(null, "Returned: " + equipmentName, "Return Success", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                });
             }
         });
         view.getAddItem().addMouseListener(new MouseAdapter() {

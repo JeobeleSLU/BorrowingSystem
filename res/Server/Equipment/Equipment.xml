@@ -2,13 +2,6 @@
 <Equipments>
     <Equipment>
         <isAvailable>true</isAvailable>
-        <quantity>8</quantity>
-        <name>Cisco Catalyst 9300</name>
-        <id>CIS9300</id>
-        <type>Switch</type>
-    </Equipment>
-    <Equipment>
-        <isAvailable>true</isAvailable>
         <quantity>9</quantity>
         <name>cor</name>
         <id>unum</id>
