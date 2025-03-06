@@ -38,10 +38,12 @@ public class HomepageController {
             }
         });
        view.getSearchButton().addActionListener(e-> {
+           equipment.clear();
+           view.clearTable();
            String search = view.getSearchField().getText();
            server.sendXMLToServer(model.request("SEARCH",search));
-           equipment.clear();
            getResponse();
+           view.populateTableList(equipment.getEquipmentArrayList());
        });
 
         view.getBorrowedItemlbl().addMouseListener(new MouseAdapter() {

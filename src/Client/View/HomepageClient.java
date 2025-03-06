@@ -89,22 +89,22 @@ public class HomepageClient extends JFrame {
         });
         setVisible(true);
 
-        //SEARCH FIELD FOR SEARCHING
-        searchField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchAndUpdateTable();
-
-            }
-        });
-        //Search Button
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchAndUpdateTable();
-
-            }
-        });
+//        //SEARCH FIELD FOR SEARCHING
+//        searchField.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                searchAndUpdateTable();
+//
+//            }
+//        });
+//        //Search Button
+//        searchButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                searchAndUpdateTable();
+//
+//            }
+//        });
         equipLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -153,7 +153,6 @@ public class HomepageClient extends JFrame {
 
 public void populateTableList(ArrayList<Equipment> equipmentList) {
     clearTable();
-
     centerPanel.removeAll();
     centerPanel.setLayout(new BorderLayout());
 
