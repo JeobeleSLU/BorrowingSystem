@@ -45,7 +45,6 @@ public class login_page extends JFrame {
     public void showWrongPasswordPrompt(){
         JOptionPane.showMessageDialog(null, "Invalid Username or Password", "Warning", 2);
 
-
     }
     public void showNoUSerPrompt(){
         JOptionPane.showMessageDialog(null,

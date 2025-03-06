@@ -5,9 +5,11 @@ import Client.Model.EquipmentManager;
 import Server.Controller.TransactionController;
 import Server.Model.Authenticator;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -16,8 +18,13 @@ import java.util.concurrent.Executors;
  * This class is where the clients should connect into
  */
 public class Server {
+
     private static boolean running = true;
     public static void main(String[] args) throws IOException {
+
+        String[] ip = String.valueOf(Inet4Address.getLocalHost()).split("/",2);
+        JOptionPane.showMessageDialog(null,"Connect to: " + ip[1], "Warning", 1);
+
         TransactionController controller = new TransactionController();
         EquipmentManager equipmentManager = new EquipmentManager();
         Authenticator authenticator = new Authenticator();
