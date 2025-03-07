@@ -99,5 +99,9 @@ public class Transaction implements XMLTemplate {
     public boolean isBorrowed() {
         return isBorrowed;
     }
+
+    public void setBorrowed(boolean b) {
+        this.isBorrowed = b
+    }
 }
 

@@ -5,6 +5,7 @@ import Common.Model.Transaction;
 import Common.Utilities.FileHandler;
 import Common.Utilities.XMLCreator;
 import Common.Utilities.XMLParser;
+import Server.Network.RequestUtility;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,8 +58,6 @@ public class TransactionController {
           loadTransactions("base");
 
           return true;
-
-
       }else return false;
     }
 
@@ -110,15 +109,33 @@ public class TransactionController {
         }
         return true;
     }
-    public boolean canReturn(Transaction transaction){
-        return transactions.stream()
-                .filter(e -> e.getUserId().equals(transaction.getUserId())
-                        && e.getEquipmentId().equals(transaction.getEquipmentId())
+
+    public boolean canReturn(ArrayList<String> transaction){
+        boolean canReturn =  transactions.stream()
+                .filter(e -> e.getUserId().equals(transaction.get(1))
+                        && e.getEquipmentName().equals(transaction.get(0))
                         && e.isBorrowed())
-                .findFirst()  // Find the first matching transaction
-                .isPresent(); // Returns true if a matching transaction is found
+                .findFirst().isPresent();
+        updateTransaction(transaction);
+
+        return canReturn;
     }
 
+    private void updateTransaction(ArrayList<String> transaction) {
+        transactions.stream()
+                .filter(e -> e.getUserId().equals(transaction.get(1))
+                        && e.getEquipmentName().equals(transaction.get(0))
+                        && e.isBorrowed())
+                .findFirst().get().setBorrowed(false);
+        updateXML();
+    }
+
+    private void updateXML() {
+        if (handler.getXMLFile("Transaction").delete()){
+            transactions.forEach(e-> RequestUtility.buildObjectXML(e,"Transaction",handler.getXMLFile("Transaction")));
+            loadTransactions("base");
+        }
+    }
 
 
 }

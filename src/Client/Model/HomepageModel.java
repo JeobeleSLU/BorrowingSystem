@@ -53,12 +53,12 @@ public class HomepageModel {
         ArrayList<String> response= new ArrayList<>();
         response.add("TRUE");
         response.add("1");
-        response.add(equipmentToBeBorrowed.getName().replace(":", "-"));
-        response.add(equipmentToBeBorrowed.getId().replace(":", "-"));
-        response.add(equipmentToBeBorrowed.getType().replace(":", "-"));
-        response.add(startTime.replace(":", "-"));
-        response.add(endTime.replace(":", "-"));
-        response.add(date.replace(":", "-"));
+        response.add(equipmentToBeBorrowed.getName().replace(":", ";"));
+        response.add(equipmentToBeBorrowed.getId().replace(":", ";"));
+        response.add(equipmentToBeBorrowed.getType().replace(":", ";"));
+        response.add(startTime.replace(":", ";"));
+        response.add(endTime.replace(":", ";"));
+        response.add(date.replace(":", ";"));
 
         response.forEach(e-> System.out.println(e));
         return SingletonRequestService.createXMLRequest("TRANSACT",response,node);

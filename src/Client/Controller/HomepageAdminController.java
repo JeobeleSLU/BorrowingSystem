@@ -41,6 +41,7 @@ public class HomepageAdminController {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         String equipmentName = e.getActionCommand();
+                        returnItem(equipmentName);
                         System.out.println("Returning: " + equipmentName);
                         //TODO: ADD RETURN LOGIC (REQUEST TO SERVER)
                         JOptionPane.showMessageDialog(null, "Returned: " + equipmentName, "Return Success", JOptionPane.INFORMATION_MESSAGE);
@@ -91,6 +92,11 @@ public class HomepageAdminController {
         server.sendXMLToServer(model.requestRemove(view.getItemToRemove()));
         getServerResponse();
     }
+
+    private void returnItem(String equipmentName) {
+        server.sendXMLToServer(model.updateEquipmentReturn(equipmentName));
+    }
+
 
 }
 

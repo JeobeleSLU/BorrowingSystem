@@ -5,6 +5,7 @@ import Server.Controller.TransactionController;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class HomepageAdminModel {
     public static final String[] nodes = {
@@ -43,6 +44,7 @@ public class HomepageAdminModel {
     }
 
 
+
     public TransactionController stroreTransacToMem() {
         return new TransactionController("./Client/Cache/response.xml");
     }
@@ -65,5 +67,16 @@ public class HomepageAdminModel {
         File file = new File("./Client/Cache/response.xml");
         response.addAll(SingletonRequestService.getContent(file,NODE_TO_RECEIVE));
         return response.get(0);
+    }
+
+    public File updateEquipmentReturn(String equipmentName) {
+        String[] requestNode = new String[] {
+              "EquipmentName","userID"
+        };
+        String[] att = equipmentName.split("-");
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add(att[0]);
+        arrayList.add(att[1]);
+        return SingletonRequestService.createXMLRequest("RETURN_ITEM",arrayList,requestNode);
     }
 }

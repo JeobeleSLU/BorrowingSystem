@@ -119,8 +119,9 @@ public class ClientHandler implements Runnable {
     }
 
     private void reutrnItem() {
-
-//        if (transactionController.canReturn())
+        String[] nodesToGet = {"EquipmentName", "userID"};
+        ArrayList<String> attributes =RequestUtility.getContent(saveFile,nodesToGet);
+        transactionController.canReturn(attributes);
     }
 
     private void removeEquipment() {

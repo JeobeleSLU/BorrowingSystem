@@ -169,9 +169,9 @@
                             ((DefaultTableModel) table.getModel()).removeRow(row);
                             removeActionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, equipmentName));
                         } else if ("Return".equals(action) && returnActionListener != null) {
-                            String equipmentName = table.getValueAt(row, 0).toString(); // Adjust column index as needed
+                            String equipmentNameAndBorrower = table.getValueAt(row, 0).toString()+"-"+table.getValueAt(row,1).toString(); // Adjust column index as needed
                             // Update status or perform return logic here if needed
-                            returnActionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, equipmentName));
+                            returnActionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, equipmentNameAndBorrower));
                         }
                     }
                 });
@@ -230,18 +230,18 @@
             centerPanel.add(datePanel, BorderLayout.NORTH);
             datePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 250, 5));
 
-            String[] columnNames = new String[]{"Equipment Name", "Date Borrowed", "Time Borrowed", "Status", "Return"};
-            Object[][] data = new Object[transactionList.size()][5];
+            String[] columnNames = new String[]{"Equipment Name","Student id", "Date Borrowed", "Time Borrowed", "Status", "Return"};
+            Object[][] data = new Object[transactionList.size()][6];
 
             for (int i = 0; i < transactionList.size(); i++) {
                 Transaction transaction = transactionList.get(i);
-                data[i] = new Object[]{transaction.getEquipmentName(), transaction.getDate(), transaction.getTime(), "In-Progress", "Return"};
+                data[i] = new Object[]{transaction.getEquipmentName(), transaction.getUserId(),transaction.getDate(), transaction.getTime(), "In-Progress", "Return"};
             }
 
             DefaultTableModel model = new DefaultTableModel(data, columnNames) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
-                    return column == 4; // Only the "Return" column is editable
+                    return column == 5; // Only the "Return" column is editable
                 }
             };
 
@@ -257,8 +257,8 @@
             equipTable.getColumnModel().getColumn(4).setPreferredWidth(90);
 
             // Add button renderer and editor for "Return" column
-            equipTable.getColumnModel().getColumn(4).setCellRenderer(new ButtonRenderer());
-            equipTable.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable, transactionList, null, returnActionListener));
+            equipTable.getColumnModel().getColumn(5).setCellRenderer(new ButtonRenderer());
+            equipTable.getColumnModel().getColumn(5).setCellEditor(new ButtonEditor(new JCheckBox(), equipTable, transactionList, null, returnActionListener));
 
             JScrollPane scrollPane = new JScrollPane(equipTable);
             scrollPane.setPreferredSize(new Dimension(600, 500));
