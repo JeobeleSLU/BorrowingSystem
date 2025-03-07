@@ -45,7 +45,7 @@ public class main {
 
 
 
-        Transaction transaction = new Transaction(4,"name","date","time","10","eqID");
+        Transaction transaction = new Transaction(4,"name","date","time","10","eqID",true);
         creator.createXML(transaction,"Transaction");
         ArrayList<Transaction>transactopns  = parser.parse(SingletonTransactionFactory.getInstance(),handler.getXMLFile("Transaction"));
         transactopns.forEach(e-> System.out.println(e.getAllValues()));

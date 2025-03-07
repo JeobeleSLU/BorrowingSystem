@@ -2,12 +2,14 @@ package Common.Model;
 import Common.Utilities.XMLTemplate;
 //test
 public class Transaction implements XMLTemplate {
-    String userId;
-    String equipmentId;
-    String equipmentName;
-    int qty;
-    String time;
-    String date;
+    private String userId;
+    private String equipmentId;
+    private String equipmentName;
+    private int qty;
+    private String time;
+    private String date;
+    private boolean isBorrowed;
+
     /*
         <qty>2</qty>
         <equipmentName>Cisco</equipmentName>
@@ -15,13 +17,14 @@ public class Transaction implements XMLTemplate {
         <userId>223</userId>
         <equipmentId>224</equipmentId>
      */
-    public Transaction(int qty, String equipmentName, String date, String time, String userId, String equipmentId) {
+    public Transaction(int qty, String equipmentName, String date, String time, String userId, String equipmentId,boolean isBorrowed) {
         this.userId = userId;
         this.equipmentId = equipmentId;
         this.equipmentName = equipmentName;
         this.qty = qty;
         this.time = time;
         this.date = date;
+        this.isBorrowed = isBorrowed;
     }
     public String getDate() {
         return date;
@@ -64,8 +67,9 @@ public class Transaction implements XMLTemplate {
                 "equipmentId",
                 "equipmentName",
                 "qty",
-                "time"
-                ,"date"
+                "isBorrowed",
+                "time",
+                "date"
         };
     }
     /*
@@ -80,6 +84,7 @@ public class Transaction implements XMLTemplate {
      */
     @Override
     public String getAllValues() {
+        System.out.println("isBorrowed:" + this.isBorrowed);
         return new StringBuilder()
                 .append("userId:").append(this.userId).append(",")
                 .append("equipmentId:").append(this.equipmentId).append(",")
@@ -87,7 +92,12 @@ public class Transaction implements XMLTemplate {
                 .append("time:").append(this.time).append(",")
                 .append("date:").append(this.date).append(",")
                 .append("qty:").append(this.qty).append(",")
+                .append("isBorrowed:").append(this.isBorrowed).append(",")
                 .toString();
+    }
+
+    public boolean isBorrowed() {
+        return isBorrowed;
     }
 }
 

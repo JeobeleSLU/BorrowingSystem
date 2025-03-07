@@ -91,5 +91,6 @@ public class HomepageAdminController {
         server.sendXMLToServer(model.requestRemove(view.getItemToRemove()));
         getServerResponse();
     }
+
 }
 

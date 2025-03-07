@@ -106,6 +106,8 @@ public class XMLCreator {
         while (iterator.hasNext()) {
             Map.Entry<String, String> entry = iterator.next();
             Element temp = doc.createElement(entry.getKey());
+            System.out.println(entry.getKey());
+            System.out.println(entry.getValue());
             temp.appendChild(doc.createTextNode(entry.getValue()));
             tempRoot.appendChild(temp);
         }

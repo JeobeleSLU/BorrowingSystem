@@ -110,6 +110,15 @@ public class TransactionController {
         }
         return true;
     }
+    public boolean canReturn(Transaction transaction){
+        return transactions.stream()
+                .filter(e -> e.getUserId().equals(transaction.getUserId())
+                        && e.getEquipmentId().equals(transaction.getEquipmentId())
+                        && e.isBorrowed())
+                .findFirst()  // Find the first matching transaction
+                .isPresent(); // Returns true if a matching transaction is found
+    }
+
 
 
 }

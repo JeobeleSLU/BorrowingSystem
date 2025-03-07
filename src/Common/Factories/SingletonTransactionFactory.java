@@ -37,7 +37,7 @@ public class SingletonTransactionFactory implements Factory {
         String userID = members[3];
         String time = members[2];
 
-        return new Transaction(qty,name,date,time,userID,eqID);
+        return new Transaction(qty,name,date,time,userID,eqID,true);
     }
 
     @Override
@@ -53,7 +53,8 @@ public class SingletonTransactionFactory implements Factory {
                 "time",
                 "userId",
                 "equipmentId",
-                "date"
+                "date",
+                "isBorrowed"
         };
     }
     private SingletonTransactionFactory(){}

@@ -113,7 +113,14 @@ public class ClientHandler implements Runnable {
             searchEquipment();
         }else if (request.equals("REMOVE_EQUIPMENT")){
             removeEquipment();
+        }else if (request.equals("RETURN_ITEM")){
+            reutrnItem();
         }
+    }
+
+    private void reutrnItem() {
+
+//        if (transactionController.canReturn())
     }
 
     private void removeEquipment() {
@@ -176,16 +183,14 @@ public class ClientHandler implements Runnable {
         String[] node  = new String[]{
                 "result"
         };
-//        String[] borrowNode  = {
-//                "isAvailable","quantity","name","id","type","startTime","EndTime","Date"
-//        };
+//
         String[] borrowNode  = {
                 "isAvailable", "quantity", "name", "id", "type", "startTime", "EndTime", "Date"
         };
 
         ArrayList<String> nodes = RequestUtility.getContent(saveFile,borrowNode);
         String startAndEnd = nodes.get(5)+"-"+nodes.get(6);
-        nodes.stream().map(e-> e.replaceAll(":","-"));
+        nodes.stream().map(e-> e.replaceAll(":",";"));
         nodes.forEach(e-> System.out.println(e));
         for (int i = 0; i < nodes.size();i++){
             System.out.println(nodes.get(i));
@@ -196,7 +201,7 @@ public class ClientHandler implements Runnable {
                 ,nodes.get(2),
                 nodes.get(3),nodes.get(4));
 
-        Transaction transaction = new Transaction(1,nodes.get(2),nodes.get(7),startAndEnd,idNumber,nodes.get(3));
+        Transaction transaction = new Transaction(1,nodes.get(2),nodes.get(7),startAndEnd,idNumber,nodes.get(3),true);
 //        Transaction transaction = new Transaction(4,"name","date","time","10","eqID");
        transactionController.writeUserToXml(transaction);
 

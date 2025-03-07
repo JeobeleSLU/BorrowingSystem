@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Equipments>
-    <Equipment>
-        <isAvailable>true</isAvailable>
-        <quantity>7</quantity>
-        <name>cor</name>
-        <id>unum</id>
-        <type>et</type>
-    </Equipment>
-</Equipments>
+<Transactions>
+    <Transaction>
+        <date>date</date>
+        <qty>4</qty>
+        <equipmentName>name</equipmentName>
+        <time>time</time>
+        <userId>10</userId>
+        <equipmentId>eqID</equipmentId>
+        <isBorrowed>true</isBorrowed>
+    </Transaction>
+    <Transaction>
+        <date>date</date>
+        <qty>4</qty>
+        <equipmentName>name</equipmentName>
+        <time>time</time>
+        <userId>10</userId>
+        <equipmentId>eqID</equipmentId>
+        <isBorrowed>true</isBorrowed>
+    </Transaction>
+    <Transaction>
+        <date>date</date>
+        <qty>4</qty>
+        <equipmentName>name</equipmentName>
+        <time>time</time>
+        <userId>10</userId>
+        <equipmentId>eqID</equipmentId>
+        <isBorrowed>true</isBorrowed>
+    </Transaction>
+</Transactions>

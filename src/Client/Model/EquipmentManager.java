@@ -91,6 +91,7 @@ static int transactions = 0;
 
 
 
+
     public ArrayList<Equipment> getEquipmentArrayList() {
         return equipmentArrayList;
     }
