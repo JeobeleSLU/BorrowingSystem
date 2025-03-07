@@ -1,32 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Response>
-    <result>-1</result>
+<Equipments>
     <Equipment>
         <isAvailable>true</isAvailable>
-        <quantity>8</quantity>
+        <quantity>7</quantity>
         <name>cor</name>
         <id>unum</id>
         <type>et</type>
     </Equipment>
-    <Equipment>
-        <isAvailable>true</isAvailable>
-        <quantity>8</quantity>
-        <name>cor</name>
-        <id>unum</id>
-        <type>et</type>
-    </Equipment>
-    <Equipment>
-        <isAvailable>true</isAvailable>
-        <quantity>8</quantity>
-        <name>cor</name>
-        <id>unum</id>
-        <type>et</type>
-    </Equipment>
-    <Equipment>
-        <isAvailable>true</isAvailable>
-        <quantity>8</quantity>
-        <name>cor</name>
-        <id>unum</id>
-        <type>et</type>
-    </Equipment>
-</Response>
+</Equipments>

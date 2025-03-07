@@ -68,7 +68,7 @@ public class HomepageClient extends JFrame {
         receiptArea = new JTextArea();
         receiptArea.setEditable(false);
         JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
-        receiptScrollPane.setPreferredSize(new Dimension(400, 500));
+        receiptScrollPane.setPreferredSize(new Dimension(450, 500));
         centerPanel.add(receiptScrollPane, BorderLayout.EAST);
 
         homePageAdmin = new homePageAdmin();
@@ -193,19 +193,19 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
     equipTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
     equipTable.getColumnModel().getColumn(3).setCellEditor(new ButtonEditor(new JCheckBox()));
 
-    equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);
-    equipTable.getColumnModel().getColumn(1).setPreferredWidth(160);
-    equipTable.getColumnModel().getColumn(2).setPreferredWidth(90);
+    equipTable.getColumnModel().getColumn(0).setPreferredWidth(160);
+    equipTable.getColumnModel().getColumn(1).setPreferredWidth(130);
+    equipTable.getColumnModel().getColumn(2).setPreferredWidth(80);
     equipTable.getColumnModel().getColumn(3).setPreferredWidth(100);
     JScrollPane scrollPane = new JScrollPane(equipTable);
-    scrollPane.setPreferredSize(new Dimension(530, 500));
+    scrollPane.setPreferredSize(new Dimension(580, 500));
 
     centerPanel.add(scrollPane, BorderLayout.WEST);
 
     receiptArea = new JTextArea();
     receiptArea.setEditable(false);
     JScrollPane receiptScrollPane = new JScrollPane(receiptArea);
-    receiptScrollPane.setPreferredSize(new Dimension(430, 500));
+    receiptScrollPane.setPreferredSize(new Dimension(300, 500));
     centerPanel.add(receiptScrollPane, BorderLayout.EAST);
         centerPanel.add(receiptScrollPane, BorderLayout.EAST);
 
@@ -253,7 +253,7 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
         equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         JScrollPane scrollPane = new JScrollPane(equipTable);
-        scrollPane.setPreferredSize(new Dimension(530, 500));
+        scrollPane.setPreferredSize(new Dimension(500, 500));
 
         centerPanel.add(scrollPane, BorderLayout.WEST);
 
@@ -386,7 +386,7 @@ public void populateTableList(ArrayList<Equipment> equipmentList) {
                 itemtoBorrowed = equipmentName;
                 String quantity = equipTable.getValueAt(selectedRow, 2).toString();
                 startTime = (String) startTimeBox.getSelectedItem();
-                endTime = (String) endTimeBox.getSelectedItem();
+//                endTime = (String) endTimeBox.getSelectedItem();
                 dayString = (String) day.getSelectedItem();
                 month = (String) monthBox.getSelectedItem();
 

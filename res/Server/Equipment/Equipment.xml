@@ -2,7 +2,7 @@
 <Equipments>
     <Equipment>
         <isAvailable>true</isAvailable>
-        <quantity>9</quantity>
+        <quantity>7</quantity>
         <name>cor</name>
         <id>unum</id>
         <type>et</type>
