@@ -101,7 +101,7 @@ public class Transaction implements XMLTemplate {
     }
 
     public void setBorrowed(boolean b) {
-        this.isBorrowed = b
+        this.isBorrowed = b;
     }
 }
 

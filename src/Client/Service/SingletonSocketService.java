@@ -44,7 +44,7 @@ public class SingletonSocketService {
     }
 
     public void sendXMLToServer (File file) {
-        System.out.println("Sending to server: "+ file.getName());
+//        System.out.println("Sending to server: "+ file.getName());
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
             byte[] buffer = new byte[20000000];
             int bytesRead;

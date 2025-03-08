@@ -30,7 +30,8 @@ public class FileHandler {
                 basePath += "Transaction/";
                 break;
             case "Cache":
-                return basePath+="Cache/";
+                basePath +="Cache/";
+                break;
             default:
                 return null;
         }

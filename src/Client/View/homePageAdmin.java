@@ -221,7 +221,7 @@
             System.out.println("Showing equipment: " + showingEquipment);
 
         }
-        public void populateTableList2(ArrayList<Transaction> transactionList, ActionListener returnActionListener) {
+        public void populateTableList2(ArrayList<Transaction> transactionList, ActionListener returnActionListener) throws NullPointerException {
             clearTable();
             centerPanel.removeAll();
             centerPanel.setLayout(new BorderLayout());
@@ -235,7 +235,11 @@
 
             for (int i = 0; i < transactionList.size(); i++) {
                 Transaction transaction = transactionList.get(i);
-                data[i] = new Object[]{transaction.getEquipmentName(), transaction.getUserId(),transaction.getDate(), transaction.getTime(), "In-Progress", "Return"};
+                String bor = "In-Progress";
+                if (!transaction.isBorrowed()){
+                    bor = "Returned";
+                }
+                data[i] = new Object[]{transaction.getEquipmentName(), transaction.getUserId(), transaction.getDate(), transaction.getTime(), bor, "Return"};
             }
 
             DefaultTableModel model = new DefaultTableModel(data, columnNames) {
@@ -248,6 +252,7 @@
             equipTable = new JTable(model);
             equipTable.setRowHeight(50);
             equipTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
 
             // Set column widths
             equipTable.getColumnModel().getColumn(0).setPreferredWidth(140);

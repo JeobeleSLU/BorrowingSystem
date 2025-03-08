@@ -63,7 +63,6 @@ public class HomepageAdminController {
                 requestEquipment();
             }
         });
-
     }
 
 
@@ -79,11 +78,8 @@ public class HomepageAdminController {
             view.showInvalidEnter();
     }
 
-
-
     private void getResponse() {
         equipment = model.storeEqToMemory();
-        System.out.println("Search plss");
         equipment.getEquipmentArrayList().forEach(e-> System.out.println("Search query: "+ e.getName()));
         view.populateEquipmentTable(equipment.getEquipmentArrayList(), this::handleRemoveButtonClick);
     }
@@ -95,6 +91,8 @@ public class HomepageAdminController {
 
     private void returnItem(String equipmentName) {
         server.sendXMLToServer(model.updateEquipmentReturn(equipmentName));
+        server.sendXMLToServer(model.createRequest("TRANSACTION_HISTORY_ADMIN"));
+        transactions = model.storeTransactionsToMemory();
     }
 
 

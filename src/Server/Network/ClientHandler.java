@@ -119,10 +119,22 @@ public class ClientHandler implements Runnable {
     }
 
     private void reutrnItem() {
+        String result = "0";
+
         String[] nodesToGet = {"EquipmentName", "userID"};
         ArrayList<String> attributes =RequestUtility.getContent(saveFile,nodesToGet);
-        transactionController.canReturn(attributes);
+        if(transactionController.canReturn(attributes)){
+            EquipmentManager.updateEquipment(attributes.get(0), "res/Server/Equipment/Equipment.xml");
+            result = "1";
+        }
+        String[] nodeResult = {
+                "Result"
+        };
+        ArrayList<String> temp = new ArrayList<>();
+        temp.add(result);
+        sendToStream(temp,nodeResult);
     }
+
 
     private void removeEquipment() {
         String[] node = new String[]{
@@ -260,6 +272,18 @@ public class ClientHandler implements Runnable {
      * Sends the xml to the file input stream byte by byte
      */
     private void sendResponseXML(File file) {
+        if (!file.exists()) {
+            try {
+                if (file.createNewFile()) {
+                    System.out.println("File created: " + file.getAbsolutePath());
+                } else {
+                    System.out.println("Failed to create file.");
+                    return;
+                }
+            } catch (IOException e) {
+                throw new RuntimeException("Error while creating XML file", e);
+            }
+        }
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
             byte[] buffer = new byte[20000000];
             int bytesRead;

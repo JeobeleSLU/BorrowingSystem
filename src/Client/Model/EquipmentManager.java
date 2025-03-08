@@ -5,7 +5,19 @@ import Common.Utilities.FileHandler;
 import Common.Utilities.XMLCreator;
 import Common.Utilities.XMLParser;
 import Server.Model.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -198,6 +210,58 @@ static int transactions = 0;
         reWriteXML(); // Update XML to reflect removal
 
         return "1";
+    }
+
+    public static void updateEquipment(String equipmentName, String filePath) {
+        try {
+            File xmlFile = new File(filePath);
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(xmlFile);
+            doc.getDocumentElement().normalize();
+
+            NodeList equipmentList = doc.getElementsByTagName("Equipment");
+
+            for (int i = 0; i < equipmentList.getLength(); i++) {
+                Node node = equipmentList.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element equipment = (Element) node;
+                    String name = equipment.getElementsByTagName("name").item(0).getTextContent();
+                    System.out.println("TESING KUNG AABOT BA DITO UNG RUN: " + equipmentList.getLength() + name + equipmentName);
+                    if (name.equalsIgnoreCase(equipmentName)) {
+                        // Get and increment quantity
+                        Element quantityElement = (Element) equipment.getElementsByTagName("quantity").item(0);
+
+                        int quantity = Integer.parseInt(quantityElement.getTextContent());
+                        quantityElement.setTextContent(String.valueOf(quantity + 1));
+
+                        // Update availability if it was previously 0
+                        Element availabilityElement = (Element) equipment.getElementsByTagName("isAvailable").item(0);
+                        if (quantity == 0) {
+                            availabilityElement.setTextContent("true");
+                        }
+
+                        // Save changes
+                        saveXMLChanges(doc, xmlFile);
+
+                        System.out.println("Equipment updated successfully!");
+                        return;
+                    }
+                }
+            }
+
+            System.out.println("Equipment not found!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private static void saveXMLChanges(Document doc, File xmlFile) throws TransformerException, TransformerException {
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        DOMSource source = new DOMSource(doc);
+        StreamResult result = new StreamResult(xmlFile);
+        transformer.transform(source, result);
     }
 
 }

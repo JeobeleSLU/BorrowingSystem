@@ -2,7 +2,19 @@ package Client.Model;
 
 import Client.Service.SingletonRequestService;
 import Server.Controller.TransactionController;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,12 +55,9 @@ public class HomepageAdminModel {
         return SingletonRequestService.createXMLRequest(request,nodes,requestNode);
     }
 
-
-
     public TransactionController stroreTransacToMem() {
         return new TransactionController("./Client/Cache/response.xml");
     }
-
 
     public File requestRemove(String itemToRemove) {
         String[] requestNode = new String[] {
@@ -79,4 +88,5 @@ public class HomepageAdminModel {
         arrayList.add(att[1]);
         return SingletonRequestService.createXMLRequest("RETURN_ITEM",arrayList,requestNode);
     }
+
 }
