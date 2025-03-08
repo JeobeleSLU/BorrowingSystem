@@ -128,7 +128,7 @@ public class XMLCreator {
 
         return variables;
     }
-    private static void removeWhitespaceNodes(Node node) {
+    public static void removeWhitespaceNodes(Node node) {
         for (int i = node.getChildNodes().getLength() - 1; i >= 0; i--) {
             Node child = node.getChildNodes().item(i);
             if (child.getNodeType() == Node.TEXT_NODE && child.getNodeValue().trim().isEmpty()) {
